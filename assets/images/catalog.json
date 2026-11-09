@@ -953,13 +953,13 @@
    "category": "animal",
    "file": "assets/images/animals/kangaroo.jpg",
    "source": {
-    "title": "Eastern Grey Kangaroo",
-    "url": "https://www.flickr.com/photos/183476300@N04/51367520502",
-    "author": "New Matilda | Independent Media",
+    "title": "Kangaroo and Joey",
+    "url": "https://www.flickr.com/photos/65032901@N00/2449456990",
+    "author": "Dale Gillard",
     "license": "CC BY 2.0",
     "license_url": "https://creativecommons.org/licenses/by/2.0/",
     "via": "Openverse (flickr)",
-    "modified": "resized to max 500px JPEG"
+    "modified": "cropped, resized to max 500px JPEG"
    }
   },
   {
@@ -1104,10 +1104,10 @@
    "file": "assets/images/animals/sea_lion.jpg",
    "source": {
     "title": "California sea lion (Zalophus californianus)",
-    "url": "https://www.flickr.com/photos/22170893@N06/13633026324",
-    "author": "Gregory 'Slobirdr' Smith",
-    "license": "CC BY-SA 2.0",
-    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "url": "https://www.flickr.com/photos/143373510@N02/51894445282",
+    "author": "javier.reina.martinez",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
     "via": "Openverse (flickr)",
     "modified": "resized to max 500px JPEG"
    }

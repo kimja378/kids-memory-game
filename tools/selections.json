@@ -72,7 +72,13 @@
  "kangaroo": {
   "name": "캥거루",
   "category": "animal",
-  "ov": "kangaroo_c/5"
+  "ov": "kangaroo_joey_e/0",
+  "crop": [
+   0.12,
+   0.06,
+   0.82,
+   0.97
+  ]
  },
  "koala": {
   "name": "코알라",
@@ -128,7 +134,7 @@
  "sea_lion": {
   "name": "바다사자",
   "category": "animal",
-  "ov": "seal/1"
+  "ov": "sea_lion_b/4"
  },
  "horse": {
   "name": "말",
