@@ -1,5 +1,122 @@
 <!doctype html><html lang="ko"><head><meta charset="utf-8"><meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate"><meta http-equiv="Pragma" content="no-cache"><meta name="viewport" content="width=device-width,initial-scale=1"><title>사진 기억놀이</title><style>
-*{box-sizing:border-box}body{margin:0;background:#f5f7ff;color:#27334a;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}main{max-width:1160px;margin:auto;padding:14px}h1{text-align:center;font-size:clamp(26px,4vw,42px);margin:10px}.subtitle{text-align:center;color:#65738a;font-size:18px}.tools{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:20px 0}button,select{border:2px solid #cbd5ef;border-radius:14px;background:white;color:#26354d;font:700 17px system-ui;padding:12px 15px;cursor:pointer}.primary{background:#526fe5;color:white;border-color:#526fe5}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,2vw,20px)}.card{aspect-ratio:.74;min-height:175px;padding:0;border:0;background:transparent;perspective:1000px;touch-action:manipulation}.inner{position:relative;display:block;width:100%;height:100%;transform-style:preserve-3d;transition:transform .65s ease}.card.flipped .inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;backface-visibility:hidden;border:3px solid #d5def2;border-radius:22px;background:white;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden;box-shadow:0 8px 20px #27395914}.back{transform:rotateY(180deg);background:linear-gradient(135deg,#dce6ff,#f0e8ff);border-color:#b4c2ef}.face img{width:95%;height:82%;object-fit:contain}.number{position:absolute;top:9px;left:12px;font-size:16px;font-weight:800;color:#64718a}.name{font-size:clamp(17px,2.8vw,28px);font-weight:800}.question{font-size:clamp(85px,15vw,165px);font-weight:900;color:#768bda}#status{text-align:center;min-height:35px;margin:20px;font-size:clamp(19px,3vw,27px);font-weight:800}.note{text-align:center;color:#67758c;font-size:15px}body.noNames .name{visibility:hidden}@media(max-width:600px){main{padding:9px}.tools button,.tools select{font-size:14px;padding:10px}.face{border-radius:13px;border-width:2px}.number{font-size:12px;top:7px;left:7px}.name{font-size:16px}}
-</style></head><body class="noNames"><main><h1>📷 사진 기억놀이</h1><p style="text-align:center;color:#69758b;font-size:12px;margin:0">업데이트 v9 · 사진 확인 후 표시</p><p class="subtitle">사진 세 개를 보고 기억해요!</p><div class="tools"><select id="category"><option value="fruit">🍎 과일</option><option value="veg">🥕 채소·식재료</option><option value="animal">🐘 동물</option><option value="vehicle">🚌 탈것</option><option value="all">🎲 모두 섞기</option></select><button id="new">🔄 다음 문제</button><button id="hide" class="primary">🙈 모두 뒤집기</button><button id="show">👀 모두 보기</button><button id="names">이름 보기</button></div><div class="cards" id="cards"><button class="card" type="button"><span class="inner"><span class="face"><span class="number">1번</span><img src="photo_01.jpg" alt="복숭아"><span class="name">복숭아</span></span><span class="face back"><span class="number">1번</span><span class="question">?</span></span></span></button><button class="card" type="button"><span class="inner"><span class="face"><span class="number">2번</span><img src="photo_02.jpg" alt="바나나"><span class="name">바나나</span></span><span class="face back"><span class="number">2번</span><span class="question">?</span></span></span></button><button class="card" type="button"><span class="inner"><span class="face"><span class="number">3번</span><img src="photo_03.jpg" alt="사과"><span class="name">사과</span></span><span class="face back"><span class="number">3번</span><span class="question">?</span></span></span></button></div><p id="status">사진을 천천히 살펴보세요.</p><p class="note">카드를 눌러 하나씩 뒤집거나, 모두 뒤집기로 기억놀이를 시작하세요.</p></main><script>
-const animals=[{"name":"강아지","tag":"dog","src":"https://images.unsplash.com/photo-1552053831-71594a27632d?w=650&fit=crop&auto=format","group":"animal"},{"name":"고양이","tag":"cat","src":"https://images.unsplash.com/photo-1573865526739-10659fec78a5?w=650&fit=crop&auto=format","group":"animal"},{"name":"토끼","tag":"rabbit","src":"https://images.unsplash.com/photo-1585110396000-c9ffd4e4b308?w=650&fit=crop&auto=format","group":"animal"},{"name":"사자","tag":"lion","src":"https://images.unsplash.com/photo-1546182990-dffeafbe841d?w=650&fit=crop&auto=format","group":"animal"},{"name":"코끼리","tag":"elephant","src":"https://images.unsplash.com/photo-1564760055775-d63b17a55c44?w=650&fit=crop&auto=format","group":"animal"},{"name":"기린","tag":"giraffe","src":"https://images.unsplash.com/photo-1547721064-da6cfb341d50?w=650&fit=crop&auto=format","group":"animal"},{"name":"호랑이","tag":"tiger","src":"https://images.unsplash.com/photo-1561731216-c3a4d99437d5?w=650&fit=crop&auto=format","group":"animal"},{"name":"얼룩말","tag":"zebra","src":"https://images.unsplash.com/photo-1526095179574-86e545346ae6?w=650&fit=crop&auto=format","group":"animal"}];const extras=[];let requestId=0;const items=[{"name":"레몬","src":"photo_01.jpg","group":"fruit"},{"name":"당근","src":"photo_02.jpg","group":"veg"},{"name":"옥수수","src":"photo_03.jpg","group":"veg"},{"name":"토마토","src":"photo_04.jpg","group":"veg"},{"name":"오이","src":"photo_05.jpg","group":"veg"},{"name":"양파","src":"photo_06.jpg","group":"veg"},{"name":"감자","src":"photo_07.jpg","group":"veg"},{"name":"토마토","src":"photo_08.jpg","group":"veg"},{"name":"파프리카","src":"photo_09.jpg","group":"veg"},{"name":"브로콜리","src":"photo_10.jpg","group":"veg"},{"name":"감자","src":"photo_11.jpg","group":"veg"},{"name":"딸기","src":"photo_12.jpg","group":"fruit"},{"name":"배","src":"photo_13.jpg","group":"fruit"},{"name":"피망","src":"photo_14.jpg","group":"veg"},{"name":"상추","src":"photo_15.jpg","group":"veg"},{"name":"당근","src":"photo_16.jpg","group":"veg"},{"name":"복숭아","src":"photo_17.jpg","group":"fruit"},{"name":"바나나","src":"photo_18.jpg","group":"fruit"},{"name":"사과","src":"photo_19.jpg","group":"fruit"},{"name":"오렌지","src":"photo_20.jpg","group":"fruit"}];const cards=Array.from(document.querySelectorAll('.card'));const status=document.getElementById('status');function shuffle(a){a=a.slice();for(let i=a.length-1;i>0;i--){let j=Math.floor(Math.random()*(i+1));[a[i],a[j]]=[a[j],a[i]]}return a}const vehicles=[{"name":"버스","group":"vehicle","src":"https://images.unsplash.com/photo-1544620347-c4fd4a3d5957?w=650&fit=crop&auto=format"},{"name":"자동차","group":"vehicle","src":"https://images.unsplash.com/photo-1493238792000-8113da705763?w=650&fit=crop&auto=format"},{"name":"기차","group":"vehicle","src":"https://images.unsplash.com/photo-1474487548417-781cb71495f3?w=650&fit=crop&auto=format"},{"name":"비행기","group":"vehicle","src":"https://images.unsplash.com/photo-1436491865332-7a61a109cc05?w=650&fit=crop&auto=format"},{"name":"자전거","group":"vehicle","src":"https://images.unsplash.com/photo-1485965120184-e220f721d03e?w=650&fit=crop&auto=format"},{"name":"오토바이","group":"vehicle","src":"https://images.unsplash.com/photo-1558981806-ec527fa84c39?w=650&fit=crop&auto=format"},{"name":"트럭","group":"vehicle","src":"https://images.unsplash.com/photo-1601584115197-04ecc0da31d7?w=650&fit=crop&auto=format"}];let loadToken=0;const available=new Map();function isLoaded(src){if(available.has(src))return available.get(src);const p=new Promise(resolve=>{const img=new Image();let finished=false;const done=ok=>{if(finished)return;finished=true;clearTimeout(timer);resolve(ok)};const timer=setTimeout(()=>done(false),6500);img.onload=()=>done(img.naturalWidth>50);img.onerror=()=>done(false);img.src=src});available.set(src,p);return p}async function next(){const token=++loadToken;const group=document.getElementById('category').value;const pool=shuffle([...items,...animals,...vehicles].filter(x=>group==='all'||x.group===group));status.textContent='사진을 불러오는 중이에요…';const results=await Promise.all(pool.map(async item=>({item,ok:await isLoaded(item.src)})));if(token!==loadToken)return;const good=shuffle(results.filter(x=>x.ok).map(x=>x.item));if(good.length<3){status.textContent='이 종류의 사진을 충분히 불러오지 못했어요. 다른 종류를 선택해 주세요.';return}good.slice(0,3).forEach((item,i)=>{const card=cards[i];card.classList.remove('flipped');const face=card.querySelector('.face');const old=face.querySelector('.photo-placeholder');if(old)old.remove();const img=face.querySelector('img');img.style.display='block';img.src=item.src;img.alt=item.name;card.querySelector('.name').textContent=item.name});status.textContent='사진을 천천히 살펴보세요.'}function allFlip(v){cards.forEach(c=>c.classList.toggle('flipped',v));status.textContent=v?'어디에 어떤 사진이 있었을까요?':'잘했어! 최고야! ⭐'}cards.forEach(c=>c.addEventListener('click',()=>{c.classList.toggle('flipped');status.textContent=c.classList.contains('flipped')?'무엇이 숨어 있을까요?':'잘했어! 최고야! ⭐'}));document.getElementById('new').onclick=next;document.getElementById('hide').onclick=()=>allFlip(true);document.getElementById('show').onclick=()=>allFlip(false);document.getElementById('category').onchange=next;document.getElementById('names').onclick=function(){document.body.classList.toggle('noNames');this.textContent=document.body.classList.contains('noNames')?'이름 보기':'이름 숨기기'};next();
+*{box-sizing:border-box}body{margin:0;background:#f5f7ff;color:#27334a;font-family:-apple-system,BlinkMacSystemFont,"Apple SD Gothic Neo",sans-serif}main{max-width:1160px;margin:auto;padding:14px}h1{text-align:center;font-size:clamp(26px,4vw,42px);margin:10px}.subtitle{text-align:center;color:#65738a;font-size:18px}.tools{display:flex;flex-wrap:wrap;justify-content:center;gap:9px;margin:20px 0}button,select{border:2px solid #cbd5ef;border-radius:14px;background:white;color:#26354d;font:700 17px system-ui;padding:12px 15px;cursor:pointer}.primary{background:#526fe5;color:white;border-color:#526fe5}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:clamp(8px,2vw,20px)}.card{aspect-ratio:.74;min-height:175px;padding:0;border:0;background:transparent;perspective:1000px;touch-action:manipulation}.inner{position:relative;display:block;width:100%;height:100%;-webkit-transform-style:preserve-3d;transform-style:preserve-3d;transition:transform .65s ease}.card.flipped .inner{transform:rotateY(180deg)}.face{position:absolute;inset:0;-webkit-backface-visibility:hidden;backface-visibility:hidden;border:3px solid #d5def2;border-radius:22px;background:white;display:flex;align-items:center;justify-content:center;flex-direction:column;overflow:hidden;box-shadow:0 8px 20px #27395914}.back{-webkit-transform:rotateY(180deg);transform:rotateY(180deg);background:linear-gradient(135deg,#dce6ff,#f0e8ff);border-color:#b4c2ef}.face img{width:95%;height:82%;object-fit:contain}.number{position:absolute;top:9px;left:12px;font-size:16px;font-weight:800;color:#64718a}.name{font-size:clamp(17px,2.8vw,28px);font-weight:800}.question{font-size:clamp(85px,15vw,165px);font-weight:900;color:#768bda}#status{text-align:center;min-height:35px;margin:20px;font-size:clamp(19px,3vw,27px);font-weight:800}.note{text-align:center;color:#67758c;font-size:15px}body.noNames .name{visibility:hidden}.cards.empty{visibility:hidden}@media(max-width:600px){main{padding:9px}.tools button,.tools select{font-size:14px;padding:10px}.face{border-radius:13px;border-width:2px}.number{font-size:12px;top:7px;left:7px}.name{font-size:16px}}
+</style></head><body class="noNames"><main><h1>📷 사진 기억놀이</h1><p style="text-align:center;color:#69758b;font-size:12px;margin:0">업데이트 v10 · 저장소 사진 사용</p><p class="subtitle">사진 세 개를 보고 기억해요!</p><div class="tools"><select id="category"><option value="fruit">🍎 과일</option><option value="veg">🥕 채소·식재료</option><option value="animal">🐘 동물</option><option value="vehicle">🚌 탈것</option><option value="all">🎲 모두 섞기</option></select><button id="new">🔄 다음 문제</button><button id="hide" class="primary">🙈 모두 뒤집기</button><button id="show">👀 모두 보기</button><button id="names">이름 보기</button></div><div class="cards" id="cards"><button class="card" type="button"><span class="inner"><span class="face"><span class="number">1번</span><img src="assets/images/fruits/peach.jpg" alt="복숭아"><span class="name">복숭아</span></span><span class="face back"><span class="number">1번</span><span class="question">?</span></span></span></button><button class="card" type="button"><span class="inner"><span class="face"><span class="number">2번</span><img src="assets/images/fruits/banana.jpg" alt="바나나"><span class="name">바나나</span></span><span class="face back"><span class="number">2번</span><span class="question">?</span></span></span></button><button class="card" type="button"><span class="inner"><span class="face"><span class="number">3번</span><img src="assets/images/fruits/apple.jpg" alt="사과"><span class="name">사과</span></span><span class="face back"><span class="number">3번</span><span class="question">?</span></span></span></button></div><p id="status">사진을 천천히 살펴보세요.</p><p class="note">카드를 눌러 하나씩 뒤집거나, 모두 뒤집기로 기억놀이를 시작하세요.</p></main><script>
+(function(){
+'use strict';
+// v10: 모든 사진은 저장소 안 assets/images/ 에서 상대경로로 불러옵니다 (외부 이미지 API 없음).
+// 사진·이름 목록은 assets/images/catalog.json 에서 관리합니다.
+var CATALOG_URL='assets/images/catalog.json?v=10';
+var LOAD_TIMEOUT=8000;
+var cards=Array.prototype.slice.call(document.querySelectorAll('.card'));
+var status=document.getElementById('status');
+var select=document.getElementById('category');
+var cardsBox=document.getElementById('cards');
+var items=[];            // 카탈로그 항목
+var failed={};           // 로딩 실패한 파일 → 후보에서 제외
+var loaded={};           // 로딩 확인된 파일 → Promise<boolean>
+var loadToken=0;         // 마지막 요청만 화면에 반영
+var lastShown=[];        // 직전 문제 사진 (가능하면 반복 피하기)
+
+function shuffle(a){a=a.slice();for(var i=a.length-1;i>0;i--){var j=Math.floor(Math.random()*(i+1));var t=a[i];a[i]=a[j];a[j]=t}return a}
+
+function loadImage(src){
+  if(failed[src])return Promise.resolve(false);
+  if(loaded[src])return loaded[src];
+  var p=new Promise(function(resolve){
+    var img=new Image(),finished=false;
+    var timer=setTimeout(function(){done(false)},LOAD_TIMEOUT);
+    function done(ok){if(finished)return;finished=true;clearTimeout(timer);img.onload=img.onerror=null;resolve(ok)}
+    img.onload=function(){done(img.naturalWidth>20&&img.naturalHeight>20)};
+    img.onerror=function(){done(false)};
+    img.src=src;
+  }).then(function(ok){if(!ok){failed[src]=true;delete loaded[src]}return ok});
+  loaded[src]=p;
+  return p;
+}
+
+// 같은 사진·같은 이름이 한 문제에 겹치지 않도록 3장을 고르고, 실제로 로딩된 사진만 사용
+function pickThree(group){
+  var pool=items.filter(function(x){return (group==='all'||x.category===group)&&!failed[x.file]});
+  var fresh=pool.filter(function(x){return lastShown.indexOf(x.file)<0});
+  var queue=shuffle(fresh).concat(shuffle(pool.filter(function(x){return lastShown.indexOf(x.file)>=0})));
+  var chosen=[],usedNames={},usedFiles={};
+  function take(){
+    while(queue.length){var c=queue.shift();if(usedNames[c.name]||usedFiles[c.file]||failed[c.file])continue;return c}
+    return null;
+  }
+  function fill(){
+    var batch=[];
+    while(chosen.length+batch.length<3){
+      var c=take();if(!c)break;
+      usedNames[c.name]=true;usedFiles[c.file]=true;batch.push(c);
+    }
+    if(!batch.length)return Promise.resolve(chosen);
+    return Promise.all(batch.map(function(c){return loadImage(c.file).then(function(ok){
+      if(ok)chosen.push(c);else{delete usedNames[c.name];}
+    })})).then(function(){return chosen.length<3?fill():chosen});
+  }
+  return fill();
+}
+
+function render(list){
+  list.forEach(function(item,i){
+    var card=cards[i];
+    card.classList.remove('flipped');
+    var img=card.querySelector('.face img');
+    img.style.display='block';
+    img.alt=item.name;
+    img.src=item.file;
+    card.querySelector('.name').textContent=item.name;
+    card.setAttribute('data-name',item.name);
+  });
+  lastShown=list.map(function(x){return x.file});
+  status.textContent='사진을 천천히 살펴보세요.';
+}
+
+function next(){
+  var token=++loadToken;
+  var group=select.value;
+  status.textContent='사진을 불러오는 중이에요…';
+  document.body.setAttribute('data-loading','1');
+  return pickThree(group).then(function(list){
+    if(token!==loadToken)return;            // 더 새 요청이 있으면 결과 버림
+    document.body.removeAttribute('data-loading');
+    if(list.length<3){cardsBox.classList.add('empty');status.textContent='이 종류의 사진을 충분히 불러오지 못했어요. 다른 종류를 선택해 주세요.';return}
+    cardsBox.classList.remove('empty');
+    render(shuffle(list));
+    document.body.setAttribute('data-ready',String(token));
+  }).catch(function(err){
+    if(token!==loadToken)return;
+    document.body.removeAttribute('data-loading');
+    status.textContent='사진을 불러오지 못했어요. 다음 문제를 눌러 주세요.';
+    if(window.console)console.error(err);
+  });
+}
+
+function allFlip(v){cards.forEach(function(c){c.classList.toggle('flipped',v)});status.textContent=v?'어디에 어떤 사진이 있었을까요?':'잘했어! 최고야! ⭐'}
+cards.forEach(function(c){
+  c.addEventListener('click',function(){c.classList.toggle('flipped');status.textContent=c.classList.contains('flipped')?'무엇이 숨어 있을까요?':'잘했어! 최고야! ⭐'});
+  // 화면에 표시된 사진이 나중에라도 깨지면 해당 사진을 제외하고 새 문제로 교체
+  c.querySelector('.face img').addEventListener('error',function(){var s=this.getAttribute('src');if(s&&!failed[s]){failed[s]=true;delete loaded[s];next()}});
+});
+document.getElementById('new').onclick=function(){next()};
+document.getElementById('hide').onclick=function(){allFlip(true)};
+document.getElementById('show').onclick=function(){allFlip(false)};
+select.onchange=function(){next()};
+document.getElementById('names').onclick=function(){document.body.classList.toggle('noNames');this.textContent=document.body.classList.contains('noNames')?'이름 보기':'이름 숨기기'};
+
+window.__memoryGame={next:next,items:function(){return items},failed:failed};
+
+function loadCatalog(){
+  return fetch(CATALOG_URL,{cache:'no-cache'}).then(function(r){if(!r.ok)throw new Error('catalog '+r.status);return r.json()});
+}
+loadCatalog().catch(function(){return new Promise(function(r){setTimeout(r,1500)}).then(loadCatalog)})
+  .then(function(data){
+    items=(data&&data.items||[]).filter(function(x){return x&&x.file&&x.name&&x.category});
+    next();
+  }).catch(function(err){
+    status.textContent='사진 목록을 불러오지 못했어요. 화면을 새로고침해 주세요.';
+    if(window.console)console.error(err);
+  });
+})();
 </script></body></html>

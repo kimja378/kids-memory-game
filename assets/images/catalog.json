@@ -1,0 +1,291 @@
+{
+ "version": 10,
+ "categories": {
+  "fruit": "과일",
+  "veg": "채소·식재료",
+  "animal": "동물",
+  "vehicle": "탈것"
+ },
+ "items": [
+  {
+   "id": "peach",
+   "name": "복숭아",
+   "category": "fruit",
+   "file": "assets/images/fruits/peach.jpg",
+   "source": {
+    "title": "photo_01.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_01.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "banana",
+   "name": "바나나",
+   "category": "fruit",
+   "file": "assets/images/fruits/banana.jpg",
+   "source": {
+    "title": "photo_02.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_02.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "apple",
+   "name": "사과",
+   "category": "fruit",
+   "file": "assets/images/fruits/apple.jpg",
+   "source": {
+    "title": "photo_03.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_03.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "orange",
+   "name": "오렌지",
+   "category": "fruit",
+   "file": "assets/images/fruits/orange.jpg",
+   "source": {
+    "title": "photo_04.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_04.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "strawberry",
+   "name": "딸기",
+   "category": "fruit",
+   "file": "assets/images/fruits/strawberry.jpg",
+   "source": {
+    "title": "photo_05.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_05.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "pear",
+   "name": "배",
+   "category": "fruit",
+   "file": "assets/images/fruits/pear.jpg",
+   "source": {
+    "title": "photo_06.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_06.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "green_pepper",
+   "name": "피망",
+   "category": "veg",
+   "file": "assets/images/vegetables/green_pepper.jpg",
+   "source": {
+    "title": "photo_07.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_07.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "lemon",
+   "name": "레몬",
+   "category": "fruit",
+   "file": "assets/images/fruits/lemon.jpg",
+   "source": {
+    "title": "photo_08.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_08.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "carrot",
+   "name": "당근",
+   "category": "veg",
+   "file": "assets/images/vegetables/carrot.jpg",
+   "source": {
+    "title": "photo_09.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_09.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "corn",
+   "name": "옥수수",
+   "category": "veg",
+   "file": "assets/images/vegetables/corn.jpg",
+   "source": {
+    "title": "photo_10.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_10.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "tomato",
+   "name": "토마토",
+   "category": "veg",
+   "file": "assets/images/vegetables/tomato.jpg",
+   "source": {
+    "title": "photo_11.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_11.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "cucumber",
+   "name": "오이",
+   "category": "veg",
+   "file": "assets/images/vegetables/cucumber.jpg",
+   "source": {
+    "title": "photo_12.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_12.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "onion",
+   "name": "양파",
+   "category": "veg",
+   "file": "assets/images/vegetables/onion.jpg",
+   "source": {
+    "title": "photo_13.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_13.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "potato",
+   "name": "감자",
+   "category": "veg",
+   "file": "assets/images/vegetables/potato.jpg",
+   "source": {
+    "title": "photo_14.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_14.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "tomato_2",
+   "name": "토마토",
+   "category": "veg",
+   "file": "assets/images/vegetables/tomato_2.jpg",
+   "source": {
+    "title": "photo_15.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_15.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "lettuce",
+   "name": "상추",
+   "category": "veg",
+   "file": "assets/images/vegetables/lettuce.jpg",
+   "source": {
+    "title": "photo_16.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_16.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "paprika",
+   "name": "파프리카",
+   "category": "veg",
+   "file": "assets/images/vegetables/paprika.jpg",
+   "source": {
+    "title": "photo_17.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_17.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "carrot_2",
+   "name": "당근",
+   "category": "veg",
+   "file": "assets/images/vegetables/carrot_2.jpg",
+   "source": {
+    "title": "photo_18.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_18.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "broccoli",
+   "name": "브로콜리",
+   "category": "veg",
+   "file": "assets/images/vegetables/broccoli.jpg",
+   "source": {
+    "title": "photo_19.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_19.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "potato_2",
+   "name": "감자",
+   "category": "veg",
+   "file": "assets/images/vegetables/potato_2.jpg",
+   "source": {
+    "title": "photo_20.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_20.jpg를 이름만 바꿔 복사"
+   }
+  }
+ ]
+}
