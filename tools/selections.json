@@ -1,0 +1,430 @@
+{
+ "dog": {
+  "name": "강아지",
+  "category": "animal",
+  "commons": "YellowLabradorLooking new.jpg"
+ },
+ "cat": {
+  "name": "고양이",
+  "category": "animal",
+  "commons": "Cat November 2010-1a.jpg"
+ },
+ "rabbit": {
+  "name": "토끼",
+  "category": "animal",
+  "commons": "Oryctolagus cuniculus Tasmania 2.jpg"
+ },
+ "lion": {
+  "name": "사자",
+  "category": "animal",
+  "commons": "Lion waiting in Namibia.jpg"
+ },
+ "tiger": {
+  "name": "호랑이",
+  "category": "animal",
+  "ov": "tiger_b/6"
+ },
+ "elephant": {
+  "name": "코끼리",
+  "category": "animal",
+  "ov": "elephant/7"
+ },
+ "giraffe": {
+  "name": "기린",
+  "category": "animal",
+  "ov": "giraffe/1"
+ },
+ "zebra": {
+  "name": "얼룩말",
+  "category": "animal",
+  "ov": "zebra/2"
+ },
+ "panda": {
+  "name": "판다",
+  "category": "animal",
+  "ov": "panda/1"
+ },
+ "bear": {
+  "name": "곰",
+  "category": "animal",
+  "ov": "bear/2"
+ },
+ "fox": {
+  "name": "여우",
+  "category": "animal",
+  "ov": "fox/2"
+ },
+ "wolf": {
+  "name": "늑대",
+  "category": "animal",
+  "ov": "wolf/0"
+ },
+ "monkey": {
+  "name": "원숭이",
+  "category": "animal",
+  "ov": "monkey/4"
+ },
+ "gorilla": {
+  "name": "고릴라",
+  "category": "animal",
+  "ov": "gorilla/1"
+ },
+ "kangaroo": {
+  "name": "캥거루",
+  "category": "animal",
+  "ov": "kangaroo_c/5"
+ },
+ "koala": {
+  "name": "코알라",
+  "category": "animal",
+  "ov": "koala_d/4"
+ },
+ "hippo": {
+  "name": "하마",
+  "category": "animal",
+  "ov": "hippo/0"
+ },
+ "rhino": {
+  "name": "코뿔소",
+  "category": "animal",
+  "ov": "rhino/3"
+ },
+ "crocodile": {
+  "name": "악어",
+  "category": "animal",
+  "ov": "crocodile/1"
+ },
+ "turtle": {
+  "name": "거북이",
+  "category": "animal",
+  "ov": "turtle/6"
+ },
+ "penguin": {
+  "name": "펭귄",
+  "category": "animal",
+  "ov": "penguin/6"
+ },
+ "dolphin": {
+  "name": "돌고래",
+  "category": "animal",
+  "ov": "dolphin/0",
+  "crop": [
+   0.28,
+   0.0,
+   0.78,
+   0.85
+  ]
+ },
+ "whale": {
+  "name": "고래",
+  "category": "animal",
+  "ov": "whale/7"
+ },
+ "shark": {
+  "name": "상어",
+  "category": "animal",
+  "ov": "shark_d/0"
+ },
+ "sea_lion": {
+  "name": "바다사자",
+  "category": "animal",
+  "ov": "seal/1"
+ },
+ "horse": {
+  "name": "말",
+  "category": "animal",
+  "ov": "horse_b/0"
+ },
+ "cow": {
+  "name": "소",
+  "category": "animal",
+  "ov": "cow/4"
+ },
+ "pig": {
+  "name": "돼지",
+  "category": "animal",
+  "ov": "pig/2"
+ },
+ "sheep": {
+  "name": "양",
+  "category": "animal",
+  "ov": "sheep/3"
+ },
+ "chicken": {
+  "name": "닭",
+  "category": "animal",
+  "ov": "chicken_c/6"
+ },
+ "duck": {
+  "name": "오리",
+  "category": "animal",
+  "ov": "duck/3"
+ },
+ "goat": {
+  "name": "염소",
+  "category": "animal",
+  "ov": "goat_c/5"
+ },
+ "deer": {
+  "name": "사슴",
+  "category": "animal",
+  "ov": "deer/3"
+ },
+ "chipmunk": {
+  "name": "다람쥐",
+  "category": "animal",
+  "ov": "squirrel/7"
+ },
+ "owl": {
+  "name": "부엉이",
+  "category": "animal",
+  "ov": "owl/7"
+ },
+ "frog": {
+  "name": "개구리",
+  "category": "animal",
+  "ov": "frog/3"
+ },
+ "grape": {
+  "name": "포도",
+  "category": "fruit",
+  "ov": "grape_b/6"
+ },
+ "watermelon": {
+  "name": "수박",
+  "category": "fruit",
+  "ov": "watermelon_b/1"
+ },
+ "melon": {
+  "name": "멜론",
+  "category": "fruit",
+  "ov": "melon/4"
+ },
+ "mandarin": {
+  "name": "귤",
+  "category": "fruit",
+  "ov": "mandarin/4"
+ },
+ "plum": {
+  "name": "자두",
+  "category": "fruit",
+  "ov": "plum_b/3"
+ },
+ "cherry": {
+  "name": "체리",
+  "category": "fruit",
+  "ov": "cherry_b/1"
+ },
+ "blueberry": {
+  "name": "블루베리",
+  "category": "fruit",
+  "ov": "blueberry/2"
+ },
+ "persimmon": {
+  "name": "감",
+  "category": "fruit",
+  "ov": "persimmon_d/4"
+ },
+ "kiwi": {
+  "name": "키위",
+  "category": "fruit",
+  "ov": "kiwi/0"
+ },
+ "mango": {
+  "name": "망고",
+  "category": "fruit",
+  "ov": "mango/1"
+ },
+ "pineapple": {
+  "name": "파인애플",
+  "category": "fruit",
+  "ov": "pineapple/6"
+ },
+ "pomegranate": {
+  "name": "석류",
+  "category": "fruit",
+  "ov": "pomegranate/2"
+ },
+ "fig": {
+  "name": "무화과",
+  "category": "fruit",
+  "ov": "fig/0"
+ },
+ "raspberry": {
+  "name": "라즈베리",
+  "category": "fruit",
+  "ov": "raspberry/0"
+ },
+ "avocado": {
+  "name": "아보카도",
+  "category": "fruit",
+  "ov": "avocado/6"
+ },
+ "sweet_potato": {
+  "name": "고구마",
+  "category": "veg",
+  "ov": "sweet_potato_b/0"
+ },
+ "garlic": {
+  "name": "마늘",
+  "category": "veg",
+  "ov": "garlic/5"
+ },
+ "green_onion": {
+  "name": "파",
+  "category": "veg",
+  "ov": "green_onion_b/4"
+ },
+ "cabbage": {
+  "name": "양배추",
+  "category": "veg",
+  "ov": "cabbage_b/4"
+ },
+ "napa_cabbage": {
+  "name": "배추",
+  "category": "veg",
+  "ov": "napa_cabbage/3"
+ },
+ "spinach": {
+  "name": "시금치",
+  "category": "veg",
+  "ov": "spinach/7"
+ },
+ "eggplant": {
+  "name": "가지",
+  "category": "veg",
+  "ov": "eggplant/7"
+ },
+ "pumpkin": {
+  "name": "호박",
+  "category": "veg",
+  "ov": "pumpkin/1"
+ },
+ "mushroom": {
+  "name": "버섯",
+  "category": "veg",
+  "ov": "mushroom_b/3"
+ },
+ "peas": {
+  "name": "완두콩",
+  "category": "veg",
+  "ov": "peas/0"
+ },
+ "ginger": {
+  "name": "생강",
+  "category": "veg",
+  "ov": "ginger/2"
+ },
+ "city_bus": {
+  "name": "버스",
+  "category": "vehicle",
+  "ov": "city_bus_b/0"
+ },
+ "school_bus": {
+  "name": "스쿨버스",
+  "category": "vehicle",
+  "ov": "school_bus/2"
+ },
+ "car": {
+  "name": "자동차",
+  "category": "vehicle",
+  "ov": "car/7"
+ },
+ "taxi": {
+  "name": "택시",
+  "category": "vehicle",
+  "ov": "taxi_b/1",
+  "crop": [
+   0.42,
+   0.35,
+   1.0,
+   1.0
+  ]
+ },
+ "police_car": {
+  "name": "경찰차",
+  "category": "vehicle",
+  "ov": "police_car_b/7"
+ },
+ "fire_truck": {
+  "name": "소방차",
+  "category": "vehicle",
+  "ov": "fire_truck_b/5"
+ },
+ "ambulance": {
+  "name": "구급차",
+  "category": "vehicle",
+  "ov": "ambulance/3"
+ },
+ "truck": {
+  "name": "트럭",
+  "category": "vehicle",
+  "ov": "truck_b/3"
+ },
+ "dump_truck": {
+  "name": "덤프트럭",
+  "category": "vehicle",
+  "ov": "dump_truck/0"
+ },
+ "excavator": {
+  "name": "굴착기",
+  "category": "vehicle",
+  "ov": "excavator/5"
+ },
+ "bulldozer": {
+  "name": "불도저",
+  "category": "vehicle",
+  "ov": "bulldozer_b/4"
+ },
+ "tractor": {
+  "name": "트랙터",
+  "category": "vehicle",
+  "ov": "tractor/7"
+ },
+ "train": {
+  "name": "기차",
+  "category": "vehicle",
+  "ov": "train/6"
+ },
+ "subway": {
+  "name": "지하철",
+  "category": "vehicle",
+  "ov": "train_b/0"
+ },
+ "ktx": {
+  "name": "고속열차",
+  "category": "vehicle",
+  "ov": "ktx/0"
+ },
+ "airplane": {
+  "name": "비행기",
+  "category": "vehicle",
+  "ov": "airplane_b/1",
+  "crop": [
+   0.45,
+   0.05,
+   1.0,
+   0.95
+  ]
+ },
+ "helicopter": {
+  "name": "헬리콥터",
+  "category": "vehicle",
+  "ov": "helicopter/4"
+ },
+ "ship": {
+  "name": "배",
+  "category": "vehicle",
+  "ov": "ship/7"
+ },
+ "bicycle": {
+  "name": "자전거",
+  "category": "vehicle",
+  "ov": "bicycle_b/4"
+ },
+ "motorcycle": {
+  "name": "오토바이",
+  "category": "vehicle",
+  "ov": "motorcycle_b/4"
+ }
+}

@@ -8,17 +8,32 @@
  },
  "items": [
   {
-   "id": "peach",
-   "name": "복숭아",
+   "id": "apple",
+   "name": "사과",
    "category": "fruit",
-   "file": "assets/images/fruits/peach.jpg",
+   "file": "assets/images/fruits/apple.jpg",
    "source": {
-    "title": "photo_01.jpg",
+    "title": "photo_03.jpg",
     "url": "",
     "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
     "license": "unknown",
     "license_url": "",
-    "modified": "원본 photo_01.jpg를 이름만 바꿔 복사"
+    "modified": "원본 photo_03.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "avocado",
+   "name": "아보카도",
+   "category": "fruit",
+   "file": "assets/images/fruits/avocado.jpg",
+   "source": {
+    "title": "Free fresh avocado cut half",
+    "url": "https://www.rawpixel.com/image/5914514/image-public-domain-plant-green",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
@@ -36,73 +51,78 @@
    }
   },
   {
-   "id": "apple",
-   "name": "사과",
+   "id": "blueberry",
+   "name": "블루베리",
    "category": "fruit",
-   "file": "assets/images/fruits/apple.jpg",
+   "file": "assets/images/fruits/blueberry.jpg",
    "source": {
-    "title": "photo_03.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_03.jpg를 이름만 바꿔 복사"
+    "title": "blueberries",
+    "url": "https://www.flickr.com/photos/7927684@N03/34558043583",
+    "author": "jeffreyw",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "orange",
-   "name": "오렌지",
+   "id": "cherry",
+   "name": "체리",
    "category": "fruit",
-   "file": "assets/images/fruits/orange.jpg",
+   "file": "assets/images/fruits/cherry.jpg",
    "source": {
-    "title": "photo_04.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_04.jpg를 이름만 바꿔 복사"
+    "title": "Red Cherries",
+    "url": "https://stocksnap.io/photo/red-cherries-YS8L3DPSXI",
+    "author": "Patryk Dziejma",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "strawberry",
-   "name": "딸기",
+   "id": "fig",
+   "name": "무화과",
    "category": "fruit",
-   "file": "assets/images/fruits/strawberry.jpg",
+   "file": "assets/images/fruits/fig.jpg",
    "source": {
-    "title": "photo_05.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_05.jpg를 이름만 바꿔 복사"
+    "title": "Figs Fruits",
+    "url": "https://stocksnap.io/photo/figs-fruits-YVDRQAGWOP",
+    "author": "Jaroslaw%20Puszczy%u0144ski",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "pear",
-   "name": "배",
+   "id": "grape",
+   "name": "포도",
    "category": "fruit",
-   "file": "assets/images/fruits/pear.jpg",
+   "file": "assets/images/fruits/grape.jpg",
    "source": {
-    "title": "photo_06.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_06.jpg를 이름만 바꿔 복사"
+    "title": "Green Grapes",
+    "url": "https://stocksnap.io/photo/green-grapes-JDT71I6U96",
+    "author": "Krzysztof%20Puszczy%u0144ski",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "green_pepper",
-   "name": "피망",
-   "category": "veg",
-   "file": "assets/images/vegetables/green_pepper.jpg",
+   "id": "kiwi",
+   "name": "키위",
+   "category": "fruit",
+   "file": "assets/images/fruits/kiwi.jpg",
    "source": {
-    "title": "photo_07.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_07.jpg를 이름만 바꿔 복사"
+    "title": "Close up photo of a sliced kiwi fruit",
+    "url": "https://www.flickr.com/photos/194291384@N08/51624047992",
+    "author": "britishhamper",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
@@ -120,143 +140,194 @@
    }
   },
   {
-   "id": "carrot",
-   "name": "당근",
-   "category": "veg",
-   "file": "assets/images/vegetables/carrot.jpg",
+   "id": "mandarin",
+   "name": "귤",
+   "category": "fruit",
+   "file": "assets/images/fruits/mandarin.jpg",
    "source": {
-    "title": "photo_09.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_09.jpg를 이름만 바꿔 복사"
+    "title": "Mandarin Orange",
+    "url": "https://www.flickr.com/photos/25802865@N08/54315552933",
+    "author": "chooyutshing",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "corn",
-   "name": "옥수수",
-   "category": "veg",
-   "file": "assets/images/vegetables/corn.jpg",
+   "id": "mango",
+   "name": "망고",
+   "category": "fruit",
+   "file": "assets/images/fruits/mango.jpg",
    "source": {
-    "title": "photo_10.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_10.jpg를 이름만 바꿔 복사"
+    "title": "Closeup mango fruit white background",
+    "url": "https://www.rawpixel.com/image/6035201/photo-image-background-public-domain-leaf",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "tomato",
-   "name": "토마토",
-   "category": "veg",
-   "file": "assets/images/vegetables/tomato.jpg",
+   "id": "melon",
+   "name": "멜론",
+   "category": "fruit",
+   "file": "assets/images/fruits/melon.jpg",
    "source": {
-    "title": "photo_11.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_11.jpg를 이름만 바꿔 복사"
+    "title": "Cantaloupe on the Vine",
+    "url": "https://www.flickr.com/photos/184594136@N08/52307009259",
+    "author": "Alabama Extension",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "cucumber",
-   "name": "오이",
-   "category": "veg",
-   "file": "assets/images/vegetables/cucumber.jpg",
+   "id": "orange",
+   "name": "오렌지",
+   "category": "fruit",
+   "file": "assets/images/fruits/orange.jpg",
    "source": {
-    "title": "photo_12.jpg",
+    "title": "photo_04.jpg",
     "url": "",
     "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
     "license": "unknown",
     "license_url": "",
-    "modified": "원본 photo_12.jpg를 이름만 바꿔 복사"
+    "modified": "원본 photo_04.jpg를 이름만 바꿔 복사"
    }
   },
   {
-   "id": "onion",
-   "name": "양파",
-   "category": "veg",
-   "file": "assets/images/vegetables/onion.jpg",
+   "id": "peach",
+   "name": "복숭아",
+   "category": "fruit",
+   "file": "assets/images/fruits/peach.jpg",
    "source": {
-    "title": "photo_13.jpg",
+    "title": "photo_01.jpg",
     "url": "",
     "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
     "license": "unknown",
     "license_url": "",
-    "modified": "원본 photo_13.jpg를 이름만 바꿔 복사"
+    "modified": "원본 photo_01.jpg를 이름만 바꿔 복사"
    }
   },
   {
-   "id": "potato",
-   "name": "감자",
-   "category": "veg",
-   "file": "assets/images/vegetables/potato.jpg",
+   "id": "pear",
+   "name": "배",
+   "category": "fruit",
+   "file": "assets/images/fruits/pear.jpg",
    "source": {
-    "title": "photo_14.jpg",
+    "title": "photo_06.jpg",
     "url": "",
     "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
     "license": "unknown",
     "license_url": "",
-    "modified": "원본 photo_14.jpg를 이름만 바꿔 복사"
+    "modified": "원본 photo_06.jpg를 이름만 바꿔 복사"
    }
   },
   {
-   "id": "tomato_2",
-   "name": "토마토",
-   "category": "veg",
-   "file": "assets/images/vegetables/tomato_2.jpg",
+   "id": "persimmon",
+   "name": "감",
+   "category": "fruit",
+   "file": "assets/images/fruits/persimmon.jpg",
    "source": {
-    "title": "photo_15.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_15.jpg를 이름만 바꿔 복사"
+    "title": "Free persimmon, kaki fruit close",
+    "url": "https://www.rawpixel.com/image/5907276/photo-image-public-domain-wooden-fruit",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "lettuce",
-   "name": "상추",
-   "category": "veg",
-   "file": "assets/images/vegetables/lettuce.jpg",
+   "id": "pineapple",
+   "name": "파인애플",
+   "category": "fruit",
+   "file": "assets/images/fruits/pineapple.jpg",
    "source": {
-    "title": "photo_16.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_16.jpg를 이름만 바꿔 복사"
+    "title": "Pineapple Fruit",
+    "url": "https://stocksnap.io/photo/pineapple-fruit-X0EC2UF71G",
+    "author": "Patrycja Tomaszczyk",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "paprika",
-   "name": "파프리카",
-   "category": "veg",
-   "file": "assets/images/vegetables/paprika.jpg",
+   "id": "plum",
+   "name": "자두",
+   "category": "fruit",
+   "file": "assets/images/fruits/plum.jpg",
    "source": {
-    "title": "photo_17.jpg",
-    "url": "",
-    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
-    "license": "unknown",
-    "license_url": "",
-    "modified": "원본 photo_17.jpg를 이름만 바꿔 복사"
+    "title": "Plum fruit growing tree",
+    "url": "https://www.rawpixel.com/image/6037376/photo-image-public-domain-leaf-tree",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
-   "id": "carrot_2",
-   "name": "당근",
-   "category": "veg",
-   "file": "assets/images/vegetables/carrot_2.jpg",
+   "id": "pomegranate",
+   "name": "석류",
+   "category": "fruit",
+   "file": "assets/images/fruits/pomegranate.jpg",
    "source": {
-    "title": "photo_18.jpg",
+    "title": "Pomegranate blast",
+    "url": "https://www.flickr.com/photos/88913562@N00/51521108749",
+    "author": "CAJC: in the PNW",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "raspberry",
+   "name": "라즈베리",
+   "category": "fruit",
+   "file": "assets/images/fruits/raspberry.jpg",
+   "source": {
+    "title": "Raspberry Cake",
+    "url": "https://stocksnap.io/photo/raspberry-cake-HUBPTR7YNE",
+    "author": "Michal Kulesza",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "strawberry",
+   "name": "딸기",
+   "category": "fruit",
+   "file": "assets/images/fruits/strawberry.jpg",
+   "source": {
+    "title": "photo_05.jpg",
     "url": "",
     "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
     "license": "unknown",
     "license_url": "",
-    "modified": "원본 photo_18.jpg를 이름만 바꿔 복사"
+    "modified": "원본 photo_05.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "watermelon",
+   "name": "수박",
+   "category": "fruit",
+   "file": "assets/images/fruits/watermelon.jpg",
+   "source": {
+    "title": "Watermelon Fruits",
+    "url": "https://stocksnap.io/photo/watermelon-fruits-GDTA8DSYQ7",
+    "author": "Krzysztof%20Puszczy%u0144ski",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
    }
   },
   {
@@ -274,6 +345,252 @@
    }
   },
   {
+   "id": "cabbage",
+   "name": "양배추",
+   "category": "veg",
+   "file": "assets/images/vegetables/cabbage.jpg",
+   "source": {
+    "title": "Cabbage, agricultural produce",
+    "url": "https://www.rawpixel.com/image/6040271/photo-image-public-domain-plant-food",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "carrot",
+   "name": "당근",
+   "category": "veg",
+   "file": "assets/images/vegetables/carrot.jpg",
+   "source": {
+    "title": "photo_09.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_09.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "carrot_2",
+   "name": "당근",
+   "category": "veg",
+   "file": "assets/images/vegetables/carrot_2.jpg",
+   "source": {
+    "title": "photo_18.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_18.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "corn",
+   "name": "옥수수",
+   "category": "veg",
+   "file": "assets/images/vegetables/corn.jpg",
+   "source": {
+    "title": "photo_10.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_10.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "cucumber",
+   "name": "오이",
+   "category": "veg",
+   "file": "assets/images/vegetables/cucumber.jpg",
+   "source": {
+    "title": "photo_12.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_12.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "eggplant",
+   "name": "가지",
+   "category": "veg",
+   "file": "assets/images/vegetables/eggplant.jpg",
+   "source": {
+    "title": "eggplants",
+    "url": "https://www.flickr.com/photos/41087714@N00/295806625",
+    "author": "Rex Pe",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "garlic",
+   "name": "마늘",
+   "category": "veg",
+   "file": "assets/images/vegetables/garlic.jpg",
+   "source": {
+    "title": "Garlic Reference #4",
+    "url": "https://www.flickr.com/photos/189561381@N07/51951940792",
+    "author": "claralieu",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "ginger",
+   "name": "생강",
+   "category": "veg",
+   "file": "assets/images/vegetables/ginger.jpg",
+   "source": {
+    "title": "Free single ginger image",
+    "url": "https://www.rawpixel.com/image/5913937/image-public-domain-shadow-nature",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "green_onion",
+   "name": "파",
+   "category": "veg",
+   "file": "assets/images/vegetables/green_onion.jpg",
+   "source": {
+    "title": "Free pile green onions image",
+    "url": "https://www.rawpixel.com/image/5925502/photo-image-public-domain-plant-green",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "green_pepper",
+   "name": "피망",
+   "category": "veg",
+   "file": "assets/images/vegetables/green_pepper.jpg",
+   "source": {
+    "title": "photo_07.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_07.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "lettuce",
+   "name": "상추",
+   "category": "veg",
+   "file": "assets/images/vegetables/lettuce.jpg",
+   "source": {
+    "title": "photo_16.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_16.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "mushroom",
+   "name": "버섯",
+   "category": "veg",
+   "file": "assets/images/vegetables/mushroom.jpg",
+   "source": {
+    "title": "Wild Mushrooms",
+    "url": "https://stocksnap.io/photo/wild-mushrooms-75P3RRH6UN",
+    "author": "Aaron Burden",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "napa_cabbage",
+   "name": "배추",
+   "category": "veg",
+   "file": "assets/images/vegetables/napa_cabbage.jpg",
+   "source": {
+    "title": "800px-Napa_cabbages",
+    "url": "https://www.flickr.com/photos/203460072@N08/54742947286",
+    "author": "trishf42",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "onion",
+   "name": "양파",
+   "category": "veg",
+   "file": "assets/images/vegetables/onion.jpg",
+   "source": {
+    "title": "photo_13.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_13.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "paprika",
+   "name": "파프리카",
+   "category": "veg",
+   "file": "assets/images/vegetables/paprika.jpg",
+   "source": {
+    "title": "photo_17.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_17.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "peas",
+   "name": "완두콩",
+   "category": "veg",
+   "file": "assets/images/vegetables/peas.jpg",
+   "source": {
+    "title": "Free image green peas pod",
+    "url": "https://www.rawpixel.com/image/5925207/photo-image-public-domain-plant-green",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "potato",
+   "name": "감자",
+   "category": "veg",
+   "file": "assets/images/vegetables/potato.jpg",
+   "source": {
+    "title": "photo_14.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_14.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
    "id": "potato_2",
    "name": "감자",
    "category": "veg",
@@ -285,6 +602,919 @@
     "license": "unknown",
     "license_url": "",
     "modified": "원본 photo_20.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "pumpkin",
+   "name": "호박",
+   "category": "veg",
+   "file": "assets/images/vegetables/pumpkin.jpg",
+   "source": {
+    "title": "Orange Pumpkins",
+    "url": "https://stocksnap.io/photo/orange-pumpkins-15J9JFRC1K",
+    "author": "Aaron Burden",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "spinach",
+   "name": "시금치",
+   "category": "veg",
+   "file": "assets/images/vegetables/spinach.jpg",
+   "source": {
+    "title": "Spinach. Avocado. Salt. Pepper.",
+    "url": "https://www.flickr.com/photos/48889115061@N01/52321898422",
+    "author": "Howdy, I'm HMK",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "sweet_potato",
+   "name": "고구마",
+   "category": "veg",
+   "file": "assets/images/vegetables/sweet_potato.jpg",
+   "source": {
+    "title": "Sweet Potato",
+    "url": "https://stocksnap.io/photo/sweet-potato-RYXVCEK3Q2",
+    "author": "ela haney",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "tomato",
+   "name": "토마토",
+   "category": "veg",
+   "file": "assets/images/vegetables/tomato.jpg",
+   "source": {
+    "title": "photo_11.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_11.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "tomato_2",
+   "name": "토마토",
+   "category": "veg",
+   "file": "assets/images/vegetables/tomato_2.jpg",
+   "source": {
+    "title": "photo_15.jpg",
+    "url": "",
+    "author": "저장소 소유자 업로드 (원 출처 기록 없음)",
+    "license": "unknown",
+    "license_url": "",
+    "modified": "원본 photo_15.jpg를 이름만 바꿔 복사"
+   }
+  },
+  {
+   "id": "bear",
+   "name": "곰",
+   "category": "animal",
+   "file": "assets/images/animals/bear.jpg",
+   "source": {
+    "title": "Kodiak brown bear in the snow.",
+    "url": "https://www.flickr.com/photos/54775250@N07/51942708088",
+    "author": "USFWSAlaska",
+    "license": "Public Domain Mark",
+    "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "cat",
+   "name": "고양이",
+   "category": "animal",
+   "file": "assets/images/animals/cat.jpg",
+   "source": {
+    "title": "File:Cat November 2010-1a.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Cat_November_2010-1a.jpg",
+    "author": "Alvesgaspar",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "via": "Wikimedia Commons",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "chicken",
+   "name": "닭",
+   "category": "animal",
+   "file": "assets/images/animals/chicken.jpg",
+   "source": {
+    "title": "Rhode Island Red scans grass for bugs",
+    "url": "https://www.flickr.com/photos/196506958@N06/52823356585",
+    "author": "donovan_terry",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "chipmunk",
+   "name": "다람쥐",
+   "category": "animal",
+   "file": "assets/images/animals/chipmunk.jpg",
+   "source": {
+    "title": "New Hampshire-01033 - Chipmunk",
+    "url": "https://www.flickr.com/photos/22490717@N02/52593359299",
+    "author": "archer10 (Dennis)",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "cow",
+   "name": "소",
+   "category": "animal",
+   "file": "assets/images/animals/cow.jpg",
+   "source": {
+    "title": "afrc.mc.1.10.14 (40)",
+    "url": "https://www.flickr.com/photos/47027921@N05/15412291202",
+    "author": "ScotGov Rural",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "crocodile",
+   "name": "악어",
+   "category": "animal",
+   "file": "assets/images/animals/crocodile.jpg",
+   "source": {
+    "title": "Nile Crocodile",
+    "url": "https://www.flickr.com/photos/88497936@N08/8075665672",
+    "author": "totorus",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "deer",
+   "name": "사슴",
+   "category": "animal",
+   "file": "assets/images/animals/deer.jpg",
+   "source": {
+    "title": "NB-00369 - Deer at the site",
+    "url": "https://www.flickr.com/photos/22490717@N02/51308043685",
+    "author": "archer10 (Dennis)",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "dog",
+   "name": "강아지",
+   "category": "animal",
+   "file": "assets/images/animals/dog.jpg",
+   "source": {
+    "title": "File:YellowLabradorLooking new.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:YellowLabradorLooking_new.jpg",
+    "author": "derivative work: Djmirko (talk)wereweweewewewg.jpg",
+    "license": "CC BY-SA 3.0",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "via": "Wikimedia Commons",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "dolphin",
+   "name": "돌고래",
+   "category": "animal",
+   "file": "assets/images/animals/dolphin.jpg",
+   "source": {
+    "title": "Elli the dolphin jumps 2, Anthony's Key, Roatan, Honduras",
+    "url": "https://www.flickr.com/photos/37996580417@N01/52602487435",
+    "author": "gruntzooki",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "cropped, resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "duck",
+   "name": "오리",
+   "category": "animal",
+   "file": "assets/images/animals/duck.jpg",
+   "source": {
+    "title": "Mallard duck",
+    "url": "https://www.flickr.com/photos/125741467@N05/51868488307",
+    "author": "hedera.baltica",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "elephant",
+   "name": "코끼리",
+   "category": "animal",
+   "file": "assets/images/animals/elephant.jpg",
+   "source": {
+    "title": "African Elephant",
+    "url": "https://www.flickr.com/photos/60654399@N00/52099021294",
+    "author": "Michelle K Callahan",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "fox",
+   "name": "여우",
+   "category": "animal",
+   "file": "assets/images/animals/fox.jpg",
+   "source": {
+    "title": "Rural Red Fox - Vixen",
+    "url": "https://www.flickr.com/photos/128941223@N02/52000627413",
+    "author": "cazalegg",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "frog",
+   "name": "개구리",
+   "category": "animal",
+   "file": "assets/images/animals/frog.jpg",
+   "source": {
+    "title": "Slender Green Frog",
+    "url": "https://www.flickr.com/photos/63479603@N00/52656363548",
+    "author": "jeans_Photos",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "giraffe",
+   "name": "기린",
+   "category": "animal",
+   "file": "assets/images/animals/giraffe.jpg",
+   "source": {
+    "title": "Giraffe #8",
+    "url": "https://www.flickr.com/photos/189561381@N07/52295717101",
+    "author": "claralieu",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "goat",
+   "name": "염소",
+   "category": "animal",
+   "file": "assets/images/animals/goat.jpg",
+   "source": {
+    "title": "Animal Goat",
+    "url": "https://stocksnap.io/photo/animal-goat-0QJJYBAVZ1",
+    "author": "Fineas Anton",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "gorilla",
+   "name": "고릴라",
+   "category": "animal",
+   "file": "assets/images/animals/gorilla.jpg",
+   "source": {
+    "title": "Mountain Gorilla, Uganda",
+    "url": "https://www.flickr.com/photos/64607715@N05/51593997777",
+    "author": "Rod Waddington",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "hippo",
+   "name": "하마",
+   "category": "animal",
+   "file": "assets/images/animals/hippo.jpg",
+   "source": {
+    "title": "Hippo (Hippopotamus amphibius)",
+    "url": "https://www.flickr.com/photos/65695019@N07/52121044837",
+    "author": "Bernard DUPONT",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "horse",
+   "name": "말",
+   "category": "animal",
+   "file": "assets/images/animals/horse.jpg",
+   "source": {
+    "title": "Brown horse",
+    "url": "https://www.flickr.com/photos/137294100@N08/51731625011",
+    "author": "radkuch.13",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "kangaroo",
+   "name": "캥거루",
+   "category": "animal",
+   "file": "assets/images/animals/kangaroo.jpg",
+   "source": {
+    "title": "Eastern Grey Kangaroo",
+    "url": "https://www.flickr.com/photos/183476300@N04/51367520502",
+    "author": "New Matilda | Independent Media",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "koala",
+   "name": "코알라",
+   "category": "animal",
+   "file": "assets/images/animals/koala.jpg",
+   "source": {
+    "title": "koala is arboreal herbivorous marsupial",
+    "url": "https://www.rawpixel.com/image/4021311/photo-image-animal-public-domain",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "lion",
+   "name": "사자",
+   "category": "animal",
+   "file": "assets/images/animals/lion.jpg",
+   "source": {
+    "title": "File:Lion waiting in Namibia.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Lion_waiting_in_Namibia.jpg",
+    "author": "Kevin Pluck",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0",
+    "via": "Wikimedia Commons",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "monkey",
+   "name": "원숭이",
+   "category": "animal",
+   "file": "assets/images/animals/monkey.jpg",
+   "source": {
+    "title": "Macaque Monkey",
+    "url": "https://www.flickr.com/photos/64607715@N05/52374566457",
+    "author": "Rod Waddington",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "owl",
+   "name": "부엉이",
+   "category": "animal",
+   "file": "assets/images/animals/owl.jpg",
+   "source": {
+    "title": "Eurasian Eagle-owl (Bubo bubo)",
+    "url": "https://www.flickr.com/photos/68466173@N02/51670040809",
+    "author": "gilgit2",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "panda",
+   "name": "판다",
+   "category": "animal",
+   "file": "assets/images/animals/panda.jpg",
+   "source": {
+    "title": "Giant Panda",
+    "url": "https://www.flickr.com/photos/188082384@N02/52252496718",
+    "author": "Mogami Kariya",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "penguin",
+   "name": "펭귄",
+   "category": "animal",
+   "file": "assets/images/animals/penguin.jpg",
+   "source": {
+    "title": "Antarctica penguin",
+    "url": "https://www.flickr.com/photos/43355249@N00/53375190991",
+    "author": "szeke",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "pig",
+   "name": "돼지",
+   "category": "animal",
+   "file": "assets/images/animals/pig.jpg",
+   "source": {
+    "title": "PG Goroka pig farm and garden - 1965 (W65-A23-09)",
+    "url": "https://www.flickr.com/photos/9905418@N05/51834160429",
+    "author": "David Pirmann",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "rabbit",
+   "name": "토끼",
+   "category": "animal",
+   "file": "assets/images/animals/rabbit.jpg",
+   "source": {
+    "title": "File:Oryctolagus cuniculus Tasmania 2.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Oryctolagus_cuniculus_Tasmania_2.jpg",
+    "author": "JJ Harrison (https://www.jjharrison.com.au/)",
+    "license": "CC BY-SA 3.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/3.0",
+    "via": "Wikimedia Commons",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "rhino",
+   "name": "코뿔소",
+   "category": "animal",
+   "file": "assets/images/animals/rhino.jpg",
+   "source": {
+    "title": "Nashville Zoo - Rhinoceros",
+    "url": "https://www.flickr.com/photos/124651729@N04/51302680678",
+    "author": "Stabbur's Master",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "sea_lion",
+   "name": "바다사자",
+   "category": "animal",
+   "file": "assets/images/animals/sea_lion.jpg",
+   "source": {
+    "title": "California sea lion (Zalophus californianus)",
+    "url": "https://www.flickr.com/photos/22170893@N06/13633026324",
+    "author": "Gregory 'Slobirdr' Smith",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "shark",
+   "name": "상어",
+   "category": "animal",
+   "file": "assets/images/animals/shark.jpg",
+   "source": {
+    "title": "Shark Sea",
+    "url": "https://stocksnap.io/photo/shark-sea-UKZCDUVYZS",
+    "author": "George Desipris",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "sheep",
+   "name": "양",
+   "category": "animal",
+   "file": "assets/images/animals/sheep.jpg",
+   "source": {
+    "title": "Sheep",
+    "url": "https://www.flickr.com/photos/75967467@N02/16146501982",
+    "author": "Alex.m.Hayward",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "tiger",
+   "name": "호랑이",
+   "category": "animal",
+   "file": "assets/images/animals/tiger.jpg",
+   "source": {
+    "title": "",
+    "url": "https://www.rawpixel.com/image/5935244/photo-image-animal-park",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "turtle",
+   "name": "거북이",
+   "category": "animal",
+   "file": "assets/images/animals/turtle.jpg",
+   "source": {
+    "title": "MAY 16: A desert tortoise at the Kingman Field Office",
+    "url": "https://www.flickr.com/photos/165415395@N07/52150111645",
+    "author": "National Interagency Fire Center",
+    "license": "Public Domain Mark",
+    "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "whale",
+   "name": "고래",
+   "category": "animal",
+   "file": "assets/images/animals/whale.jpg",
+   "source": {
+    "title": "Humpback whale in Antarctica",
+    "url": "https://www.flickr.com/photos/43355249@N00/52920178976",
+    "author": "szeke",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "wolf",
+   "name": "늑대",
+   "category": "animal",
+   "file": "assets/images/animals/wolf.jpg",
+   "source": {
+    "title": "Gray Wolf - Canis lupus",
+    "url": "https://www.flickr.com/photos/22170893@N06/51545668593",
+    "author": "Gregory 'Slobirdr' Smith",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "zebra",
+   "name": "얼룩말",
+   "category": "animal",
+   "file": "assets/images/animals/zebra.jpg",
+   "source": {
+    "title": "Zebra Reference #11",
+    "url": "https://www.flickr.com/photos/189561381@N07/51707943549",
+    "author": "claralieu",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "airplane",
+   "name": "비행기",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/airplane.jpg",
+   "source": {
+    "title": "Airplane Travel",
+    "url": "https://stocksnap.io/photo/airplane-travel-I54H0TYV9C",
+    "author": "Robert De Bock",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "cropped, resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "ambulance",
+   "name": "구급차",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/ambulance.jpg",
+   "source": {
+    "title": "old rochester ambulance",
+    "url": "https://www.flickr.com/photos/96501274@N00/295713692",
+    "author": "christopdesoto",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "bicycle",
+   "name": "자전거",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/bicycle.jpg",
+   "source": {
+    "title": "Bike Bicycle",
+    "url": "https://stocksnap.io/photo/bike-bicycle-9WRTTVGZOS",
+    "author": "Markus Spiske",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "bulldozer",
+   "name": "불도저",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/bulldozer.jpg",
+   "source": {
+    "title": "Caterpillar D6R Dozer",
+    "url": "https://www.flickr.com/photos/87297882@N03/52021783377",
+    "author": "Aaron Volkening",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "car",
+   "name": "자동차",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/car.jpg",
+   "source": {
+    "title": "MG ZS 2019",
+    "url": "https://www.flickr.com/photos/37691369@N08/52232608069",
+    "author": "RL GNZLZ",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "city_bus",
+   "name": "버스",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/city_bus.jpg",
+   "source": {
+    "title": "Culver City Bus Yard 2",
+    "url": "https://www.flickr.com/photos/166312056@N06/51493966365",
+    "author": "NeoplanKid79",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "dump_truck",
+   "name": "덤프트럭",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/dump_truck.jpg",
+   "source": {
+    "title": "1961 Dodge C-800 Dump Truck",
+    "url": "https://www.flickr.com/photos/31411679@N08/52065805120",
+    "author": "aldenjewell",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "excavator",
+   "name": "굴착기",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/excavator.jpg",
+   "source": {
+    "title": "Volvo Excavator",
+    "url": "https://www.flickr.com/photos/47515486@N05/52510770541",
+    "author": "ohefin",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "fire_truck",
+   "name": "소방차",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/fire_truck.jpg",
+   "source": {
+    "title": "Pirsch Custom Pumper Fire Engine",
+    "url": "https://www.flickr.com/photos/31411679@N08/52151744768",
+    "author": "aldenjewell",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "helicopter",
+   "name": "헬리콥터",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/helicopter.jpg",
+   "source": {
+    "title": "XT761 (G-WSEX) Westland Wessex HU.5 Historic Helicopters RAF Fairford 14.7.22",
+    "url": "https://www.flickr.com/photos/16172980@N07/52291806973",
+    "author": "Colin Cooke Photo",
+    "license": "CC BY-SA 2.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "ktx",
+   "name": "고속열차",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/ktx.jpg",
+   "source": {
+    "title": "KTX, Jeonju station, Jeollabukdo, South Korea",
+    "url": "https://www.flickr.com/photos/41980486@N07/51533214717",
+    "author": "Sharon Hahn Darlin",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "motorcycle",
+   "name": "오토바이",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/motorcycle.jpg",
+   "source": {
+    "title": "Motorcycle Bike",
+    "url": "https://stocksnap.io/photo/motorcycle-bike-2925BDBD23",
+    "author": "Skitter Photo",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "police_car",
+   "name": "경찰차",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/police_car.jpg",
+   "source": {
+    "title": "West Miami Police Car",
+    "url": "https://www.flickr.com/photos/25955895@N03/51773143853",
+    "author": "Phillip Pessar",
+    "license": "CC BY 2.0",
+    "license_url": "https://creativecommons.org/licenses/by/2.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "school_bus",
+   "name": "스쿨버스",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/school_bus.jpg",
+   "source": {
+    "title": "Yellow school bus",
+    "url": "https://www.rawpixel.com/image/8809277/yellow-school-bus",
+    "author": "(rawpixel)",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (rawpixel)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "ship",
+   "name": "배",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/ship.jpg",
+   "source": {
+    "title": "The vessel MN PELICAN (IMO 9170999, MMSI 228315700) is a Ro-Ro Cargo Ship built in 1999 (25 years old) and currently sailing under the flag of France.",
+    "url": "https://www.flickr.com/photos/89918055@N05/54049523375",
+    "author": "JOHN K THORNE",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "subway",
+   "name": "지하철",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/subway.jpg",
+   "source": {
+    "title": "Subway Train",
+    "url": "https://stocksnap.io/photo/subway-train-OUEV60QGR4",
+    "author": "Negative Space",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "taxi",
+   "name": "택시",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/taxi.jpg",
+   "source": {
+    "title": "Taxis Cabs",
+    "url": "https://stocksnap.io/photo/taxis-cabs-6EB25751DC",
+    "author": "Leeroy",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "cropped, resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "tractor",
+   "name": "트랙터",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/tractor.jpg",
+   "source": {
+    "title": "old farm tractors",
+    "url": "https://www.flickr.com/photos/109200699@N03/55352407416",
+    "author": "indyraf",
+    "license": "Public Domain Mark",
+    "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "train",
+   "name": "기차",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/train.jpg",
+   "source": {
+    "title": "How About a Curve, F-units, a Passenger Train All in Some Snow? -- 3 Photos",
+    "url": "https://www.flickr.com/photos/129679309@N05/33137960800",
+    "author": "railfan 44",
+    "license": "Public Domain Mark",
+    "license_url": "https://creativecommons.org/publicdomain/mark/1.0/",
+    "via": "Openverse (flickr)",
+    "modified": "resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "truck",
+   "name": "트럭",
+   "category": "vehicle",
+   "file": "assets/images/vehicles/truck.jpg",
+   "source": {
+    "title": "Truck Orange",
+    "url": "https://stocksnap.io/photo/truck-orange-3148453E5E",
+    "author": "Jay Mantri",
+    "license": "CC0",
+    "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+    "via": "Openverse (stocksnap)",
+    "modified": "resized to max 500px JPEG"
    }
   }
  ]

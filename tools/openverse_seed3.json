@@ -1,0 +1,18 @@
+[
+["animal","kangaroo_c","캥거루","eastern grey kangaroo"],
+["animal","kangaroo_d","캥거루","kangaroo",{"source":"wordpress,stocksnap,rawpixel"}],
+["animal","koala_c","코알라","koala sleeping eucalyptus"],
+["animal","koala_d","코알라","koala",{"source":"wordpress,stocksnap,rawpixel"}],
+["animal","shark_c","상어","reef shark swimming"],
+["animal","shark_d","상어","shark",{"source":"wordpress,stocksnap,rawpixel"}],
+["animal","chicken_c","닭","chicken hen farm"],
+["animal","chicken_d","닭","chicken",{"source":"wordpress,stocksnap,rawpixel"}],
+["animal","goat_c","염소","goat",{"source":"wordpress,stocksnap,rawpixel"}],
+["animal","goat_d","염소","domestic goat farm"],
+["fruit","persimmon_c","감","persimmons fruit",{"source":"wordpress,stocksnap,rawpixel"}],
+["fruit","persimmon_d","감","kaki persimmon fruit"],
+["fruit","korean_melon_c","참외","chamoe"],
+["veg","radish_c","무","daikon"],
+["veg","beans_c","콩","soybean"],
+["veg","mushroom_c","버섯","shiitake"]
+]
