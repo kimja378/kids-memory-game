@@ -149,12 +149,12 @@ function mouth(mood, y){
 const reduceMotion = (() => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){ return false; } })();
 function waveArm(sx, sy, rx, ry, fill, stroke){
   const st = stroke ? `stroke="${stroke}" stroke-width="2"` : '';
-  const anim = reduceMotion ? '' : `<animateTransform attributeName="transform" type="rotate" values="25;60;25" dur="1s" repeatCount="indefinite"/>`;
-  return `<g transform="translate(${sx} ${sy})"><g transform="rotate(40)">
+  const anim = reduceMotion ? '' : `<animateTransform attributeName="transform" type="rotate" values="50;85;50" dur="1s" repeatCount="indefinite"/>`;
+  return `<g transform="translate(${sx} ${sy})"><g transform="rotate(65)">
     <ellipse cx="0" cy="${-ry+5}" rx="${rx}" ry="${ry}" fill="${fill}" ${st}/>${anim}</g></g>`;
 }
 function bear(x, y, s=1, mood='happy', opt={}){
-  const armBack = opt.wave ? waveArm(20, 28, 9, 17, '#a56b3f') : '';
+  const armBack = opt.wave ? waveArm(22, 30, 9, 19, '#a56b3f') : '';
   const armR = opt.wave ? ''
     : `<ellipse cx="29" cy="40" rx="9" ry="17" fill="#a56b3f" transform="rotate(${opt.reach ? -70 : -15} 29 40)"/>`;
   return `<g transform="translate(${x} ${y}) scale(${s})"><g class="bob ${opt.cls||''}">

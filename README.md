@@ -19,6 +19,7 @@ tools/validate_images.py       사진 누락·손상 검증 스크립트
 tools/*.py                     사진 수집/변환용 개발 도구 (앱 실행에는 사용되지 않음)
 tests/game.test.js             Playwright 자동 테스트
 storybooks/kongi.html          사회성 질문 동화 「콩이랑 같이 놀자」 (한 파일, 아이 얼굴 사진 포함)
+storybooks/mart.html           사회성 질문 동화 「엄마랑 마트에 가요」 (한 파일, 아이 얼굴 사진 포함)
 photo_01.jpg ~ photo_20.jpg    예전 버전 사진 원본 (보관용, 현재는 assets/images 복사본 사용)
 ```
 
