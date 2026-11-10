@@ -23,7 +23,7 @@ for line in open(sys.argv[2]):
         resp = requests.get(u, headers=UA, timeout=120)
         if resp.status_code == 200: break
         if resp.status_code == 404 and u != r["url"] and r["w"] < 3000: u = r["url"]; continue
-        wait = max(int(resp.headers.get("retry-after", "30") or 30), 300)
+        wait = max(int(resp.headers.get("retry-after", "30") or 30), 180)
         print("  ", resp.status_code, "wait", wait, file=sys.stderr, flush=True); time.sleep(wait)
     open(fn, "wb").write(resp.content)
     json.dump(dict(key=key, title=r["title"]), open(fn + ".json", "w"), ensure_ascii=False)
