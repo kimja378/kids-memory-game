@@ -1,0 +1,335 @@
+[
+[
+"obj",
+"hair-dryer_b",
+"드라이기",
+"hair dryer isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"mirror_b",
+"거울",
+"round mirror isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"hairbrush_b",
+"머리빗",
+"comb isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"toothbrush_b",
+"칫솔",
+"toothbrush isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"toothpaste_b",
+"치약",
+"toothpaste isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"towel_b",
+"수건",
+"folded towel isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"soap_b",
+"비누",
+"soap isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"cap_b",
+"모자",
+"cap isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"backpack_b",
+"가방",
+"backpack isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"umbrella_b",
+"우산",
+"umbrella isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"sneakers_b",
+"신발",
+"sneaker isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"socks_b",
+"양말",
+"socks isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"spoon_b",
+"숟가락",
+"spoon isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"chopsticks_b",
+"젓가락",
+"chopsticks isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"cup_b",
+"컵",
+"mug isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"plate_b",
+"접시",
+"empty plate isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"refrigerator_b",
+"냉장고",
+"fridge isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"washing-machine_b",
+"세탁기",
+"washing machine isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"clock_b",
+"시계",
+"clock isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"pillow_b",
+"베개",
+"pillow isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"blanket_b",
+"이불",
+"folded blanket isolated",
+{
+"source": "rawpixel,stocksnap,wordpress"
+}
+],
+[
+"obj",
+"hair-dryer_c",
+"드라이기",
+"hair dryer",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"mirror_c",
+"거울",
+"round mirror",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"hairbrush_c",
+"머리빗",
+"comb",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"toothpaste_c",
+"치약",
+"toothpaste",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"soap_c",
+"비누",
+"soap",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"cap_c",
+"모자",
+"cap",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"backpack_c",
+"가방",
+"backpack",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"umbrella_c",
+"우산",
+"umbrella",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"sneakers_c",
+"신발",
+"sneaker",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"socks_c",
+"양말",
+"socks",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"spoon_c",
+"숟가락",
+"spoon",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"chopsticks_c",
+"젓가락",
+"chopsticks",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"refrigerator_c",
+"냉장고",
+"fridge",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"washing-machine_c",
+"세탁기",
+"washing machine",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"pillow_c",
+"베개",
+"pillow",
+{
+"source": "flickr"
+}
+],
+[
+"obj",
+"blanket_c",
+"이불",
+"folded blanket",
+{
+"source": "flickr"
+}
+]
+]

@@ -28,4 +28,4 @@ for line in open(sys.argv[2]):
     open(fn, "wb").write(resp.content)
     json.dump(dict(key=key, title=r["title"]), open(fn + ".json", "w"), ensure_ascii=False)
     print("got", key, len(resp.content), flush=True)
-    time.sleep(25)
+    time.sleep(12)

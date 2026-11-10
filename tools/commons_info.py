@@ -44,4 +44,4 @@ for i in range(0, len(todo), 50):
         out[title] = rec
     json.dump(out, open(sys.argv[2], "w"), ensure_ascii=False, indent=1)
     print("batch done", i, flush=True)
-    time.sleep(45)
+    time.sleep(20)
