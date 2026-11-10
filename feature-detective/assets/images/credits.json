@@ -1,0 +1,101 @@
+{
+ "clock": {
+  "name": "시계",
+  "file": "assets/images/clock.jpg",
+  "title": "Wall clock",
+  "url": "https://wordpress.org/photos/photo/75561fd429/",
+  "author": "Michael Burridge",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "via": "Openverse (wordpress)",
+  "modified": "cropped, resized to max 480px JPEG"
+ },
+ "cup": {
+  "name": "컵",
+  "file": "assets/images/cup.jpg",
+  "title": "Black coffee mug white table",
+  "url": "https://www.rawpixel.com/image/6038747/photo-image-public-domain-coffee-table",
+  "author": "(rawpixel)",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "via": "Openverse (rawpixel)",
+  "modified": "cropped, resized to max 480px JPEG"
+ },
+ "microwave": {
+  "name": "전자레인지",
+  "file": "assets/images/microwave.jpg",
+  "title": "",
+  "url": "https://www.rawpixel.com/image/5935324/free-public-domain-cc0-photo",
+  "author": "(rawpixel)",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "via": "Openverse (rawpixel)",
+  "modified": "resized to max 480px JPEG"
+ },
+ "remote-control": {
+  "name": "리모컨",
+  "file": "assets/images/remote-control.jpg",
+  "title": "Free remote control image",
+  "url": "https://www.rawpixel.com/image/5920827/photo-image-public-domain-hand-technology",
+  "author": "(rawpixel)",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "via": "Openverse (rawpixel)",
+  "modified": "resized to max 480px JPEG"
+ },
+ "scissors": {
+  "name": "가위",
+  "file": "assets/images/scissors.jpg",
+  "title": "Pink Scissors",
+  "url": "https://stocksnap.io/photo/pink-scissors-X4A4FSCTBM",
+  "author": "Mike Birdy",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "via": "Openverse (stocksnap)",
+  "modified": "cropped, resized to max 480px JPEG"
+ },
+ "sneakers": {
+  "name": "신발",
+  "file": "assets/images/sneakers.jpg",
+  "title": "Free sneakers photo",
+  "url": "https://www.rawpixel.com/image/5926397/photo-image-public-domain-fashion-free",
+  "author": "(rawpixel)",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "via": "Openverse (rawpixel)",
+  "modified": "resized to max 480px JPEG"
+ },
+ "spoon": {
+  "name": "숟가락",
+  "file": "assets/images/spoon.jpg",
+  "title": "Serving Spoon by John Bayly",
+  "url": "https://www.rawpixel.com/image/8941303/serving-spoon-john-bayly",
+  "author": "artinstitutechicago",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "via": "Openverse (rawpixel)",
+  "modified": "cropped, resized to max 480px JPEG"
+ },
+ "towel": {
+  "name": "수건",
+  "file": "assets/images/towel.jpg",
+  "title": "Bath towels",
+  "url": "https://www.rawpixel.com/image/5921967/bath-towels-free-public-domain-cc0-photo",
+  "author": "(rawpixel)",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "via": "Openverse (rawpixel)",
+  "modified": "resized to max 480px JPEG"
+ },
+ "umbrella": {
+  "name": "우산",
+  "file": "assets/images/umbrella.jpg",
+  "title": "",
+  "url": "https://www.rawpixel.com/image/5935312/free-public-domain-cc0-photo",
+  "author": "(rawpixel)",
+  "license": "CC0",
+  "license_url": "https://creativecommons.org/publicdomain/zero/1.0/",
+  "via": "Openverse (rawpixel)",
+  "modified": "resized to max 480px JPEG"
+ }
+}

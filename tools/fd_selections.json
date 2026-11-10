@@ -1,0 +1,11 @@
+{
+ "sneakers":{"name":"신발","ov":"sneakers_r/6"},
+ "spoon":{"name":"숟가락","ov":"spoon_r/4","crop":[0.05,0.1,0.95,0.9]},
+ "cup":{"name":"컵","ov":"cup_r/0","crop":[0,0.15,1,0.85]},
+ "towel":{"name":"수건","ov":"towel_r/1"},
+ "remote-control":{"name":"리모컨","ov":"remote-control_r/0"},
+ "umbrella":{"name":"우산","ov":"umbrella_b/2"},
+ "microwave":{"name":"전자레인지","ov":"microwave/0"},
+ "clock":{"name":"시계","ov":"clock/3","crop":[0.06,0.06,0.62,0.6]},
+ "scissors":{"name":"가위","ov":"scissors/6","crop":[0,0.1,1,0.9]}
+}
