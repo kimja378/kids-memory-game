@@ -469,6 +469,10 @@ USAGE = {
 }
 
 def main():
+    import sys
+    sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+    import situation_art_more          # second batch: 15 more situations
+    situation_art_more.register(OBJECTS, SCENES, USAGE)
     for sub in ("objects", "scenes", "usage"):
         os.makedirs(os.path.join(ROOT, sub), exist_ok=True)
     for k, f in OBJECTS.items():

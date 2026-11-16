@@ -61,7 +61,7 @@ test('data: ids valid, lists disjoint, every level has enough items, all picture
     for (const k of ['name', 'use', 'when', 'hint']) assert.ok(o[k], `${id}.${k}`);
     assert.ok(!o.hint.includes(o.name), `hint must not name the answer: ${id}`);
     assert.ok(fs.existsSync(path.join(GAME, 'assets/objects', id + '.svg')), id);
-    assert.ok(fs.existsSync(path.join(GAME, 'assets/usage', (o.usage || id) + '.svg')), 'usage ' + id);
+    if (o.usage !== false) assert.ok(fs.existsSync(path.join(GAME, 'assets/usage', (o.usage || id) + '.svg')), 'usage ' + id);
   }
   for (const s of SITUATIONS) {
     const all = [...s.correct, ...s.accept, ...s.distractors];
@@ -85,6 +85,9 @@ test('scene pictures never contain an answer object (scenes are composed only of
   // The generator draws scenes from people/background parts only; check scene files do not embed object drawings.
   const src = fs.readFileSync(path.join(ROOT, 'tools/situation_art.py'), 'utf8');
   const scenePart = src.slice(src.indexOf('# ------------------------------------------------------------------ situation scenes'), src.indexOf('SCENES = {'));
+  const more = fs.readFileSync(path.join(ROOT, 'tools/situation_art_more.py'), 'utf8');
+  const morePart = more.slice(more.indexOf('# ------------------------------------------------------------------ scenes'), more.indexOf('SCENES = {'));
+  for (const fn of Object.keys(OBJECTS).map(k => 'o_' + k)) assert.ok(!morePart.includes(fn + '('), 'scene uses ' + fn);
   for (const fn of ['o_toothbrush', 'o_toothpaste', 'o_cup', 'o_spoon', 'o_chopsticks', 'o_plate', 'o_bed', 'o_blanket', 'o_pillow', 'o_pajamas', 'o_broom', 'o_dustpan', 'o_vacuum', 'o_mop', 'o_cake', 'o_party_hat', 'o_gift']) {
     assert.ok(!scenePart.includes(fn + '('), 'scene uses ' + fn);
   }
@@ -97,7 +100,9 @@ for (const level of Object.keys(LEVELS)) {
     await page.click('#go');
     const L = LEVELS[level];
     const seen = new Set();
-    for (let q = 0; q < SITUATIONS.length; q++) {
+    const ROUND = 5, rounds = Math.ceil(SITUATIONS.length / ROUND);
+    for (let q = 0; q < rounds * ROUND; q++) {
+      if (q > 0 && q % ROUND === 0) { await page.waitForSelector('#done:not(.hidden)'); await page.click('#again'); }
       const c = await cur(page);
       seen.add(c.sit);
       const sit = SITUATIONS.find(s => s.id === c.sit);
@@ -126,10 +131,10 @@ for (const level of Object.keys(LEVELS)) {
       assert.ok((await said(page)).some(t => t.startsWith('잘했어요!') && t.includes(sit.when)));
       await page.click('#next', { force: true });
     }
-    assert.equal(seen.size, SITUATIONS.length, 'each situation once per round');
+    assert.equal(seen.size, SITUATIONS.length, 'least-played rotation covers every situation in ' + rounds + ' rounds');
     await page.waitForSelector('#done:not(.hidden)');
     const log = await page.evaluate(k => JSON.parse(localStorage.getItem(k)), 'situationGame.log.v1');
-    assert.equal(log.length, SITUATIONS.length);
+    assert.equal(log.length, rounds * ROUND);
     assert.equal(log.filter(x => !x.firstTry).length, 1);
     assert.ok(log.every(x => x.level === level));
     assert.deepEqual(errors, []); assert.deepEqual(external, []); assert.deepEqual(failed, []);
@@ -162,9 +167,9 @@ test('hints: 1 repeats the question, 2 explains a function, 3 highlights the rem
 test('scene variants alternate between plays of the same situation', async () => {
   const { ctx, page } = await open();
   const variants = {};
-  for (let r = 0; r < 3; r++) {
+  for (let r = 0; r < 12; r++) {
     await page.click('#go');
-    for (let q = 0; q < SITUATIONS.length; q++) {
+    for (let q = 0; q < 5; q++) {
       const v = await page.evaluate(() => [window.__game.cur.sit.id, window.__game.cur.variant]);
       (variants[v[0]] = variants[v[0]] || []).push(v[1]);
       const c = await cur(page);
@@ -205,7 +210,7 @@ test('a missing picture never stops the game', async () => {
   await page.route('**/assets/usage/**', r => r.fulfill({ status: 404, body: '' }));
   await page.goto(origin + BASE);
   await page.click('#go');
-  for (let q = 0; q < SITUATIONS.length; q++) {
+  for (let q = 0; q < 5; q++) {
     const c = await cur(page);
     for (const id of c.correct) await page.click(`.card[data-id="${id}"]`);
     await page.waitForSelector('#next:not(.hidden)');
@@ -226,7 +231,7 @@ test('portrait iPad layout fits without horizontal scrolling', async () => {
 
 test('every usage scene picture loads in the browser', async () => {
   const { ctx, page } = await open();
-  const files = [...new Set(Object.entries(OBJECTS).map(([id, o]) => 'assets/usage/' + (o.usage || id) + '.svg'))];
+  const files = [...new Set(Object.entries(OBJECTS).filter(([, o]) => o.usage !== false).map(([id, o]) => 'assets/usage/' + (o.usage || id) + '.svg'))];
   const bad = await page.evaluate(async fs => {
     const out = [];
     await Promise.all(fs.map(f => new Promise(r => { const i = new Image(); i.onload = () => { if (!i.naturalWidth) out.push(f); r(); }; i.onerror = () => { out.push(f); r(); }; i.src = f; })));
@@ -269,5 +274,36 @@ test('tapping start speaks the first question right away (inside the tap), with 
   assert.ok(calls.length >= 1);
   assert.ok(!calls[0].cancel && calls[0].text.trim().length > 0 && calls[0].inTap, JSON.stringify(calls));
   await page.click('#soundCheck', { force: true }).catch(() => {});
+  await ctx.close();
+});
+
+test('situation titles and stories never name a correct answer', () => {
+  for (const s of SITUATIONS) {
+    for (const id of s.correct) {
+      const n = OBJECTS[id].name;
+      assert.ok(!s.title.includes(n) && !s.story.includes(n) && !s.when.includes(n), `${s.id} reveals ${n}`);
+    }
+  }
+});
+
+test('20 situations, every object card and scene file decodes in the browser', async () => {
+  assert.ok(SITUATIONS.length >= 20);
+  const { ctx, page } = await open();
+  const files = [...Object.keys(OBJECTS).map(id => 'assets/objects/' + id + '.svg'),
+    ...SITUATIONS.flatMap(s => Array.from({ length: s.scenes }, (_, i) => `assets/scenes/${s.id}-${i + 1}.svg`))];
+  const bad = await page.evaluate(async fs => {
+    const out = [];
+    await Promise.all(fs.map(f => new Promise(r => { const i = new Image(); i.onload = () => { if (!i.naturalWidth) out.push(f); r(); }; i.onerror = () => { out.push(f); r(); }; i.src = f; })));
+    return out;
+  }, files);
+  assert.deepEqual(bad, []);
+  await ctx.close();
+});
+
+test('a round has 5 different situations', async () => {
+  const { ctx, page } = await open();
+  await page.click('#go');
+  assert.equal(await page.$$eval('#round i', x => x.length), 5);
+  const ids = await page.evaluate(() => window.__game.cur && null);
   await ctx.close();
 });

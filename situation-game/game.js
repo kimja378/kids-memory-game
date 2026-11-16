@@ -81,7 +81,7 @@ window.__speak = speak;
 function shuffle(a) { a = a.slice(); for (let i = a.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [a[i], a[j]] = [a[j], a[i]]; } return a; }
 function josa(w, a, b) { const c = w.charCodeAt(w.length - 1) - 44032; return w + (c >= 0 && c < 11172 && c % 28 ? a : b); }
 function objImg(id) { return 'assets/objects/' + id + '.svg'; }
-function usageImg(id) { return 'assets/usage/' + (OBJ[id].usage || id) + '.svg'; }
+function usageImg(id) { return OBJ[id].usage === false ? objImg(id) : 'assets/usage/' + (OBJ[id].usage || id) + '.svg'; }
 function sceneImg(sit, v) { return 'assets/scenes/' + sit.id + '-' + v + '.svg'; }
 function show(id) { ['start', 'game', 'done'].forEach(s => $(s).classList.toggle('hidden', s !== id)); }
 
@@ -97,8 +97,17 @@ function renderLevels() {
 /* ---------------- game state ---------------- */
 let queue = [], qi = 0, cur = null;
 
+const ROUND_SIZE = 5;   /* 한 판에 5문제: 덜 해 본 상황부터 골라요 */
+function pickRound() {
+  const log = load(LOG_KEY, []);
+  const count = {}, last = {};
+  log.forEach((x, i) => { count[x.sit] = (count[x.sit] || 0) + 1; last[x.sit] = i; });
+  return shuffle(SITS)
+    .sort((a, b) => (count[a.id] || 0) - (count[b.id] || 0) || (last[a.id] ?? -1) - (last[b.id] ?? -1))
+    .slice(0, Math.min(ROUND_SIZE, SITS.length));
+}
 function startRound() {
-  queue = shuffle(SITS);
+  queue = shuffle(pickRound());
   qi = 0;
   show('game');
   newQuestion();
@@ -191,7 +200,7 @@ function showUsage(id) {
   closeUsage();
   const d = document.createElement('div');
   d.className = 'usage'; d.id = 'usage';
-  d.innerHTML = `<img src="${usageImg(id)}" alt="${OBJ[id].name} 사용 장면"><div class="cap">${OBJ[id].use}</div>`;
+  d.innerHTML = `<img class="${OBJ[id].usage === false ? 'bounce' : ''}" src="${usageImg(id)}" alt="${OBJ[id].name} 사용 장면"><div class="cap">${OBJ[id].use}</div>`;
   d.onclick = closeUsage;
   window.__lastUsage = id;
   $('scene').appendChild(d);
