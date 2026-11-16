@@ -5,7 +5,7 @@
 <meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
 <meta name="apple-mobile-web-app-capable" content="yes">
 <title>필요한 물건을 찾아요</title>
-<link rel="stylesheet" href="style.css?v=1">
+<link rel="stylesheet" href="style.css?v=2">
 </head>
 <body>
 <svg width="0" height="0" style="position:absolute" aria-hidden="true">
@@ -23,6 +23,11 @@
   <p>그림 속 상황을 보고, 필요한 물건을 골라 보세요.</p>
   <div class="levels" id="levels"></div>
   <button class="go" id="go">시작하기</button>
+  <button class="iconbtn" id="soundCheck"><svg class="ic"><use href="#i-speak"/></svg><span>소리 확인</span></button>
+  <p class="soundinfo hidden" id="soundInfo"></p>
+  <p class="soundhelp">소리가 안 나면: ① 제어 센터에서 무음 모드(종 모양)를 끄고 볼륨을 올려요.
+  ② 설정 → 손쉬운 사용 → 읽기 및 말하기 → 음성 → 한국어에서 목소리(예: 유나)를 내려받아요.
+  ③ 홈 화면 아이콘 대신 Safari에서 주소로 열어 봐요.</p>
   <button class="parentbtn" id="openReport1"><svg class="ic"><use href="#i-chart"/></svg> 부모님 기록</button>
 </section>
 
@@ -74,6 +79,6 @@
 </div>
 
 <script src="data.js?v=1"></script>
-<script src="game.js?v=1"></script>
+<script src="game.js?v=2"></script>
 </body>
 </html>

@@ -251,3 +251,23 @@ test('the next button still appears when Safari never reports the end of speech'
   await page.waitForSelector('#next:not(.hidden)', { timeout: 15000 });
   await ctx.close();
 });
+
+test('tapping start speaks the first question right away (inside the tap), with no silent warm-up utterance', async () => {
+  const ctx = await browser.newContext({ ...devices['iPad (gen 7) landscape'] });
+  await ctx.addInitScript(() => {
+    window.__calls = [];
+    const fake = { speaking: false, pending: false, speak(u) { window.__calls.push({ text: u.text, inTap: !!window.__inTap }); }, cancel() { window.__calls.push({ cancel: true }); },
+      resume() {}, getVoices() { return []; }, addEventListener() {} };
+    Object.defineProperty(window, 'speechSynthesis', { value: fake, configurable: true });
+    window.SpeechSynthesisUtterance = function (t) { this.text = t; };
+    document.addEventListener('click', () => { window.__inTap = true; setTimeout(() => { window.__inTap = false; }, 0); }, true);
+  });
+  const page = await ctx.newPage();
+  await page.goto(origin + BASE);
+  await page.click('#go');
+  const calls = await page.evaluate(() => window.__calls);
+  assert.ok(calls.length >= 1);
+  assert.ok(!calls[0].cancel && calls[0].text.trim().length > 0 && calls[0].inTap, JSON.stringify(calls));
+  await page.click('#soundCheck', { force: true }).catch(() => {});
+  await ctx.close();
+});

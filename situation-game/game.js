@@ -22,33 +22,58 @@ function pickVoice() {
 }
 if (hasTTS) { pickVoice(); try { speechSynthesis.addEventListener('voiceschanged', pickVoice); } catch (e) {} }
 function unlockSpeech() {
-  if (unlocked || !hasTTS) return;
+  if (unlocked) return;
   unlocked = true;
-  try { const u = new SpeechSynthesisUtterance(' '); u.lang = 'ko-KR'; u.volume = 0; speechSynthesis.speak(u); } catch (e) {}
+  /* 새 아이패드(iPadOS 17 이상): 무음 모드에서도 소리가 나도록 '재생' 모드로 설정 */
+  try { if (navigator.audioSession) navigator.audioSession.type = 'playback'; } catch (e) {}
+  if (hasTTS) { try { speechSynthesis.getVoices(); speechSynthesis.resume(); } catch (e) {} }
 }
 document.addEventListener('touchend', unlockSpeech, { passive: true });
 document.addEventListener('click', unlockSpeech);
-let speakToken = 0;
+let speakToken = 0, lastStarted = null;
 function speak(text, onend) {
   const token = ++speakToken;
   let fired = false;
   const done = () => { if (fired) return; fired = true; if (token === speakToken && onend) onend(); };
   /* Safari가 말하기 끝 신호를 주지 않는 경우에도 게임이 멈추지 않게 */
   if (onend) setTimeout(done, 1500 + text.length * 180);
-  if (!hasTTS) { setTimeout(done, 1200); return; }
+  if (!hasTTS) return;
   try {
     const say = () => {
       const u = new SpeechSynthesisUtterance(text);
       u.lang = 'ko-KR';
       if (koVoice && !isIOS) u.voice = koVoice;
       u.rate = 0.85; u.pitch = 1.1; u.volume = 1;
-      u.onend = done; u.onerror = done;
+      u.onstart = () => { lastStarted = true; };
+      u.onend = done; u.onerror = e => { lastStarted = lastStarted || false; window.__speechError = e && e.error; done(); };
+      lastStarted = false;
       try { speechSynthesis.resume(); } catch (e) {}
       speechSynthesis.speak(u);
     };
+    /* 아무 말도 안 하고 있으면 바로 말하기 (터치한 그 순간에 말해야 아이패드가 허락해요).
+       말하는 중이면 멈추고 잠깐 쉰 뒤 말하기 (멈추자마자 말하면 Safari가 무시해요) */
     if (speechSynthesis.speaking || speechSynthesis.pending) { speechSynthesis.cancel(); setTimeout(say, 150); }
     else say();
-  } catch (e) { setTimeout(done, 1200); }
+  } catch (e) {}
+}
+
+/* 소리 확인: 무엇이 문제인지 화면에 보여 주기 */
+function soundCheck() {
+  unlockSpeech();
+  const out = $('soundInfo');
+  const voices = hasTTS ? (speechSynthesis.getVoices() || []) : [];
+  const ko = voices.filter(v => v.lang && v.lang.toLowerCase().replace('_', '-').startsWith('ko'));
+  const lines = [];
+  lines.push('음성 기능: ' + (hasTTS ? '있음' : '없음 (이 브라우저는 읽어 주기를 지원하지 않아요)'));
+  lines.push('한국어 목소리: ' + (ko.length ? ko.length + '개 (' + ko.map(v => v.name).slice(0, 4).join(', ') + ')' : (voices.length ? '없음 (전체 목소리 ' + voices.length + '개)' : '목록을 아직 못 받았어요')));
+  out.innerHTML = lines.join('<br>') + '<br>말하기 시작 신호: 확인 중…';
+  out.classList.remove('hidden');
+  speak('안녕! 소리가 잘 들리나요?');
+  setTimeout(() => {
+    const st = lastStarted === true ? '받음 — 그래도 안 들리면 무음 모드·볼륨을 확인해 주세요'
+      : '못 받음' + (window.__speechError ? ' (오류: ' + window.__speechError + ')' : '') + ' — 한국어 목소리 설치를 확인해 주세요';
+    out.innerHTML = lines.join('<br>') + '<br>말하기 시작 신호: ' + st;
+  }, 2500);
 }
 window.__speak = speak;
 
@@ -236,6 +261,7 @@ function openReport() { renderReport(); $('toggleNames').textContent = prefs.nam
 /* ---------------- wiring ---------------- */
 function applyNames() { document.body.classList.toggle('noNames', !prefs.names); }
 $('go').onclick = () => { unlockSpeech(); startRound(); };
+$('soundCheck').onclick = soundCheck;
 $('again').onclick = startRound;
 $('home').onclick = $('home2').onclick = () => { speakToken++; try { speechSynthesis.cancel(); } catch (e) {} show('start'); };
 $('speak').onclick = speakQuestion;

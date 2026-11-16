@@ -86,3 +86,5 @@ body.noNames .card .nm{visibility:hidden}
   .main{grid-template-columns:1fr;grid-template-rows:minmax(0,42vh) 1fr}
 }
 @media (max-width:600px){.iconbtn span{display:none}.next{padding:12px 20px;font-size:20px}}
+.soundinfo{background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px;font-size:15px!important;color:var(--ink)!important;text-align:left;max-width:560px;line-height:1.6}
+.soundhelp{font-size:14px!important;max-width:620px;line-height:1.6}
