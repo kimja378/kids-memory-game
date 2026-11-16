@@ -344,18 +344,40 @@ let showReport = false;
 
 /* ---------- 읽어주기 ---------- */
 let koVoice = null;
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+let currentUtter = null, speechUnlocked = false;
 function pickVoice(){
-  try{ const vs = speechSynthesis.getVoices(); koVoice = vs.find(v => v.lang && v.lang.toLowerCase().startsWith('ko')) || null; }catch(e){}
+  try{
+    const vs = speechSynthesis.getVoices().filter(v => v.lang && v.lang.toLowerCase().replace('_','-').startsWith('ko'));
+    koVoice = vs.find(v => v.localService && v.default) || vs.find(v => v.localService) || vs[0] || null;
+  }catch(e){}
 }
-if ('speechSynthesis' in window){ pickVoice(); try{ speechSynthesis.onvoiceschanged = pickVoice; }catch(e){} }
+if ('speechSynthesis' in window){ pickVoice(); try{ speechSynthesis.addEventListener('voiceschanged', pickVoice); }catch(e){} }
+/* 아이패드는 첫 터치 때 음성을 한 번 '깨워야' 이후에 소리가 나요 */
+function unlockSpeech(){
+  if (speechUnlocked || !('speechSynthesis' in window)) return;
+  speechUnlocked = true;
+  try{ const u = new SpeechSynthesisUtterance(' '); u.lang = 'ko-KR'; u.volume = 0; speechSynthesis.speak(u); }catch(e){}
+}
+document.addEventListener('touchend', unlockSpeech, {passive:true});
+document.addEventListener('click', unlockSpeech);
 function speak(text){
   if (!('speechSynthesis' in window)) return;
   try{
-    speechSynthesis.cancel();
-    const u = new SpeechSynthesisUtterance(text.replace(/["“”]/g,''));
-    u.lang = 'ko-KR'; if (koVoice) u.voice = koVoice;
-    u.rate = 0.85; u.pitch = 1.1;
-    speechSynthesis.speak(u);
+    const say = () => {
+      const u = new SpeechSynthesisUtterance(text.replace(/["“”]/g,''));
+      u.lang = 'ko-KR';
+      /* 아이패드에서는 목소리를 직접 고르지 않고 기본 한국어 목소리를 쓰게 함
+         (내려받지 않은 고급 목소리가 골라지면 소리가 안 나요) */
+      if (koVoice && !isIOS) u.voice = koVoice;
+      u.rate = 0.85; u.pitch = 1.1; u.volume = 1;
+      currentUtter = u;
+      try{ speechSynthesis.resume(); }catch(e){}
+      speechSynthesis.speak(u);
+    };
+    /* 말하는 중일 때만 멈추고 잠깐 쉰 뒤 말하기 (멈추자마자 말하면 Safari가 무시해요) */
+    if (speechSynthesis.speaking || speechSynthesis.pending){ speechSynthesis.cancel(); setTimeout(say, 150); }
+    else say();
   }catch(e){}
 }
 function pageSpeech(p){
@@ -399,6 +421,8 @@ function render(){
         </label>
         <label class="check" for="usePhoto"><input type="checkbox" id="usePhoto" ${usePhoto?'checked':''}> 곰돌이 얼굴을 아이 사진으로 보기</label>
         <label class="check" for="autoRead"><input type="checkbox" id="autoRead" ${autoRead?'checked':''}> 장면마다 소리 내어 읽어주기</label>
+        <button class="btn btn-read" id="testBtn" type="button" style="justify-self:start">🔊 소리 확인</button>
+        <p class="note">아이패드에서 소리가 안 나면: ① 옆 버튼이나 제어센터에서 무음 모드를 끄고 볼륨을 올려요. ② 설정 → 손쉬운 사용 → 읽기 및 말하기 → 음성 → 한국어에서 목소리가 내려받아져 있는지 확인해요. ③ 홈 화면 아이콘으로 열었을 때 안 되면 Safari에서 바로 열어 봐요.</p>
         <p class="note">중간중간 질문이 나와요. 정답을 고르면 다음 장면으로 넘어가고, 틀리면 힌트가 나와요. 마지막 장에서 아이가 각 질문을 몇 번 만에 맞혔는지 볼 수 있어요.</p>
       </div>`;
     nextLabel = '시작하기 ▶';
@@ -482,6 +506,8 @@ function bind(){
   if (ar) ar.addEventListener('change', e => { autoRead = e.target.checked; });
   const prev = document.getElementById('prevBtn');
   if (prev) prev.addEventListener('click', () => { if (idx>0) go(idx-1); });
+  const test = document.getElementById('testBtn');
+  if (test) test.addEventListener('click', () => speak('안녕! 소리가 잘 들리나요?'));
   const read = document.getElementById('readBtn');
   if (read) read.addEventListener('click', () => speak(pageSpeech(p)));
   const rep = document.getElementById('reportBtn');
