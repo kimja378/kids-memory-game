@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="300" height="240" stroke-linejoin="round" stroke-linecap="round"><style>
+.wig{animation:wig 0.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes wig{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
+.bob{animation:bob 1.2s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(10px)}to{transform:translateY(-6px)}}
+.sweep{animation:sweep 0.9s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 0%}
+@keyframes sweep{from{transform:rotate(14deg)}to{transform:rotate(-14deg)}}
+.slide{animation:slide 1.6s ease-in-out infinite alternate}
+@keyframes slide{from{transform:translateX(-50px)}to{transform:translateX(50px)}}
+.fade{animation:fade 1.6s ease-in-out infinite alternate}
+@keyframes fade{from{opacity:1}to{opacity:0.1}}
+.flick{animation:flick 0.4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes flick{from{transform:scaleY(1)}to{transform:scaleY(0.75)}}
+.zz{animation:zz 2s ease-in-out infinite}
+@keyframes zz{0%{opacity:0;transform:translate(0,10px)}40%{opacity:1}100%{opacity:0;transform:translate(16px,-24px)}}
+.pop{animation:pop 1.4s ease-in-out infinite alternate}
+@keyframes pop{from{transform:translateY(0)}to{transform:translateY(-26px)}}
+</style><rect x="0" y="0" width="300" height="240" fill="#fff4e3"/><rect x="20" y="196" width="260" height="50" rx="6" fill="#e7b989" stroke="#4b4a5c" stroke-width="3" /><g transform="translate(60 120) scale(0.9)" ><ellipse cx="100" cy="108" rx="84" ry="46" fill="#ffffff" stroke="#4b4a5c" stroke-width="3" /><ellipse cx="100" cy="104" rx="54" ry="27" fill="#f2f5fb" stroke="#4b4a5c" stroke-width="3" /><path d="M24,118 Q100,170 176,118" fill="none" stroke="#c9d3e6" stroke-width="2" /></g><circle cx="150" cy="210" r="0" fill="#fff" stroke="#4b4a5c" stroke-width="3" /><g class="pop"><g transform="translate(112 30) scale(0.6)" ><g transform="translate(84 100) rotate(-12)" ><path d="M-6,-80 L-3,80 L3,80 L6,-80 Z" fill="#e7c08e" stroke="#4b4a5c" stroke-width="3" /><rect x="-7" y="-80" width="14" height="34" rx="3" fill="#c98f56" stroke="#4b4a5c" stroke-width="2" /></g><g transform="translate(116 100) rotate(12)" ><path d="M-6,-80 L-3,80 L3,80 L6,-80 Z" fill="#e7c08e" stroke="#4b4a5c" stroke-width="3" /><rect x="-7" y="-80" width="14" height="34" rx="3" fill="#c98f56" stroke="#4b4a5c" stroke-width="2" /></g></g><circle cx="150" cy="150" r="14" fill="#9fd38a" stroke="#4b4a5c" stroke-width="3" /></g><circle cx="118" cy="214" r="10" fill="#f2a65a" stroke="#4b4a5c" stroke-width="3" /><circle cx="182" cy="212" r="11" fill="#9fd38a" stroke="#4b4a5c" stroke-width="3" /><circle cx="150" cy="222" r="10" fill="#ffffff" stroke="#4b4a5c" stroke-width="3" /></svg>

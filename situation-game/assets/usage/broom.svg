@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="300" height="240" stroke-linejoin="round" stroke-linecap="round"><style>
+.wig{animation:wig 0.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes wig{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
+.bob{animation:bob 1.2s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(10px)}to{transform:translateY(-6px)}}
+.sweep{animation:sweep 0.9s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 0%}
+@keyframes sweep{from{transform:rotate(14deg)}to{transform:rotate(-14deg)}}
+.slide{animation:slide 1.6s ease-in-out infinite alternate}
+@keyframes slide{from{transform:translateX(-50px)}to{transform:translateX(50px)}}
+.fade{animation:fade 1.6s ease-in-out infinite alternate}
+@keyframes fade{from{opacity:1}to{opacity:0.1}}
+.flick{animation:flick 0.4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes flick{from{transform:scaleY(1)}to{transform:scaleY(0.75)}}
+.zz{animation:zz 2s ease-in-out infinite}
+@keyframes zz{0%{opacity:0;transform:translate(0,10px)}40%{opacity:1}100%{opacity:0;transform:translate(16px,-24px)}}
+.pop{animation:pop 1.4s ease-in-out infinite alternate}
+@keyframes pop{from{transform:translateY(0)}to{transform:translateY(-26px)}}
+</style><rect x="0" y="0" width="300" height="240" fill="#fff7e8"/><rect x="0" y="190" width="300" height="50" rx="0" fill="#f0dcc0" stroke="#4b4a5c" stroke-width="3" /><g class="fade"><g transform="translate(110 205) scale(1.1)" ><path d="M-20,6 Q-24,-8 -10,-8 Q-8,-20 6,-14 Q18,-18 20,-4 Q30,2 20,10 Z" fill="#cbbfae" stroke="#4b4a5c" stroke-width="2" /></g><g transform="translate(190 212) scale(0.9)" ><path d="M-20,6 Q-24,-8 -10,-8 Q-8,-20 6,-14 Q18,-18 20,-4 Q30,2 20,10 Z" fill="#cbbfae" stroke="#4b4a5c" stroke-width="2" /></g></g><g class="sweep"><g transform="translate(100 20)" ><rect x="94" y="14" width="12" height="120" rx="6" fill="#d79a63" stroke="#4b4a5c" stroke-width="3" /><path d="M66,132 L134,132 L150,186 L50,186 Z" fill="#f1d27a" stroke="#4b4a5c" stroke-width="3" /><path d="M74,140 L67,184" fill="none" stroke="#c9a24a" stroke-width="2" /><path d="M86,140 L82,184" fill="none" stroke="#c9a24a" stroke-width="2" /><path d="M100,140 L100,184" fill="none" stroke="#c9a24a" stroke-width="2" /><path d="M114,140 L117,184" fill="none" stroke="#c9a24a" stroke-width="2" /><path d="M126,140 L132,184" fill="none" stroke="#c9a24a" stroke-width="2" /><rect x="62" y="124" width="76" height="14" rx="5" fill="#e46f6f" stroke="#4b4a5c" stroke-width="3" /></g></g></svg>

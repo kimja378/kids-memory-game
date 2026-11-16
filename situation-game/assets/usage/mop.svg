@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="300" height="240" stroke-linejoin="round" stroke-linecap="round"><style>
+.wig{animation:wig 0.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes wig{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
+.bob{animation:bob 1.2s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(10px)}to{transform:translateY(-6px)}}
+.sweep{animation:sweep 0.9s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 0%}
+@keyframes sweep{from{transform:rotate(14deg)}to{transform:rotate(-14deg)}}
+.slide{animation:slide 1.6s ease-in-out infinite alternate}
+@keyframes slide{from{transform:translateX(-50px)}to{transform:translateX(50px)}}
+.fade{animation:fade 1.6s ease-in-out infinite alternate}
+@keyframes fade{from{opacity:1}to{opacity:0.1}}
+.flick{animation:flick 0.4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes flick{from{transform:scaleY(1)}to{transform:scaleY(0.75)}}
+.zz{animation:zz 2s ease-in-out infinite}
+@keyframes zz{0%{opacity:0;transform:translate(0,10px)}40%{opacity:1}100%{opacity:0;transform:translate(16px,-24px)}}
+.pop{animation:pop 1.4s ease-in-out infinite alternate}
+@keyframes pop{from{transform:translateY(0)}to{transform:translateY(-26px)}}
+</style><rect x="0" y="0" width="300" height="240" fill="#eef7ff"/><rect x="0" y="190" width="300" height="50" rx="0" fill="#cfe6fb" stroke="#4b4a5c" stroke-width="3" /><g class="fade"><path d="M50,206 L50,222 M42,214 L58,214" fill="none" stroke="#ffffff" stroke-width="3" /></g><g class="fade"><path d="M250,212 L250,228 M242,220 L258,220" fill="none" stroke="#ffffff" stroke-width="3" /></g><g class="fade"><path d="M180,222 L180,238 M172,230 L188,230" fill="none" stroke="#ffffff" stroke-width="3" /></g><g class="slide"><g transform="translate(60 30) scale(0.85)" ><rect x="94" y="14" width="12" height="140" rx="6" fill="#e39a5e" stroke="#4b4a5c" stroke-width="3" /><rect x="46" y="150" width="108" height="22" rx="8" fill="#8ec5f0" stroke="#4b4a5c" stroke-width="3" /><rect x="56" y="140" width="88" height="14" rx="4" fill="#5f97d6" stroke="#4b4a5c" stroke-width="3" /></g></g></svg>

@@ -1,0 +1,18 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 300 240" width="300" height="240" stroke-linejoin="round" stroke-linecap="round"><style>
+.wig{animation:wig 0.6s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:center}
+@keyframes wig{from{transform:translateX(-8px)}to{transform:translateX(8px)}}
+.bob{animation:bob 1.2s ease-in-out infinite alternate}
+@keyframes bob{from{transform:translateY(10px)}to{transform:translateY(-6px)}}
+.sweep{animation:sweep 0.9s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 0%}
+@keyframes sweep{from{transform:rotate(14deg)}to{transform:rotate(-14deg)}}
+.slide{animation:slide 1.6s ease-in-out infinite alternate}
+@keyframes slide{from{transform:translateX(-50px)}to{transform:translateX(50px)}}
+.fade{animation:fade 1.6s ease-in-out infinite alternate}
+@keyframes fade{from{opacity:1}to{opacity:0.1}}
+.flick{animation:flick 0.4s ease-in-out infinite alternate;transform-box:fill-box;transform-origin:50% 100%}
+@keyframes flick{from{transform:scaleY(1)}to{transform:scaleY(0.75)}}
+.zz{animation:zz 2s ease-in-out infinite}
+@keyframes zz{0%{opacity:0;transform:translate(0,10px)}40%{opacity:1}100%{opacity:0;transform:translate(16px,-24px)}}
+.pop{animation:pop 1.4s ease-in-out infinite alternate}
+@keyframes pop{from{transform:translateY(0)}to{transform:translateY(-26px)}}
+</style><rect x="0" y="0" width="300" height="240" fill="#e9f4ff"/><g transform="translate(140 170)" ><rect x="-90" y="-6" width="120" height="12" rx="6" fill="#7fb3ea" stroke="#4b4a5c" stroke-width="3" /><rect x="30" y="-10" width="40" height="20" rx="5" fill="#ffffff" stroke="#4b4a5c" stroke-width="3" /></g><g class="fade"><path d="M176,156 Q190,146 204,156 Q190,162 176,156 Z" fill="#9fd4ff" stroke="#4b4a5c" stroke-width="2" /></g><g transform="translate(170 105) rotate(150) scale(0.6)" ><path d="M-30,-60 L30,-60 L36,70 L-36,70 Z" fill="#e9f4ff" stroke="#4b4a5c" stroke-width="3" /><rect x="-36" y="66" width="72" height="14" rx="3" fill="#9fc4ec" stroke="#4b4a5c" stroke-width="3" /><rect x="-12" y="-86" width="24" height="28" rx="5" fill="#7fb3ea" stroke="#4b4a5c" stroke-width="3" /><rect x="-22" y="-30" width="44" height="50" rx="10" fill="#9fc4ec" stroke="#4b4a5c" stroke-width="0" /><path d="M-10,-18 C-16,-18 -16,-6 -12,4 C-10,12 -6,12 -4,4 C-2,0 2,0 4,4 C6,12 10,12 12,4 C16,-6 16,-18 10,-18 C6,-18 4,-15 0,-15 C-4,-15 -6,-18 -10,-18 Z" fill="#ffffff" stroke="#4b4a5c" stroke-width="2" /></g></svg>
