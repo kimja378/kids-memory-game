@@ -50,6 +50,7 @@ h1{font-family:var(--display);font-weight:400;font-size:clamp(28px,6vw,40px);mar
 .hero{display:flex;align-items:center;gap:16px;padding:18px 22px}
 .avatar{width:96px;height:96px;flex:none}
 .count{font-family:var(--display);font-size:20px;color:#7a5a00;background:#fff3c4;border-radius:999px;padding:4px 14px;display:inline-block;margin-top:6px}
+.zone{font-family:var(--display);font-weight:400;font-size:clamp(20px,4vw,26px);margin:8px 20px 8px}
 .grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:14px;padding:4px 18px 20px}
 .card{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;background:#fff;border:4px solid var(--line);border-radius:24px;padding:12px 8px 14px;cursor:pointer;transition:transform .12s}
 .card:active{transform:scale(.97)}
@@ -84,6 +85,7 @@ h1{font-family:var(--display);font-weight:400;font-size:clamp(28px,6vw,40px);mar
 .fb-hint{background:#fff3cf;color:#6e4e00}
 .show{position:relative;margin:4px 18px 10px;border-radius:20px;overflow:hidden}
 .show svg{display:block;width:100%;height:auto}
+.show img.hab,.opt img.hab{display:block;width:100%;aspect-ratio:16/11;object-fit:cover;border-radius:14px}
 .show .pic{position:absolute;left:50%;top:50%;width:38%;aspect-ratio:1;border-radius:50%;object-fit:cover;border:6px solid #fff;box-shadow:0 4px 14px rgba(0,0,0,.25);transform:translate(-50%,-50%);animation:land .7s ease-out}
 .yum{position:absolute;font-family:var(--display);font-size:clamp(26px,6vw,40px);color:#c2410c;text-shadow:0 2px 0 #fff;right:10%;top:12%;animation:pop2 1.2s ease-out infinite alternate}
 .foodfly{position:absolute;font-size:clamp(40px,9vw,60px);left:12%;bottom:12%;animation:fly 1s ease-in forwards}
@@ -137,8 +139,10 @@ const FACE = 'data:image/webp;base64,UklGRmYYAABXRUJQVlA4WAoAAAAQAAAA7wAA7wAAQUx
 
 const HOMES = {
   savanna:{name:'초원'}, ice:{name:'얼음 바다'}, bamboo:{name:'대나무 숲'},
-  forest:{name:'숲'}, meadow:{name:'풀밭'}, pond:{name:'연못'}
+  forest:{name:'숲'}, meadow:{name:'풀밭'}, pond:{name:'연못'}, sea:{name:'바다'}
 };
+/* 사는 곳 실제 사진: 파일이 준비되면 여기에 경로를 넣으면 그림 대신 사진이 나와요 */
+const HAB_PHOTO = {};
 const A = [
   {id:'elephant', name:'코끼리', sound:'뿌우우!', home:'savanna', homeWrong:['ice','pond'],
     looks:'코가 아주아주 길어요. 긴 코로 물도 마시고 물건도 잡아요.', homeText:'넓은 초원에 살아요.', foodText:'풀과 나뭇잎, 과일을 먹어요.',
@@ -152,7 +156,7 @@ const A = [
     looks:'아빠 사자는 목에 북슬북슬한 갈기가 있어요.', homeText:'넓은 초원에 살아요.', foodText:'다른 동물을 사냥해서 고기를 먹어요.',
     food:{ic:'🥩',t:'고기'}, foodWrong:[{ic:'🥕',t:'당근'},{ic:'🍌',t:'바나나'}],
     clue:'목에 북슬북슬한 갈기가 있는 동물은 누구일까요?'},
-  {id:'penguin', name:'펭귄', sound:'꽥꽥!', home:'ice', homeWrong:['savanna','bamboo'],
+  {id:'penguin', name:'펭귄', sound:'꽥꽥!', zone:'sea', home:'ice', homeWrong:['savanna','bamboo'],
     looks:'등은 까맣고 배는 하얘요. 날개가 있지만 날지 못하고, 헤엄을 아주 잘 쳐요.', homeText:'추운 남쪽 바다의 얼음과 바위 위에 살아요.', foodText:'바다에 들어가서 물고기를 잡아먹어요.',
     food:{ic:'🐟',t:'물고기'}, foodWrong:[{ic:'🍌',t:'바나나'},{ic:'🥕',t:'당근'}],
     clue:'날개가 있는데 날지 못하고, 헤엄을 잘 치는 동물은 누구일까요?', notWith:['panda','zebra']},
@@ -187,12 +191,29 @@ const A = [
   {id:'tiger', name:'호랑이', sound:'어흥!', home:'forest', homeWrong:['ice','pond'],
     looks:'주황색 몸에 까만 줄무늬가 있어요. 아주 힘이 세요.', homeText:'깊은 숲에 살아요.', foodText:'다른 동물을 사냥해서 고기를 먹어요.',
     food:{ic:'🥩',t:'고기'}, foodWrong:[{ic:'🍌',t:'바나나'},{ic:'🥕',t:'당근'}],
-    clue:'주황색 몸에 까만 줄무늬가 있는 동물은 누구일까요?', notWith:['zebra','lion']}
+    clue:'주황색 몸에 까만 줄무늬가 있는 동물은 누구일까요?', notWith:['zebra','lion']},
+  {id:'whale', name:'고래', sound:'우우~', zone:'sea', home:'sea', homeWrong:['savanna','forest'],
+    looks:'몸이 버스보다 훨씬 커요. 물 위로 올라와 머리 위 숨구멍으로 "푸우!" 하고 물을 뿜어요.', homeText:'넓고 깊은 바다에 살아요.', foodText:'작은 새우와 물고기를 한입에 꿀꺽 먹어요.',
+    food:{ic:'🦐',t:'작은 새우와 물고기'}, foodWrong:[{ic:'🥕',t:'당근'},{ic:'🍌',t:'바나나'}],
+    clue:'머리 위 숨구멍으로 물을 뿜는, 아주아주 큰 동물은 누구일까요?', notWith:['dolphin','shark']},
+  {id:'dolphin', name:'돌고래', sound:'삐익삐익!', zone:'sea', home:'sea', homeWrong:['savanna','forest'],
+    looks:'매끈매끈한 몸으로 물 위로 높이 점프해요. "삐익삐익" 소리로 친구들과 이야기해요.', homeText:'넓은 바다에 살아요.', foodText:'물고기와 오징어를 잡아먹어요.',
+    food:{ic:'🐟',t:'물고기'}, foodWrong:[{ic:'🥕',t:'당근'},{ic:'🍌',t:'바나나'}],
+    clue:'물 위로 높이 점프하고, 삐익삐익 소리로 이야기하는 동물은 누구일까요?', notWith:['whale','shark']},
+  {id:'shark', name:'상어', sound:'', zone:'sea', home:'sea', homeWrong:['savanna','forest'],
+    looks:'이빨이 뾰족뾰족 아주 많아요. 등에 세모난 지느러미가 있어요.', homeText:'넓은 바다에 살아요.', foodText:'물고기와 다른 바다 동물을 잡아먹어요.',
+    food:{ic:'🐟',t:'물고기'}, foodWrong:[{ic:'🥕',t:'당근'},{ic:'🍌',t:'바나나'}],
+    clue:'뾰족한 이빨이 아주 많은 바다 동물은 누구일까요?', notWith:['dolphin','whale']},
+  {id:'sea_lion', name:'바다사자', sound:'워워!', zone:'sea', home:'sea', homeWrong:['savanna','forest'],
+    looks:'앞발과 뒷발이 지느러미처럼 생겼어요. 작은 귀가 있고 "워워!" 하고 울어요.', homeText:'바다에 살고, 바닷가 바위에 올라와 쉬어요.', foodText:'바다에 들어가 물고기를 잡아먹어요.',
+    food:{ic:'🐟',t:'물고기'}, foodWrong:[{ic:'🥕',t:'당근'},{ic:'🍌',t:'바나나'}],
+    clue:'바닷가 바위에서 쉬고 "워워!" 하고 우는 동물은 누구일까요?', notWith:['penguin']}
 ];
 const byId = Object.fromEntries(A.map(a => [a.id, a]));
 
 /* ---------- 사는 곳 그림 ---------- */
 function habitat(key, w=160, h=110){
+  if (HAB_PHOTO[key]) return `<img class="hab" src="${HAB_PHOTO[key]}" alt="${HOMES[key].name} 사진">`;
   const H = {
     savanna:`<rect width="160" height="110" fill="#ffe9b0"/><circle cx="130" cy="24" r="12" fill="#ffb627"/>
       <rect y="68" width="160" height="42" fill="#e3c26b"/><path d="M0 70 Q40 62 80 70 T160 68 V74 H0Z" fill="#d4ad52"/>
@@ -212,6 +233,11 @@ function habitat(key, w=160, h=110){
       <rect y="58" width="160" height="52" fill="#8fd16b"/><path d="M0 60 Q50 48 100 60 T160 56 V64 H0Z" fill="#7cc35a"/>
       ${[[20,80,'#ff8fab'],[50,92,'#fff'],[84,78,'#ffd84d'],[118,94,'#ff8fab'],[140,76,'#fff']].map(([x,y,c])=>`<circle cx="${x}" cy="${y}" r="4" fill="${c}"/><circle cx="${x}" cy="${y}" r="1.6" fill="#f7a400"/>`).join('')}
       <ellipse cx="110" cy="66" rx="12" ry="5" fill="#6b4a2b"/>`,
+    sea:`<rect width="160" height="110" fill="#1f6fb2"/><rect width="160" height="34" fill="#4aa3df"/>
+      <path d="M0 34 q10 -6 20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 t20 0 V40 H0Z" fill="#7cc4ef"/>
+      <rect y="92" width="160" height="18" fill="#e8cf96"/><path d="M14 92 q4 -16 0 -26 M20 92 q-4 -12 2 -20 M140 92 q4 -14 -2 -24" stroke="#3f9a5a" stroke-width="3" fill="none"/>
+      <path d="M60 62 q10 -8 20 0 q-10 8 -20 0Z M80 62 l6 -5 v10Z" fill="#ffc63d"/><path d="M104 76 q8 -6 16 0 q-8 6 -16 0Z M120 76 l5 -4 v8Z" fill="#ff8f6b"/>
+      <circle cx="40" cy="58" r="3" fill="#bfe6ff"/><circle cx="46" cy="48" r="2" fill="#bfe6ff"/><circle cx="128" cy="52" r="2.5" fill="#bfe6ff"/>`,
     pond:`<rect width="160" height="110" fill="#d6eeff"/><rect y="48" width="160" height="62" fill="#88c96a"/>
       <ellipse cx="80" cy="80" rx="62" ry="24" fill="#4aa3df"/><ellipse cx="80" cy="78" rx="54" ry="18" fill="#6bbbe9"/>
       <ellipse cx="60" cy="80" rx="12" ry="5" fill="#3f9a3a"/><ellipse cx="102" cy="74" rx="10" ry="4" fill="#3f9a3a"/><circle cx="104" cy="72" r="3" fill="#ff8fab"/>
@@ -319,13 +345,14 @@ function renderMap(){
           <span class="count">⭐ 스티커 ${got} / ${A.length}</span>
         </div>
       </div>
+      ${[['land','🌳 땅에 사는 동물'],['sea','🌊 바다에 사는 동물']].map(([z,title]) => `<h2 class="zone">${title}</h2>
       <div class="grid">
-        ${A.map(a => `<button class="card ${store.stickers[a.id]?'got':''}" data-id="${a.id}" aria-label="${a.name}">
+        ${A.filter(a => (a.zone||'land') === z).map(a => `<button class="card ${store.stickers[a.id]?'got':''}" data-id="${a.id}" aria-label="${a.name}">
           ${store.stickers[a.id] ? '<span class="badge" aria-hidden="true">⭐</span>' : ''}
           <img src="${IMG(a.id)}" alt="" loading="lazy">
           <span class="nm">${a.name}</span>
         </button>`).join('')}
-      </div>
+      </div>`).join('')}
     </div>
     ${parentHTML()}`;
   app.querySelectorAll('.card').forEach(b => b.addEventListener('click', () => startAnimal(b.dataset.id)));
