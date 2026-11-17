@@ -118,6 +118,7 @@ th{font-weight:600;color:var(--muted)}
 .t1{background:#dff3e7;color:#1b6640}.t2{background:#fff0c7;color:#6e4e00}.t3{background:#fde0d8;color:#8a3a22}.t0{background:#eee;color:#888}
 
 select{font-family:var(--body);font-size:17px;padding:8px 10px;border-radius:12px;border:3px solid var(--line);background:#fff;color:var(--ink);max-width:100%}
+.testrow{display:flex;flex-wrap:wrap;gap:10px}
 .vbox{background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px;color:var(--ink)}
 .vs{margin:0;padding-left:18px;font-size:15px;line-height:1.7}
 .diag{margin:8px 0 0;font-size:15px;line-height:1.6;background:#fff6d6;border-radius:10px;padding:8px 10px}
@@ -324,15 +325,16 @@ function voiceFor(){
   const v = V.chosen;
   return (v && !V.bad.has(v.voiceURI)) ? v : null;
 }
-function makeUtt(text){
+function makeUtt(text, opt){
+  opt = opt || {};
   const u = new SpeechSynthesisUtterance(text);
   u.lang = 'ko-KR';
-  const v = voiceFor();
+  const v = opt.noVoice ? null : voiceFor();
   if (v) u.voice = v;
   u.rate = 0.85; u.pitch = 1.1; u.volume = 1;
   const rec = {id: ++uttSeq, text, status:'요청함', error:'', voice: v ? v.name : '기본 한국어(ko-KR)', voiceURI: v ? v.voiceURI : '', tReq: Date.now(), tStart: 0};
   u.onstart = () => { rec.status = '재생 중'; rec.tStart = Date.now(); V.everStarted = true; hideSoundFix(); vlog(`▶ 시작 #${rec.id} (${rec.tStart - rec.tReq}ms, ${rec.voice})`); };
-  u.onend = () => { if (rec.status !== '오류') rec.status = '끝남'; vlog(`■ 끝 #${rec.id}`); };
+  u.onend = () => { rec.tEnd = Date.now(); if (rec.status !== '오류') rec.status = '끝남'; vlog(`■ 끝 #${rec.id} (재생 ${rec.tStart ? rec.tEnd - rec.tStart : 0}ms)`); };
   u.onerror = e => {
     const err = (e && e.error) || 'unknown';
     rec.status = '오류'; rec.error = err;
@@ -344,8 +346,8 @@ function makeUtt(text){
   u._rec = rec;
   return u;
 }
-function startUtt(text, isRetry){
-  const u = makeUtt(text);
+function startUtt(text, isRetry, opt){
+  const u = makeUtt(text, opt);
   currentUtt = u; V.last = u._rec;
   try{ speechSynthesis.resume(); }catch(e){}   // 멈춰 있는 대기열 깨우기
   speechSynthesis.speak(u);
@@ -453,11 +455,13 @@ function voiceStatusHTML(){
     : r.status === '오류' ? `#${r.id} 오류: ${esc(r.error)}`
     : r.status === '요청함' ? `#${r.id} 시작 신호 기다리는 중`
     : r.status === '시작 안 됨' ? `#${r.id} 시작 신호가 오지 않음`
+    : r.status === '끝남' ? `#${r.id} 끝남 (시작까지 ${r.tStart - r.tReq}ms, 재생 ${r.tEnd - r.tStart}ms${(r.tEnd - r.tStart) < r.text.length * 40 ? ' ⚠️ 문장 길이에 비해 너무 빨리 끝남' : ''})`
     : `#${r.id} ${r.status} (시작까지 ${r.tStart - r.tReq}ms)`;
   let q = '-';
   try{ if (hasTTS) q = `말하는 중 ${speechSynthesis.speaking ? '예' : '아니오'} · 대기 ${speechSynthesis.pending ? '있음' : '없음'} · 일시정지 ${speechSynthesis.paused ? '예' : '아니오'}`; }catch(e){}
   const v = voiceFor();
   return `<ul class="vs">
+    ${V.beep ? `<li>삐 소리 테스트: ${V.beep}</li>` : ''}
     <li>음성 기능: ${hasTTS ? '있음' : '없음 (이 브라우저는 읽어주기를 지원하지 않아요)'}</li>
     <li>기기: ${isIOS ? '아이패드·아이폰 방식으로 동작' : '일반 브라우저 방식으로 동작'}</li>
     <li>한국어 목소리: ${V.koVoices.length ? V.koVoices.length + '개' : (V.voices.length ? `없음 (전체 ${V.voices.length}개)` : '목록을 아직 받지 못했어요')}</li>
@@ -481,6 +485,37 @@ function updateVoiceStatus(){
     sel.value = V.koVoices.some(v => v.voiceURI === want) ? want : '';
   }
 }
+
+/* 추가 진단 1: 음성 말고 일반 소리(삐)가 나는지 — 무음 모드·볼륨 문제인지 가려내기 */
+function beepTest(){
+  try{
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC){ V.beep = '이 브라우저는 지원하지 않아요'; updateVoiceStatus(); return; }
+    const ctx = window.__beepCtx || (window.__beepCtx = new AC());
+    if (ctx.resume) ctx.resume();
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = 660; g.gain.value = 0.35;
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + 0.6);
+    V.beep = `재생 요청함 (오디오 상태: ${ctx.state}) — 들렸는지 확인해 주세요`;
+    vlog('삐 소리 재생 요청 (' + ctx.state + ')');
+  }catch(e){ V.beep = '오류: ' + e.message; vlog('삐 소리 오류: ' + e.message); }
+}
+/* 추가 진단 2: 목소리를 지정하지 않고 기기 기본 한국어 목소리로 말하기 */
+function plainVoiceTest(){
+  if (!hasTTS) return;
+  V.diag = '목소리 지정 없이 확인 중…';
+  try{ if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel(); }catch(e){}
+  startUtt('안녕! 이번에는 기본 목소리예요. 소리가 들리나요?', true, {noVoice:true});
+  const id = uttSeq;
+  setTimeout(() => {
+    const r = V.last; if (!r || r.id < id) return;
+    V.diag = r.status === '끝남' || r.status === '재생 중'
+      ? `기본 목소리 신호 정상 (재생 ${r.tEnd ? r.tEnd - r.tStart + 'ms' : '진행 중'}). 이걸로 들렸다면 목소리 선택을 '자동 선택' 대신 다른 것으로 바꿔 볼게요.`
+      : `기본 목소리도 ${r.status}${r.error ? ' (' + esc(r.error) + ')' : ''}.`;
+    updateVoiceStatus();
+  }, 4500);
+}
 function soundTest(){
   V.diag = '확인 중…';
   speak('안녕! 소리가 잘 들리나요? 동물 친구 탐험대예요.', true);   // 클릭 안에서 바로 말하기
@@ -489,13 +524,15 @@ function soundTest(){
     const r = V.last;
     if (!r || r.id < id) return;
     if (r.status === '재생 중' || r.status === '끝남')
-      V.diag = '✅ 말하기 시작 신호를 받았어요. 그래도 소리가 안 들리면 무음 모드, 볼륨, 블루투스 이어폰 연결을 확인해 주세요.';
+      V.diag = (r.tEnd && (r.tEnd - r.tStart) < r.text.length * 40)
+        ? `⚠️ 시작·끝 신호는 왔지만 ${r.tEnd - r.tStart}ms 만에 끝났어요. 실제로 말을 만들지 못한 것 같아요. 아래 '기본 목소리로 테스트'를 눌러 보세요.`
+        : '✅ 말하기 시작 신호를 받았어요. 그래도 소리가 안 들리면 아래 \'삐 소리 테스트\'로 무음 모드·볼륨 문제인지 확인해 주세요.';
     else if (r.status === '오류')
       V.diag = `⚠️ 말하기 오류(${esc(r.error)})가 났어요. 위에서 다른 목소리를 골라 다시 테스트해 보세요.`;
     else
       V.diag = '⚠️ 말하기 시작 신호가 오지 않았어요. 설정 → 손쉬운 사용 → 읽기 및 말하기 → 음성 → 한국어에서 목소리를 내려받았는지 확인하고, 이 페이지를 새로고침한 뒤 다시 테스트해 주세요.';
     updateVoiceStatus();
-  }, 3200);
+  }, 4500);
 }
 
 /* ---------- 상태 ---------- */
@@ -717,7 +754,7 @@ function parentHTML(){
         <div class="seg"><button type="button" data-n="2" aria-pressed="${store.nOpts===2}">2개 (쉬움)</button><button type="button" data-n="3" aria-pressed="${store.nOpts===3}">3개</button></div></div>
       <label class="field" for="voiceSel">목소리
         <select id="voiceSel"><option value="">자동 선택</option></select></label>
-      <div><button class="btn btn-sun" type="button" id="soundTestBtn">🔊 소리 테스트</button></div>
+      <div class="testrow"><button class="btn btn-sun" type="button" id="soundTestBtn">🔊 소리 테스트</button><button class="btn" type="button" id="beepBtn">🔔 삐 소리 테스트</button><button class="btn" type="button" id="plainBtn">🗣️ 기본 목소리로 테스트</button></div>
       <div class="field">음성 상태<div id="voiceStatus" class="vbox"></div></div>
     </div>
     <p class="small">각 동물의 가장 최근 탐험 기록이에요. 보기가 두 개면 우연히 맞힐 수도 있으니, 맞힌 뒤 "왜 그렇게 생각했어?" 하고 물어봐 주세요. 기록과 스티커는 이 기기에만 저장돼요.</p>
@@ -735,6 +772,8 @@ function bindParent(){
   app.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { store.nOpts = +b.dataset.n; save(); renderMap(); app.querySelector('details.parent').open = true; }));
   const t = document.getElementById('soundTestBtn');
   if (t) t.addEventListener('click', soundTest);
+  const bb = document.getElementById('beepBtn'); if (bb) bb.addEventListener('click', beepTest);
+  const pb = document.getElementById('plainBtn'); if (pb) pb.addEventListener('click', plainVoiceTest);
   const vs = document.getElementById('voiceSel');
   if (vs) vs.addEventListener('change', e => { store.voiceURI = e.target.value; save(); V.bad.clear(); loadVoices(); vlog('목소리 바꿈: ' + (e.target.value ? (V.chosen ? V.chosen.name : e.target.value) : '자동 선택')); });
   updateVoiceStatus();
