@@ -8,6 +8,7 @@
 ## 폴더 구조
 
 ```
+animal-game/index.html         동물 친구 탐험대 — 동물 12종의 생김새·사는 곳·먹이 퀴즈와 스티커 모으기 (아이 얼굴 사진 포함, 사진은 assets/images/animals 사용)
 home.html                      처음 화면 — 동화와 놀이를 카드로 골라 들어가는 메뉴
 index.html                     게임 (HTML/CSS/JS 한 파일)
 assets/images/catalog.json     사진 ↔ 한글 이름 ↔ 분류 ↔ 출처/라이선스 데이터
