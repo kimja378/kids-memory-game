@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="유성이 놀이방">
+<title>놀이방</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* 큰 그림 카드를 눌러 고르는 아이용 첫 화면 */
+  --bg:#e4f2ee;
+  --paper:#fffdf8;
+  --ink:#2b3640;
+  --muted:#5f6f7b;
+  --accent:#2f7fc1;
+  --display:'Jua','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --body:'Gowun Dodum','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-tap-highlight-color:transparent}
+.wrap{max-width:980px;margin:0 auto;padding:24px 18px 40px}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(30px,6vw,44px);margin:6px 0 4px;text-wrap:balance}
+.sub{color:var(--muted);font-size:17px;margin:0 0 18px}
+h2{font-family:var(--display);font-weight:400;font-size:clamp(22px,4.5vw,28px);margin:26px 0 12px;display:flex;align-items:center;gap:10px}
+h2 span{font-size:15px;font-family:var(--body);color:var(--muted)}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:16px}
+.card{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:8px;text-align:center;
+  min-height:190px;padding:18px 12px;border-radius:26px;background:var(--paper);color:var(--ink);text-decoration:none;
+  box-shadow:0 6px 0 var(--edge),0 10px 24px rgba(40,80,90,.12);border:4px solid var(--edge);transition:transform .12s}
+.card:active{transform:translateY(4px);box-shadow:0 2px 0 var(--edge),0 4px 10px rgba(40,80,90,.12)}
+.card:focus-visible{outline:4px solid var(--accent);outline-offset:4px}
+.icon{font-size:64px;line-height:1}
+.title{word-break:keep-all;font-family:var(--display);font-size:clamp(20px,3.6vw,25px);line-height:1.25}
+.desc{word-break:keep-all;font-size:15px;color:var(--muted);line-height:1.4}
+.num{font-family:var(--display);font-size:14px;color:#fff;background:var(--edge);border-radius:999px;padding:2px 10px}
+@media (max-width:460px){.grid{grid-template-columns:1fr 1fr;gap:12px}.card{min-height:160px}.icon{font-size:48px}.desc{display:none}}
+@media (prefers-reduced-motion: reduce){.card{transition:none}}
+</style>
+</head>
+<body>
+<main class="wrap">
+  <h1>오늘은 뭐 하고 놀까?</h1>
+  <p class="sub">보고 싶은 그림을 눌러요.</p>
+
+  <h2>질문 동화 <span>질문에 맞히면 다음 장면으로 넘어가요</span></h2>
+  <div class="grid">
+    <a class="card" href="storybooks/kongi.html" style="--edge:#f4b6c2">
+      <span class="num">1편</span><span class="icon" aria-hidden="true">🐰</span>
+      <span class="title">콩이랑 같이 놀자</span><span class="desc">어린이집에서 인사하고 같이 놀기</span>
+    </a>
+    <a class="card" href="storybooks/mart.html" style="--edge:#ffc985">
+      <span class="num">2편</span><span class="icon" aria-hidden="true">🛒</span>
+      <span class="title">엄마랑 마트에 가요</span><span class="desc">손 잡고 다니기, 줄 서서 기다리기</span>
+    </a>
+    <a class="card" href="storybooks/playground.html" style="--edge:#9fd77f">
+      <span class="num">3편</span><span class="icon" aria-hidden="true">🛝</span>
+      <span class="title">놀이터에서 사이좋게</span><span class="desc">차례 기다리기, 미안해 말하기</span>
+    </a>
+    <a class="card" href="storybooks/hospital.html" style="--edge:#8fd3c0">
+      <span class="num">4편</span><span class="icon" aria-hidden="true">🩺</span>
+      <span class="title">씩씩하게 병원 가기</span><span class="desc">조용히 기다리기, 진료 받기</span>
+    </a>
+    <a class="card" href="storybooks/index.html" style="--edge:#9cc7e2">
+      <span class="icon" aria-hidden="true">🚌</span>
+      <span class="title">버스 타고 친구 만나요</span><span class="desc">그림 동화</span>
+    </a>
+  </div>
+
+  <h2>놀이 <span>사진과 그림으로 하는 게임</span></h2>
+  <div class="grid">
+    <a class="card" href="index.html" style="--edge:#c3b1e8">
+      <span class="icon" aria-hidden="true">📷</span>
+      <span class="title">사진 기억놀이</span><span class="desc">사진 세 개를 보고 어디에 있었는지 맞히기</span>
+    </a>
+    <a class="card" href="feature-detective/" style="--edge:#ffd76a">
+      <span class="icon" aria-hidden="true">🔍</span>
+      <span class="title">특징 탐정 놀이</span><span class="desc">특징을 보고 찾아내기</span>
+    </a>
+    <a class="card" href="situation-game/" style="--edge:#f7a98b">
+      <span class="icon" aria-hidden="true">🎒</span>
+      <span class="title">필요한 물건을 찾아요</span><span class="desc">상황에 필요한 물건 고르기</span>
+    </a>
+  </div>
+</main>
+</body>
+</html>

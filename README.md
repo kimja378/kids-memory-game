@@ -8,6 +8,7 @@
 ## 폴더 구조
 
 ```
+home.html                      처음 화면 — 동화와 놀이를 카드로 골라 들어가는 메뉴
 index.html                     게임 (HTML/CSS/JS 한 파일)
 assets/images/catalog.json     사진 ↔ 한글 이름 ↔ 분류 ↔ 출처/라이선스 데이터
 assets/images/fruits/          과일 사진       (예: apple.jpg)

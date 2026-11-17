@@ -26,6 +26,9 @@
 html,body{margin:0}
 body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-tap-highlight-color:transparent}
 .book{max-width:760px;margin:0 auto;padding:16px}
+.homelink{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:20px;background:#fff;color:var(--ink);text-decoration:none;padding:8px 18px;border-radius:999px;margin-bottom:12px;box-shadow:0 3px 0 #c9dcd6}
+.homelink[hidden]{display:none}
+.homelink:focus-visible{outline:4px solid var(--accent);outline-offset:3px}
 .card{background:var(--paper);border-radius:24px;box-shadow:0 8px 28px rgba(40,80,90,.13);overflow:hidden}
 .progress{display:flex;gap:6px;justify-content:center;flex-wrap:wrap;padding:12px 16px 10px}
 .dot{width:12px;height:12px;border-radius:50%;background:var(--line)}
@@ -98,6 +101,7 @@ body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-tap-h
 </head>
 <body>
 <main class="book">
+  <a class="homelink" id="homeLink" href="../home.html" hidden>🏠 처음 화면</a>
   <div class="card" id="card"></div>
 </main>
 
@@ -511,6 +515,7 @@ function bind(){
     }
   }));
 }
+try{ if (location.hostname.endsWith('github.io')) document.getElementById('homeLink').hidden = false; }catch(e){}
 render();
 </script>
 </body>
