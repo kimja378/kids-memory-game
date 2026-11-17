@@ -1516,6 +1516,36 @@
     "via": "Openverse (stocksnap)",
     "modified": "resized to max 500px JPEG"
    }
+  },
+  {
+   "id": "octopus",
+   "name": "문어",
+   "category": "animal",
+   "file": "assets/images/animals/octopus.jpg",
+   "source": {
+    "title": "Pulpo común (Octopus vulgaris), Parque natural de la Arrábida, Portugal, 2020-07-21, DD 46.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Pulpo_com%C3%BAn_(Octopus_vulgaris),_Parque_natural_de_la_Arr%C3%A1bida,_Portugal,_2020-07-21,_DD_46.jpg",
+    "author": "Diego Delso",
+    "license": "CC BY-SA 4.0",
+    "license_url": "https://creativecommons.org/licenses/by-sa/4.0",
+    "via": "Wikimedia Commons",
+    "modified": "cropped, resized to max 500px JPEG"
+   }
+  },
+  {
+   "id": "sea_turtle",
+   "name": "바다거북",
+   "category": "animal",
+   "file": "assets/images/animals/sea_turtle.jpg",
+   "source": {
+    "title": "Chelonia mydas swimming, Hawaii.jpg",
+    "url": "https://commons.wikimedia.org/wiki/File:Chelonia_mydas_swimming,_Hawaii.jpg",
+    "author": "Dominik Keller",
+    "license": "CC BY-SA 3.0",
+    "license_url": "http://creativecommons.org/licenses/by-sa/3.0/",
+    "via": "Wikimedia Commons",
+    "modified": "resized to max 500px JPEG"
+   }
   }
  ]
 }
