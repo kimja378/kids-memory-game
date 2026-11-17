@@ -9,5 +9,5 @@
 | 숲 | `forest.jpg` | [Bali, Forest, Trees, East Bali, Indonesia.jpg](https://commons.wikimedia.org/wiki/File:Bali,_Forest,_Trees,_East_Bali,_Indonesia.jpg) | Vyacheslav Argenberg | [CC BY 4.0](https://creativecommons.org/licenses/by/4.0) |
 | 풀밭 | `meadow.jpg` | 저장소 소유자 제공 (원 출처 기록 없음) | - | unknown |
 | 연못 | `pond.jpg` | [Klagenfurt Viktring Stift Park Teich gelbe Teichrosen 23052022 9308.jpg](https://commons.wikimedia.org/wiki/File:Klagenfurt_Viktring_Stift_Park_Teich_gelbe_Teichrosen_23052022_9308.jpg) | Johann Jaritz | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
-| 바다 | `sea.jpg` | [Great barrier reef cairns.jpg](https://commons.wikimedia.org/wiki/File:Great_barrier_reef_cairns.jpg) | Mohesa83 | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
+| 바다 | `sea.jpg` | 저장소 소유자 제공 (원 출처 기록 없음) | - | unknown |
 | 대나무 숲 | `bamboo.jpg` | [Bamboo Forest, Arashiyama, Kyoto, Japan.jpg](https://commons.wikimedia.org/wiki/File:Bamboo_Forest,_Arashiyama,_Kyoto,_Japan.jpg) | Basile Morin | [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0) |
