@@ -117,6 +117,14 @@ th{font-weight:600;color:var(--muted)}
 .tag{font-family:var(--display);font-size:14px;border-radius:999px;padding:3px 10px;white-space:nowrap}
 .t1{background:#dff3e7;color:#1b6640}.t2{background:#fff0c7;color:#6e4e00}.t3{background:#fde0d8;color:#8a3a22}.t0{background:#eee;color:#888}
 
+select{font-family:var(--body);font-size:17px;padding:8px 10px;border-radius:12px;border:3px solid var(--line);background:#fff;color:var(--ink);max-width:100%}
+.vbox{background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px;color:var(--ink)}
+.vs{margin:0;padding-left:18px;font-size:15px;line-height:1.7}
+.diag{margin:8px 0 0;font-size:15px;line-height:1.6;background:#fff6d6;border-radius:10px;padding:8px 10px}
+.vlog summary{cursor:pointer;font-size:14px;color:var(--muted);margin-top:6px}
+.vlog pre{white-space:pre-wrap;font-size:12px;margin:6px 0 0;color:var(--muted)}
+.soundfix{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:10;font-family:var(--display);font-size:22px;border:none;border-radius:999px;padding:14px 26px;background:#ff8f3d;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.25);cursor:pointer}
+.soundfix[hidden]{display:none}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 @keyframes wobble{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 @keyframes pop{0%{transform:translateY(0) scale(.4);opacity:1}100%{transform:translateY(-110px) scale(1.2);opacity:0}}
@@ -256,7 +264,7 @@ function habitat(key, w=160, h=110){
 
 /* ---------- 저장 (이 아이패드에만) ---------- */
 const KEY = 'animalExplorer.v1';
-let store = {name:'토리', stickers:{}, log:{}, autoRead:true, nOpts:2};
+let store = {name:'토리', stickers:{}, log:{}, autoRead:true, nOpts:2, voiceURI:''};
 try{ const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) store = Object.assign(store, s); }catch(e){}
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
 
@@ -266,38 +274,228 @@ function nm(){ const n = store.name || '토리'; return hasBatchim(n) ? n+'이' 
 function voc(){ const n = store.name || '토리'; if (hasBatchim(n)) return n+'아'; if (n.length>=2 && n.endsWith('이') && hasBatchim(n.slice(0,-1))) return n.slice(0,-1)+'아'; return n+'야'; }
 function josa(w, a, b){ return w + (hasBatchim(w) ? a : b); }
 
-/* ---------- 읽어주기 (아이패드 대응) ---------- */
-let koVoice = null;
+/* ---------- 읽어주기 (아이패드 Safari 대응) ----------
+   원칙
+   1) 말하기는 아이가 누른 그 순간(클릭 처리 안)에서 바로 speechSynthesis.speak()를 불러요.
+   2) 아이패드에서는 앞 말이 실제로 남아 있을 때만 cancel()하고, 기다리는 타이머 없이 바로 말해요.
+   3) 시작 신호(onstart)가 안 오면 한 번만 다시 시도하고, 그래도 안 되면 '소리 켜기' 버튼을 띄워요.
+   4) 모든 시작·끝·오류 신호는 부모님 설정의 '음성 상태'에 기록돼요. */
+const hasTTS = ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window);
 const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
-let currentUtter = null, speechUnlocked = false;
-function pickVoice(){
+const V = {
+  voices: [], koVoices: [], chosen: null, bad: new Set(),
+  gesture: false, silentUnlock: 'none',   // none | trying | ok | failed | skipped
+  everStarted: false, last: null, log: [], diag: ''
+};
+let uttSeq = 0, currentUtt = null, startWatch = null;
+
+function vlog(msg){
+  const t = new Date().toTimeString().slice(0,8);
+  V.log.unshift(`${t} ${msg}`); if (V.log.length > 14) V.log.length = 14;
+  updateVoiceStatus();
+}
+function isKo(v){ return !!(v && v.lang && v.lang.toLowerCase().replace('_','-').startsWith('ko')); }
+function rankVoice(v){
+  const n = (v.name || '').toLowerCase(); let s = 0;
+  if (v.lang.toLowerCase().replace('_','-') === 'ko-kr') s += 4;
+  if (v.localService) s += 3;          // 기기에 설치된 목소리
+  if (v.default) s += 2;
+  if (/yuna|유나/.test(n)) s += 2;      // 아이패드 기본 한국어 목소리
+  if (/enhanced|premium|고급|향상/.test(n)) s -= 3;   // 내려받지 않았으면 소리가 안 나는 경우가 있어 뒤로
+  return s;
+}
+function loadVoices(){
+  if (!hasTTS) return;
   try{
-    const vs = speechSynthesis.getVoices().filter(v => v.lang && v.lang.toLowerCase().replace('_','-').startsWith('ko'));
-    koVoice = vs.find(v => v.localService && v.default) || vs.find(v => v.localService) || vs[0] || null;
-  }catch(e){}
+    V.voices = speechSynthesis.getVoices() || [];
+    V.koVoices = V.voices.filter(isKo).sort((a,b) => rankVoice(b) - rankVoice(a));
+    const want = store.voiceURI;
+    V.chosen = (want && V.koVoices.find(v => v.voiceURI === want)) || V.koVoices[0] || null;
+  }catch(e){ V.log.unshift('목소리 목록 오류: ' + e.message); }
+  updateVoiceStatus();
 }
-if ('speechSynthesis' in window){ pickVoice(); try{ speechSynthesis.addEventListener('voiceschanged', pickVoice); }catch(e){} }
-function unlockSpeech(){
-  if (speechUnlocked || !('speechSynthesis' in window)) return;
-  speechUnlocked = true;
-  try{ const u = new SpeechSynthesisUtterance(' '); u.lang='ko-KR'; u.volume=0; speechSynthesis.speak(u); }catch(e){}
+if (hasTTS){
+  loadVoices();
+  try{ speechSynthesis.addEventListener('voiceschanged', loadVoices); }catch(e){}
+  /* Safari는 목소리 목록을 늦게 주는 경우가 있어 몇 번 더 확인 (말하기와는 무관한 타이머) */
+  [400, 1200, 3000].forEach(ms => setTimeout(() => { if (!V.koVoices.length) loadVoices(); }, ms));
 }
-document.addEventListener('touchend', unlockSpeech, {passive:true});
-document.addEventListener('click', unlockSpeech);
+function voiceFor(){
+  const v = V.chosen;
+  return (v && !V.bad.has(v.voiceURI)) ? v : null;
+}
+function makeUtt(text){
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR';
+  const v = voiceFor();
+  if (v) u.voice = v;
+  u.rate = 0.85; u.pitch = 1.1; u.volume = 1;
+  const rec = {id: ++uttSeq, text, status:'요청함', error:'', voice: v ? v.name : '기본 한국어(ko-KR)', voiceURI: v ? v.voiceURI : '', tReq: Date.now(), tStart: 0};
+  u.onstart = () => { rec.status = '재생 중'; rec.tStart = Date.now(); V.everStarted = true; hideSoundFix(); vlog(`▶ 시작 #${rec.id} (${rec.tStart - rec.tReq}ms, ${rec.voice})`); };
+  u.onend = () => { if (rec.status !== '오류') rec.status = '끝남'; vlog(`■ 끝 #${rec.id}`); };
+  u.onerror = e => {
+    const err = (e && e.error) || 'unknown';
+    rec.status = '오류'; rec.error = err;
+    vlog(`✕ 오류 #${rec.id}: ${err}`);
+    if (rec.voiceURI && /voice-unavailable|synthesis-failed|synthesis-unavailable|language-unavailable/.test(err)){
+      V.bad.add(rec.voiceURI); vlog('이 목소리는 빼고 기본 한국어 목소리를 써요');
+    }
+  };
+  u._rec = rec;
+  return u;
+}
+function startUtt(text, isRetry){
+  const u = makeUtt(text);
+  currentUtt = u; V.last = u._rec;
+  try{ speechSynthesis.resume(); }catch(e){}   // 멈춰 있는 대기열 깨우기
+  speechSynthesis.speak(u);
+  vlog(`요청 #${u._rec.id}${isRetry ? ' (다시 시도)' : ''}: ${text.slice(0,16)}${text.length > 16 ? '…' : ''}`);
+  clearTimeout(startWatch);
+  /* 시작 신호 확인용 타이머: 재생을 늦추지 않고, 신호가 안 올 때만 움직여요 */
+  startWatch = setTimeout(() => {
+    const r = u._rec;
+    if (currentUtt !== u || r.status !== '요청함') return;
+    if (!isRetry){
+      vlog(`시작 신호 없음 #${r.id} → 기본 목소리로 한 번 더`);
+      if (r.voiceURI) V.bad.add(r.voiceURI);
+      try{ if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel(); }catch(e){}
+      startUtt(text, true);
+    } else {
+      r.status = '시작 안 됨'; vlog(`시작 신호 없음 #${r.id} → '소리 켜기' 버튼 표시`);
+      showSoundFix(text);
+    }
+  }, 1500);
+}
 function speak(text, force){
-  if (!('speechSynthesis' in window)) return;
+  if (!hasTTS) return;
   if (!store.autoRead && !force) return;
+  text = String(text).replace(/["“”]/g,'').replace(/\s+/g,' ').trim();
+  if (!text) return;
   try{
-    const say = () => {
-      const u = new SpeechSynthesisUtterance(text.replace(/["“”]/g,''));
-      u.lang = 'ko-KR'; if (koVoice && !isIOS) u.voice = koVoice;
-      u.rate = 0.85; u.pitch = 1.1; u.volume = 1; currentUtter = u;
-      try{ speechSynthesis.resume(); }catch(e){}
-      speechSynthesis.speak(u);
-    };
-    if (speechSynthesis.speaking || speechSynthesis.pending){ speechSynthesis.cancel(); setTimeout(say, 150); }
-    else say();
-  }catch(e){}
+    const busy = speechSynthesis.speaking || speechSynthesis.pending;
+    if (isIOS){
+      /* 아이패드: 같은 클릭 안에서 바로 말하기. 앞 말이 남아 있을 때만 멈춤 */
+      if (busy){
+        const r = currentUtt && currentUtt._rec;
+        const stuck = r && (r.status === '끝남' || r.status === '오류' || r.status === '시작 안 됨');
+        speechSynthesis.cancel();
+        vlog(stuck ? '멈춘 대기열 정리' : '앞 말 멈춤');
+      }
+      startUtt(text);
+    } else {
+      /* 다른 기기: 기존 방식 유지 (말하는 중이면 멈추고 잠깐 뒤에 말하기) */
+      if (busy){ speechSynthesis.cancel(); setTimeout(() => startUtt(text), 150); }
+      else startUtt(text);
+    }
+  }catch(e){ vlog('말하기 오류: ' + e.message); }
+}
+function stopSpeech(){
+  clearTimeout(startWatch);
+  try{ if (hasTTS && (speechSynthesis.speaking || speechSynthesis.pending)) speechSynthesis.cancel(); }catch(e){}
+}
+
+/* 첫 터치: 음성 기능 깨우기 */
+function onFirstGesture(){
+  if (V.gesture) return;
+  V.gesture = true;
+  try{ if (navigator.audioSession) navigator.audioSession.type = 'playback'; }catch(e){}   // 새 iPadOS: 무음 스위치 영향 줄이기
+  if (hasTTS){ try{ speechSynthesis.getVoices(); speechSynthesis.resume(); }catch(e){} loadVoices(); }
+  vlog('첫 터치 확인');
+}
+/* 무음 활성화: 첫 클릭에서 진짜 말하기가 없었을 때만 시도. 실패해도 다음 진짜 말하기가 활성화를 대신해요 */
+function trySilentUnlock(){
+  if (!hasTTS || V.silentUnlock !== 'none') return;
+  const r = currentUtt && currentUtt._rec;
+  if (V.everStarted || speechSynthesis.speaking || speechSynthesis.pending || (r && r.status === '요청함')){
+    V.silentUnlock = 'skipped'; updateVoiceStatus(); return;   // 이 클릭에서 이미 진짜 말하기를 시작함
+  }
+  V.silentUnlock = 'trying';
+  let settled = false;
+  const fail = why => {
+    if (settled) return; settled = true; V.silentUnlock = 'failed';
+    vlog(`무음 활성화 실패(${why}) → 다음 말하기로 활성화`);
+    try{ if (!currentUtt && (speechSynthesis.speaking || speechSynthesis.pending)) speechSynthesis.cancel(); }catch(e){}
+  };
+  try{
+    const u = new SpeechSynthesisUtterance(' ');
+    u.lang = 'ko-KR'; u.volume = 0;
+    const ok = () => { if (settled) return; settled = true; V.silentUnlock = 'ok'; vlog('무음 활성화 성공'); };
+    u.onstart = ok; u.onend = ok;
+    u.onerror = e => fail((e && e.error) || 'error');
+    speechSynthesis.speak(u);
+    setTimeout(() => fail('신호 없음'), 1500);
+  }catch(e){ fail(e.message); }
+}
+document.addEventListener('touchend', onFirstGesture, {passive:true});
+document.addEventListener('click', () => { onFirstGesture(); trySilentUnlock(); });   // 버튼 처리 뒤에 실행됨
+
+/* 소리가 시작되지 않았을 때 보여주는 버튼: 새로 누르는 순간에 다시 말해요 */
+let soundFixText = '';
+function showSoundFix(text){
+  soundFixText = text;
+  let b = document.getElementById('soundFix');
+  if (!b){
+    b = document.createElement('button');
+    b.id = 'soundFix'; b.type = 'button'; b.className = 'soundfix';
+    b.textContent = '🔊 소리가 안 나요? 여기를 눌러요';
+    b.addEventListener('click', () => { hideSoundFix(); speak(soundFixText, true); });
+    document.body.appendChild(b);
+  }
+  b.hidden = false;
+}
+function hideSoundFix(){ const b = document.getElementById('soundFix'); if (b) b.hidden = true; }
+
+/* 부모님 설정: 음성 상태 표시 */
+function voiceStatusHTML(){
+  const r = V.last;
+  const unlockTxt = {none:'아직 시도 안 함', trying:'시도 중', ok:'성공', failed:'실패 (다음 말하기로 대신 활성화)', skipped:'필요 없음 (첫 말하기로 바로 활성화)'}[V.silentUnlock];
+  const lastTxt = !r ? '아직 없음'
+    : r.status === '오류' ? `#${r.id} 오류: ${esc(r.error)}`
+    : r.status === '요청함' ? `#${r.id} 시작 신호 기다리는 중`
+    : r.status === '시작 안 됨' ? `#${r.id} 시작 신호가 오지 않음`
+    : `#${r.id} ${r.status} (시작까지 ${r.tStart - r.tReq}ms)`;
+  let q = '-';
+  try{ if (hasTTS) q = `말하는 중 ${speechSynthesis.speaking ? '예' : '아니오'} · 대기 ${speechSynthesis.pending ? '있음' : '없음'} · 일시정지 ${speechSynthesis.paused ? '예' : '아니오'}`; }catch(e){}
+  const v = voiceFor();
+  return `<ul class="vs">
+    <li>음성 기능: ${hasTTS ? '있음' : '없음 (이 브라우저는 읽어주기를 지원하지 않아요)'}</li>
+    <li>기기: ${isIOS ? '아이패드·아이폰 방식으로 동작' : '일반 브라우저 방식으로 동작'}</li>
+    <li>한국어 목소리: ${V.koVoices.length ? V.koVoices.length + '개' : (V.voices.length ? `없음 (전체 ${V.voices.length}개)` : '목록을 아직 받지 못했어요')}</li>
+    <li>사용할 목소리: ${v ? esc(v.name) + (v.localService ? ' (기기에 설치됨)' : ' (온라인)') : '기본 한국어 목소리'}</li>
+    <li>첫 터치: ${V.gesture ? '확인됨' : '아직'} · 무음 활성화: ${unlockTxt}</li>
+    <li>마지막 말하기: ${lastTxt}</li>
+    <li>대기열: ${q}</li>
+  </ul>
+  ${V.diag ? `<p class="diag">${V.diag}</p>` : ''}
+  <details class="vlog"><summary>자세한 기록</summary><pre>${esc(V.log.join('\n') || '기록 없음')}</pre></details>`;
+}
+function updateVoiceStatus(){
+  const el = document.getElementById('voiceStatus');
+  if (el){ const lg = el.querySelector('.vlog'); const wasOpen = !!(lg && lg.open); el.innerHTML = voiceStatusHTML(); if (wasOpen){ const n = el.querySelector('.vlog'); if (n) n.open = true; } }
+  const sel = document.getElementById('voiceSel');
+  if (sel){
+    const want = store.voiceURI || '';
+    const opts = ['<option value="">자동 선택</option>'].concat(V.koVoices.map(v =>
+      `<option value="${esc(v.voiceURI)}">${esc(v.name)}${v.localService ? '' : ' (온라인)'}${V.bad.has(v.voiceURI) ? ' - 이번엔 실패' : ''}</option>`)).join('');
+    if (sel.innerHTML !== opts) sel.innerHTML = opts;
+    sel.value = V.koVoices.some(v => v.voiceURI === want) ? want : '';
+  }
+}
+function soundTest(){
+  V.diag = '확인 중…';
+  speak('안녕! 소리가 잘 들리나요? 동물 친구 탐험대예요.', true);   // 클릭 안에서 바로 말하기
+  const id = uttSeq;
+  setTimeout(() => {
+    const r = V.last;
+    if (!r || r.id < id) return;
+    if (r.status === '재생 중' || r.status === '끝남')
+      V.diag = '✅ 말하기 시작 신호를 받았어요. 그래도 소리가 안 들리면 무음 모드, 볼륨, 블루투스 이어폰 연결을 확인해 주세요.';
+    else if (r.status === '오류')
+      V.diag = `⚠️ 말하기 오류(${esc(r.error)})가 났어요. 위에서 다른 목소리를 골라 다시 테스트해 보세요.`;
+    else
+      V.diag = '⚠️ 말하기 시작 신호가 오지 않았어요. 설정 → 손쉬운 사용 → 읽기 및 말하기 → 음성 → 한국어에서 목소리를 내려받았는지 확인하고, 이 페이지를 새로고침한 뒤 다시 테스트해 주세요.';
+    updateVoiceStatus();
+  }, 3200);
 }
 
 /* ---------- 상태 ---------- */
@@ -517,7 +715,10 @@ function parentHTML(){
       <label class="check" for="readIn"><input type="checkbox" id="readIn" ${store.autoRead?'checked':''}> 화면마다 소리 내어 읽어주기</label>
       <div class="field">보기 개수
         <div class="seg"><button type="button" data-n="2" aria-pressed="${store.nOpts===2}">2개 (쉬움)</button><button type="button" data-n="3" aria-pressed="${store.nOpts===3}">3개</button></div></div>
-      <div><button class="btn btn-sun" type="button" id="testBtn">🔊 소리 확인</button></div>
+      <label class="field" for="voiceSel">목소리
+        <select id="voiceSel"><option value="">자동 선택</option></select></label>
+      <div><button class="btn btn-sun" type="button" id="soundTestBtn">🔊 소리 테스트</button></div>
+      <div class="field">음성 상태<div id="voiceStatus" class="vbox"></div></div>
     </div>
     <p class="small">각 동물의 가장 최근 탐험 기록이에요. 보기가 두 개면 우연히 맞힐 수도 있으니, 맞힌 뒤 "왜 그렇게 생각했어?" 하고 물어봐 주세요. 기록과 스티커는 이 기기에만 저장돼요.</p>
     ${rows ? `<table><thead><tr><th>동물</th><th>사는 곳</th><th>먹이</th><th>누구?</th></tr></thead><tbody>${rows}</tbody></table>` : '<p class="small">아직 기록이 없어요.</p>'}
@@ -532,8 +733,11 @@ function bindParent(){
   const r = document.getElementById('readIn');
   if (r) r.addEventListener('change', e => { store.autoRead = e.target.checked; save(); });
   app.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { store.nOpts = +b.dataset.n; save(); renderMap(); app.querySelector('details.parent').open = true; }));
-  const t = document.getElementById('testBtn');
-  if (t) t.addEventListener('click', () => speak('안녕! 소리가 잘 들리나요?', true));
+  const t = document.getElementById('soundTestBtn');
+  if (t) t.addEventListener('click', soundTest);
+  const vs = document.getElementById('voiceSel');
+  if (vs) vs.addEventListener('change', e => { store.voiceURI = e.target.value; save(); V.bad.clear(); loadVoices(); vlog('목소리 바꿈: ' + (e.target.value ? (V.chosen ? V.chosen.name : e.target.value) : '자동 선택')); });
+  updateVoiceStatus();
   const rs = document.getElementById('resetBtn');
   if (rs) rs.addEventListener('click', () => {
     if (!resetArmed){ resetArmed = true; rs.textContent = '정말 지울까요? 한 번 더 누르면 지워져요'; return; }
@@ -542,7 +746,7 @@ function bindParent(){
 }
 
 function bindTop(){ const m = document.getElementById('toMap'); if (m) m.addEventListener('click', goMap); }
-function goMap(){ step = 'map'; cur = null; try{ speechSynthesis.cancel(); }catch(e){} render(); window.scrollTo({top:0}); }
+function goMap(){ step = 'map'; cur = null; stopSpeech(); hideSoundFix(); render(); window.scrollTo({top:0}); }
 function render(){
   if (step === 'map') renderMap();
   else if (step === 'meet') renderMeet();
