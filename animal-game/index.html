@@ -126,6 +126,50 @@ select{font-family:var(--body);font-size:17px;padding:8px 10px;border-radius:12p
 .vlog pre{white-space:pre-wrap;font-size:12px;margin:6px 0 0;color:var(--muted)}
 .soundfix{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:10;font-family:var(--display);font-size:22px;border:none;border-radius:999px;padding:14px 26px;background:#ff8f3d;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.25);cursor:pointer}
 .soundfix[hidden]{display:none}
+
+/* 몸 탐험 */
+.btn-body{background:#8fd3a8;color:#123d24}
+.badge2{position:absolute;top:6px;left:8px;font-size:22px}
+.hubhead{display:flex;gap:14px;align-items:center;padding:18px 20px 6px}
+.hubhead img{width:84px;height:84px;border-radius:50%;object-fit:cover;border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.nums{display:grid;grid-template-columns:repeat(3,1fr);gap:12px;padding:12px 18px 6px}
+.num{position:relative;border:4px solid var(--line);background:#fff;border-radius:24px;padding:12px 6px;min-height:150px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-family:var(--display)}
+.num .n{font-size:clamp(44px,9vw,64px);line-height:1;color:var(--accent)}
+.num .ic{font-size:30px}.num .t{font-size:clamp(17px,3.6vw,21px)}
+.num.done{border-color:#f2c94c;background:#fffaea}
+.num .st{position:absolute;top:6px;right:10px;font-size:24px}
+.qtypes{display:grid;grid-template-columns:repeat(4,1fr);gap:10px;padding:0 18px 20px}
+.qt{border:3px solid var(--line);background:#fff;border-radius:18px;padding:12px 6px;min-height:96px;cursor:pointer;font-family:var(--display);font-size:clamp(15px,3.2vw,19px);display:flex;flex-direction:column;align-items:center;gap:4px;word-break:keep-all;text-align:center}
+.qt .ic{font-size:30px}.qt.done{border-color:#f2c94c;background:#fffaea}
+.chips{display:flex;gap:8px;flex-wrap:wrap;padding:4px 20px}
+.chip2{font-family:var(--display);font-size:18px;border:3px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px}
+.chip2.on{border-color:var(--accent);background:#e3f0fb}
+.bodywrap{margin:6px 18px 8px;border-radius:20px;overflow:hidden;background:#e8efe0;display:flex;justify-content:center}
+.bodysvg{display:block;width:100%;height:auto;max-height:58vh;touch-action:manipulation}
+.bodywrap.small .bodysvg{max-height:34vh}
+.plabel{font-family:var(--display);fill:#fff;stroke:#2f3a2b;stroke-width:5px;paint-order:stroke;font-weight:400}
+.glow{animation:glow 1.2s ease-in-out infinite}
+@keyframes glow{0%,100%{stroke-opacity:1}50%{stroke-opacity:.45}}
+.say .big{font-size:1.25em;color:#b35c00}
+.hiddenTxt{color:var(--muted)}
+.btn.mini{font-size:16px;padding:8px 14px}
+.saybtns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding:0 18px 20px}
+.btn.big{font-size:clamp(22px,4.6vw,28px);padding:16px 30px}
+.bopts{grid-template-columns:repeat(auto-fit,minmax(150px,1fr))!important}
+.bopt{display:flex;flex-direction:column;gap:6px;border:4px solid var(--line);background:#fff;border-radius:22px;padding:8px}
+.bopt.right{border-color:var(--good);background:#e5f6ec}
+.bopt.tried{background:#f6f3e8}
+.bopt .pick{border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:110px;justify-content:center;font-family:var(--display);color:var(--ink)}
+.bopt .pick .n{font-size:clamp(40px,8vw,56px);line-height:1;color:var(--accent)}
+.bopt .pick .w{font-size:clamp(18px,4vw,24px);word-break:keep-all;text-align:center}
+.bopt .listen{border:none;border-radius:999px;background:#fff3c4;font-family:var(--display);font-size:16px;padding:8px;cursor:pointer;min-height:44px}
+.note{margin:0 18px 8px;font-size:15px;color:#6e4e00;background:#fff3cf;border-radius:12px;padding:8px 12px}
+.praise{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);z-index:20;background:#fff;border-radius:28px;padding:18px 28px;box-shadow:0 10px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:14px;font-family:var(--display);font-size:clamp(24px,5vw,34px);animation:praise 2.2s ease-out forwards;pointer-events:none}
+.praise .avatar{width:80px;height:80px;animation:hop .5s ease-in-out 3}
+@keyframes praise{0%{opacity:0;transform:translate(-50%,-40%) scale(.7)}15%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-55%) scale(1)}}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@media (max-width:520px){.qtypes{grid-template-columns:1fr 1fr}.num{min-height:120px}}
+@media (orientation:landscape) and (min-width:900px){.bodysvg{max-height:62vh}}
 @keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
 @keyframes wobble{0%,100%{transform:translateX(0)}25%{transform:translateX(-6px)}75%{transform:translateX(6px)}}
 @keyframes pop{0%{transform:translateY(0) scale(.4);opacity:1}100%{transform:translateY(-110px) scale(1.2);opacity:0}}
@@ -228,6 +272,104 @@ const A = [
 ];
 const byId = Object.fromEntries(A.map(a => [a.id, a]));
 
+/* ---------- 몸 탐험 데이터 ----------
+   좌표는 사진 크기에 대한 비율(0~1)이에요. 사진이 커지거나 작아져도 SVG 안에서 같은 비율로 맞춰져서 어긋나지 않아요.
+   확대(zoom)는 새 사진이 아니라 같은 사진의 그 부분을 실제로 크게 보여줘요.
+   부분을 더 넣으려면 parts 배열에 같은 모양으로 추가하면 돼요. 알맞은 사진이 없으면 ready:false로 두면 '준비 중'으로 표시돼요. */
+const BODY = {
+  sea_turtle: { who:'바다거북', W:500, H:375,
+    parts:[{ id:'shell', name:'등딱지', ready:true,
+      shape:{t:'ellipse', cx:.21, cy:.52, rx:.23, ry:.23},
+      zoom:{x:0, y:.26, w:.47, h:.56},
+      findQ:'바다거북 등딱지가 어디 있을까요?',
+      featureSay:'등딱지는 단단해요.', sentence:'바다거북 등에 등딱지가 있어요.',
+      quiz:{
+        A:{q:'바다거북 등에 있는 건 무엇일까요?', ok:'등딱지', wrong:['날개','꼬리'], yes:'맞아요! 바다거북 등에 등딱지가 있어요.'},
+        B:{q:'바다거북의 등딱지는 어떤가요?', ok:'단단해요', wrong:['말랑말랑해요','물렁물렁해요'], yes:'맞아요! 등딱지는 단단해요.'},
+        C:{q:'바다거북은 단단한 등딱지로 무엇을 할까요?', ok:'몸을 지켜요', wrong:['하늘을 날아요','소리를 들어요'], yes:'맞아요! 단단한 등딱지가 바다거북의 몸을 지켜 줘요.'}
+      }}],
+    others:[{name:'머리', shape:{t:'ellipse', cx:.62, cy:.39, rx:.075, ry:.08}},
+            {name:'앞발', shape:{t:'ellipse', cx:.43, cy:.15, rx:.07, ry:.15}}],
+    D:{q:'바다거북이 무엇을 하고 있을까요?', model:'바다거북이 바다에서 헤엄치고 있어요.'}
+  },
+  elephant: { who:'코끼리', W:500, H:374,
+    parts:[{ id:'trunk', name:'코', ready:true,
+      shape:{t:'poly', pts:[[.11,.42],[.2,.44],[.19,.6],[.17,.99],[.08,.99],[.085,.6]]},
+      zoom:{x:0, y:.3, w:.3, h:.7},
+      findQ:'코끼리 코가 어디 있을까요?',
+      featureSay:'코끼리 코는 아주 길어요.', sentence:'코끼리는 긴 코로 물을 마셔요.',
+      quiz:{
+        A:{q:'코끼리 얼굴에서 길게 늘어진 건 무엇일까요?', ok:'코', wrong:['꼬리','날개'], yes:'맞아요! 코끼리는 코가 길어요.'},
+        B:{q:'코끼리의 코는 어떤가요?', ok:'길어요', wrong:['짧아요','동그래요'], yes:'맞아요! 코끼리 코는 아주 길어요.'},
+        C:{q:'코끼리가 긴 코로 무엇을 할까요?', ok:'물을 마셔요', wrong:['하늘을 날아요','알을 낳아요'], yes:'맞아요! 코끼리는 긴 코로 물을 마셔요.'}
+      }}],
+    others:[{name:'귀', shape:{t:'ellipse', cx:.43, cy:.43, rx:.1, ry:.2}},
+            {name:'상아', shape:{t:'poly', pts:[[0,.7],[.16,.6],[.17,.64],[.02,.76]]}},
+            {name:'다리', shape:{t:'ellipse', cx:.6, cy:.85, rx:.09, ry:.15}}],
+    D:{q:'코끼리가 무엇을 하고 있을까요?', model:'코끼리가 풀숲에 서 있어요.'}
+  },
+  giraffe: { who:'기린', W:496, H:500,
+    parts:[{ id:'neck', name:'목', ready:true,
+      shape:{t:'poly', pts:[[.1,.15],[.14,.1],[.3,.16],[.5,.23],[.5,.34],[.4,.36],[.28,.27],[.12,.2]]},
+      zoom:{x:0, y:0, w:.56, h:.42},
+      findQ:'기린 목이 어디 있을까요?',
+      featureSay:'기린 목은 아주 길어요.', sentence:'기린은 목을 뻗어 나뭇잎을 먹어요.',
+      quiz:{
+        A:{q:'기린의 머리와 몸 사이를 길게 이어 주는 건 무엇일까요?', ok:'목', wrong:['꼬리','날개'], yes:'맞아요! 기린은 목이 아주 길어요.'},
+        B:{q:'기린의 목은 어떤가요?', ok:'길어요', wrong:['짧아요','동그래요'], yes:'맞아요! 기린 목은 아주 길어요.'},
+        C:{q:'기린은 긴 목으로 무엇을 할까요?', ok:'높은 나무의 나뭇잎을 먹어요', wrong:['땅을 파요','물속에서 헤엄쳐요'], yes:'맞아요! 기린은 목을 뻗어 나뭇잎을 먹어요.'}
+      }}],
+    others:[{name:'머리', shape:{t:'ellipse', cx:.1, cy:.09, rx:.06, ry:.07}},
+            {name:'다리', shape:{t:'ellipse', cx:.46, cy:.75, rx:.05, ry:.18}},
+            {name:'다리', shape:{t:'ellipse', cx:.74, cy:.75, rx:.06, ry:.18}},
+            {name:'꼬리', shape:{t:'ellipse', cx:.88, cy:.53, rx:.04, ry:.12}}],
+    D:{q:'기린이 무엇을 하고 있을까요?', model:'기린이 땅 위에 서 있어요.'}
+  },
+  rabbit: { who:'토끼', W:400, H:500,
+    parts:[{ id:'ears', name:'귀', ready:true,
+      shape:{t:'poly', pts:[[.37,.15],[.42,.12],[.47,.15],[.5,.12],[.54,.14],[.54,.3],[.4,.32],[.36,.22]]},
+      zoom:{x:.28, y:.08, w:.38, h:.3},
+      findQ:'토끼 귀가 어디 있을까요?',
+      featureSay:'토끼 귀는 길쭉해요.', sentence:'토끼는 긴 귀로 소리를 들어요.',
+      quiz:{
+        A:{q:'토끼 머리 위에 쫑긋 솟은 건 무엇일까요?', ok:'귀', wrong:['꼬리','날개'], yes:'맞아요! 토끼 머리 위에 긴 귀가 있어요.'},
+        B:{q:'토끼의 귀는 어떤가요?', ok:'길어요', wrong:['짧아요','동그래요'], yes:'맞아요! 토끼 귀는 길쭉해요.'},
+        C:{q:'토끼는 긴 귀로 무엇을 할까요?', ok:'소리를 들어요', wrong:['음식을 먹어요','하늘을 날아요'], yes:'맞아요! 토끼는 긴 귀로 소리를 잘 들어요.'}
+      }}],
+    others:[{name:'몸', shape:{t:'ellipse', cx:.38, cy:.65, rx:.2, ry:.2}},
+            {name:'발', shape:{t:'ellipse', cx:.46, cy:.84, rx:.1, ry:.05}},
+            {name:'눈', shape:{t:'ellipse', cx:.53, cy:.365, rx:.035, ry:.03}},
+            {name:'코', shape:{t:'ellipse', cx:.65, cy:.46, rx:.03, ry:.03}}],
+    D:{q:'토끼가 무엇을 하고 있을까요?', model:'토끼가 풀밭에 앉아 있어요.'}
+  },
+  kangaroo: { who:'캥거루', W:419, H:409,
+    parts:[{ id:'pouch', name:'주머니', ready:true, owner:'엄마 캥거루',
+      shape:{t:'ellipse', cx:.285, cy:.72, rx:.12, ry:.12},
+      zoom:{x:.12, y:.52, w:.34, h:.4},
+      findQ:'엄마 캥거루의 주머니가 어디 있을까요?',
+      featureSay:'주머니는 아기 캥거루를 보호해요.', sentence:'엄마 캥거루는 주머니에 아기를 넣어요.',
+      quiz:{
+        A:{q:'엄마 캥거루 배에 있는 건 무엇일까요?', ok:'주머니', wrong:['날개','등딱지'], yes:'맞아요! 엄마 캥거루 배에 주머니가 있어요.'},
+        B:{q:'엄마 캥거루 주머니 안에는 누가 있을까요?', ok:'아기 캥거루', wrong:['물고기','새'], yes:'맞아요! 주머니 안에 아기 캥거루가 있어요.'},
+        C:{q:'엄마 캥거루는 주머니로 무엇을 할까요?', ok:'아기를 보호해요', wrong:['하늘을 날아요','물을 마셔요'], yes:'맞아요! 엄마 캥거루는 주머니에 아기를 넣어 보호해요.'}
+      }}],
+    others:[{name:'귀', shape:{t:'ellipse', cx:.33, cy:.1, rx:.08, ry:.05}},
+            {name:'꼬리', shape:{t:'poly', pts:[[.42,.84],[.6,.86],[.92,.88],[.92,.92],[.6,.93],[.45,.92]]}}],
+    D:{q:'아기 캥거루가 무엇을 하고 있을까요?', model:'아기 캥거루가 엄마 주머니에서 얼굴을 내밀고 있어요.'}
+  }
+};
+/* 틀린 보기를 눌렀을 때 짧게 알려주는 말 (부정적인 소리 없이) */
+const WORD_INFO = {
+  '날개':'날개는 새가 하늘을 날 때 쓰는 거야.', '꼬리':'꼬리는 몸 뒤쪽 끝에 있어.', '등딱지':'등딱지는 거북이 등에 있는 단단한 거야.',
+  '말랑말랑해요':'말랑말랑한 건 꾹 누르면 쑥 들어가.', '물렁물렁해요':'물렁물렁한 건 꾹 누르면 들어가.',
+  '짧아요':'짧은 건 길이가 조금이야.', '동그래요':'동그란 건 공처럼 둥근 거야.',
+  '하늘을 날아요':'하늘을 나는 건 새나 비행기야.', '소리를 들어요':'소리는 귀로 들어.', '알을 낳아요':'알을 낳는 건 닭 같은 새야.',
+  '땅을 파요':'땅은 발이나 삽으로 파.', '물속에서 헤엄쳐요':'물속에서 헤엄치는 건 물고기야.', '음식을 먹어요':'음식은 입으로 먹어.',
+  '물을 마셔요':'물은 입으로 마셔.', '물고기':'물고기는 물속에 살아.', '새':'새는 하늘을 날아.'
+};
+const QUIZ_TYPES = [['A','🏷️','이름 알기'],['B','✋','어떤지 알기'],['C','⚙️','하는 일 알기'],['D','🗣️','문장으로 말하기']];
+
+
 /* ---------- 사는 곳 그림 ---------- */
 function habitat(key, w=160, h=110){
   if (HAB_PHOTO[key]) return `<img class="hab" src="${HAB_PHOTO[key]}" alt="${HOMES[key].name} 사진">`;
@@ -265,7 +407,7 @@ function habitat(key, w=160, h=110){
 
 /* ---------- 저장 (이 아이패드에만) ---------- */
 const KEY = 'animalExplorer.v1';
-let store = {name:'토리', stickers:{}, log:{}, autoRead:true, nOpts:2, voiceURI:''};
+let store = {name:'토리', stickers:{}, log:{}, autoRead:true, nOpts:2, voiceURI:'', textMode:'text', body:{}};
 try{ const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) store = Object.assign(store, s); }catch(e){}
 function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
 
@@ -591,7 +733,7 @@ function renderMap(){
       ${[['land','🌳 땅에 사는 동물'],['sea','🌊 바다에 사는 동물']].map(([z,title]) => `<h2 class="zone">${title}</h2>
       <div class="grid">
         ${A.filter(a => (a.zone||'land') === z).map(a => `<button class="card ${store.stickers[a.id]?'got':''}" data-id="${a.id}" aria-label="${a.name}">
-          ${store.stickers[a.id] ? '<span class="badge" aria-hidden="true">⭐</span>' : ''}
+          ${store.stickers[a.id] ? '<span class="badge" aria-hidden="true">⭐</span>' : ''}${BODY[a.id] ? '<span class="badge2" title="몸 탐험" aria-hidden="true">🔍</span>' : ''}
           <img src="${IMG(a.id)}" alt="" loading="lazy">
           <span class="nm">${a.name}</span>
         </button>`).join('')}
@@ -623,6 +765,7 @@ function renderMeet(){
       <div class="factText" role="status">${last ? esc(last[3]) : `세 개를 하나씩 눌러서 ${esc(cur.name)}${hasBatchim(cur.name)?'을':'를'} 알아봐요!`}</div>
       <div class="controls">
         <button class="btn btn-sun" id="again">🔊 다시 듣기</button>
+        ${BODY[cur.id] ? `<button class="btn btn-body" id="bodyBtn">🔍 몸 탐험</button>` : ''}
         <button class="btn btn-next ${all?'pulse':''}" id="next" ${all?'':'disabled'}>퀴즈 하러 가기 ▶</button>
       </div>
     </div>`;
@@ -633,6 +776,7 @@ function renderMeet(){
   }));
   document.getElementById('again').addEventListener('click', () => speak(last ? last[3] : `${cur.name}. ${cur.sound}`, true));
   document.getElementById('next').addEventListener('click', () => goQ('home'));
+  const bb = document.getElementById('bodyBtn'); if (bb) bb.addEventListener('click', () => startBody(cur.id));
   bindTop();
 }
 
@@ -740,6 +884,319 @@ function giveSticker(){
   bindTop();
 }
 
+/* ---------- 몸 탐험 ---------- */
+let body = null;   // {aid, pi, mode, quiz, ...}
+function iy(w){ return hasBatchim(w) ? '이야' : '야'; }
+function textOn(){ return store.textMode !== 'voice' || (body && body.reveal) || !hasTTS; }
+function bpart(){ return BODY[body.aid].parts[body.pi]; }
+function brec(){ store.body = store.body || {}; return (store.body[body.aid] = store.body[body.aid] || {}); }
+function shapeSVG(s, W, H, attrs){
+  if (s.t === 'ellipse') return `<ellipse cx="${s.cx*W}" cy="${s.cy*H}" rx="${s.rx*W}" ry="${s.ry*H}" ${attrs}/>`;
+  return `<polygon points="${s.pts.map(p => (p[0]*W).toFixed(1)+','+(p[1]*H).toFixed(1)).join(' ')}" ${attrs}/>`;
+}
+function shapeTop(s){ // 이름표를 붙일 위치 (모양 위쪽 가운데)
+  if (s.t === 'ellipse') return [s.cx, Math.max(.06, s.cy - s.ry - .03)];
+  const xs = s.pts.map(p => p[0]), ys = s.pts.map(p => p[1]);
+  return [(Math.min(...xs) + Math.max(...xs)) / 2, Math.max(.06, Math.min(...ys) - .03)];
+}
+/* 사진 + 터치 영역을 한 SVG에 넣어서 화면 크기가 바뀌어도 좌표가 그대로 맞아요 */
+function bodySVG(o){
+  const B = BODY[body.aid], W = B.W, H = B.H, p = bpart();
+  const vb = o.vb || [0, 0, W, H];
+  const pad = Math.round(W * .025);   // 손가락으로 누르기 쉽게 테두리를 조금 넓게
+  const hit = `fill="transparent" stroke="transparent" stroke-width="${pad}" style="pointer-events:all;cursor:pointer"`;
+  let s = `<svg class="bodysvg" id="bodySvg" viewBox="${vb.join(' ')}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(B.who)} 사진">
+    <defs><mask id="hl"><rect width="${W}" height="${H}" fill="white"/>${shapeSVG(p.shape, W, H, 'fill="black"')}</mask></defs>
+    <image href="${IMG(body.aid)}" x="0" y="0" width="${W}" height="${H}"/>`;
+  if (o.touch){
+    s += `<rect class="hs-miss" x="0" y="0" width="${W}" height="${H}" fill="transparent" style="pointer-events:all"/>`;
+    B.others.forEach((ot, i) => { s += shapeSVG(ot.shape, W, H, `class="hs" data-other="${i}" ${hit}`); });
+    s += shapeSVG(p.shape, W, H, `class="hs" data-target="1" ${hit}`);
+  }
+  if (o.highlight){
+    s += `<rect width="${W}" height="${H}" fill="rgba(0,0,0,.45)" mask="url(#hl)" style="pointer-events:none"/>`;
+    s += shapeSVG(p.shape, W, H, `fill="none" stroke="#ffd23f" stroke-width="${Math.round(W*.012)}" class="glow" style="pointer-events:none"`);
+    if (o.label){
+      const [lx, ly] = shapeTop(p.shape);
+      s += `<text x="${lx*W}" y="${ly*H}" text-anchor="middle" class="plabel" font-size="${Math.round(W*.07)}">${esc(p.name)}</text>`;
+    }
+  }
+  if (o.marker){ // 틀린 곳을 눌렀을 때 그 자리에 작은 이름표
+    const m = o.marker;
+    s += `<g style="pointer-events:none"><circle cx="${m.x}" cy="${m.y}" r="${W*.02}" fill="#fff" stroke="#2f7fc1" stroke-width="${W*.006}"/>
+      ${m.name ? `<text x="${m.x}" y="${m.y - W*.035}" text-anchor="middle" class="plabel small" font-size="${Math.round(W*.055)}">${esc(m.name)}</text>` : ''}</g>`;
+  }
+  return s + '</svg>';
+}
+function bodyTop(){
+  return `<div class="topbar">
+    <button class="pill" id="toMap">🗺️ 탐험 지도</button>
+    ${body.mode !== 'hub' ? `<button class="pill" id="toHub">🔍 ${esc(BODY[body.aid].who)} 몸 탐험</button>` : ''}
+  </div>`;
+}
+function bindBodyTop(){
+  bindTop();
+  const h = document.getElementById('toHub');
+  if (h) h.addEventListener('click', () => { stopSpeech(); bodyGo('hub'); });
+}
+/* 글자 숨기기 모드에서: 글자 대신 듣기 버튼 + 보호자용 '글자 보기' */
+function sayBlock(text, speakText){
+  if (textOn()) return `<p class="say">${esc(text)}</p>`;
+  return `<p class="say hiddenTxt">🔊 잘 들어 보세요</p>`;
+}
+function revealBtn(){
+  if (textOn()) return '';
+  return `<button class="btn mini" type="button" id="revealBtn">👀 글자 보기</button>`;
+}
+function bindReveal(rerender){
+  const r = document.getElementById('revealBtn');
+  if (r) r.addEventListener('click', () => { body.reveal = true; rerender(); });
+}
+function ttsNote(){
+  return hasTTS ? '' : `<p class="note">이 기기에서는 읽어주기가 안 돼서 글자로 보여 드려요.</p>`;
+}
+function praise(msg){
+  const d = document.createElement('div');
+  d.className = 'praise'; d.setAttribute('role','status');
+  d.innerHTML = `${avatarSVG()}<span>${esc(msg || '잘했어! 최고야!')}</span>`;
+  document.body.appendChild(d);
+  setTimeout(() => d.remove(), 2200);
+  stars(20);
+}
+
+function startBody(aid){
+  body = {aid, pi:0, mode:'hub', reveal:false};
+  step = 'body';
+  render();
+  speak(`${BODY[aid].who} 몸 탐험! 1, 2, 3 중에서 골라 봐요.`);
+}
+function bodyGo(mode, extra){
+  body = Object.assign({aid: body.aid, pi: body.pi}, {mode, reveal:false}, extra || {});
+  render();
+}
+function renderBody(){
+  ({hub:renderBodyHub, find:renderFind, zoom:renderZoom, say:renderSay, quiz:renderBQuiz, act:renderAct})[body.mode]();
+}
+
+/* 허브: 숫자 1·2·3 탐험 + 어휘 퀴즈 고르기 */
+function renderBodyHub(){
+  const B = BODY[body.aid], p = bpart(), r = brec();
+  const done = {find:!!r.find, zoom:!!r.zoom, say:!!r.say};
+  const next = !done.find ? 'find' : !done.zoom ? 'zoom' : !done.say ? 'say' : '';
+  const steps = [['find','1','👆','찾기'],['zoom','2','🔍','크게 보기'],['say','3','🗣️','말하기']];
+  const qdone = {A:!!r.A, B:!!r.B, C:!!r.C, D:!!r.D};
+  app.innerHTML = `${bodyTop()}
+    <div class="panel">
+      <div class="hubhead"><img src="${IMG(body.aid)}" alt=""><div><h1>${esc(B.who)} 몸 탐험</h1>
+        <p class="small">${textOn() ? `오늘 알아볼 곳: <b>${esc(p.name)}</b>` : '숫자를 골라 탐험을 시작해요'}</p></div></div>
+      ${B.parts.length > 1 ? `<div class="chips">${B.parts.map((x,i) => `<button class="chip2 ${i===body.pi?'on':''}" data-pi="${i}" ${x.ready?'':'disabled'}>${textOn()?esc(x.name):(i+1)}${x.ready?'':' (준비 중)'}</button>`).join('')}</div>` : ''}
+      <div class="nums">
+        ${steps.map(([m,n,ic,t]) => `<button class="num ${done[m]?'done':''} ${m===next?'pulse':''}" data-m="${m}">
+          <span class="n">${n}</span><span class="ic" aria-hidden="true">${ic}</span><span class="t">${t}</span>${done[m]?'<span class="st">⭐</span>':''}</button>`).join('')}
+      </div>
+      <h2 class="zone">어휘 퀴즈 <span class="small">하고 싶은 것만 골라요</span></h2>
+      <div class="qtypes">
+        ${QUIZ_TYPES.map(([k,ic,t]) => `<button class="qt ${qdone[k]?'done':''}" data-q="${k}"><span class="ic" aria-hidden="true">${ic}</span>${t}${qdone[k]?' ⭐':''}</button>`).join('')}
+      </div>
+    </div>`;
+  app.querySelectorAll('.num').forEach(b => b.addEventListener('click', () => {
+    const m = b.dataset.m;
+    if (m === 'find'){ bodyGo('find', {wrong:0}); speak(bpart().findQ); }
+    else if (m === 'zoom'){ bodyGo('zoom'); speak(`${bpart().name}! ${bpart().featureSay}`); }
+    else { bodyGo('say'); speak(`따라 말해 봐요. ${bpart().sentence}`); }
+  }));
+  app.querySelectorAll('.qt').forEach(b => b.addEventListener('click', () => startBQuiz(b.dataset.q)));
+  app.querySelectorAll('.chip2').forEach(b => b.addEventListener('click', () => { body.pi = +b.dataset.pi; renderBodyHub(); }));
+  bindBodyTop();
+}
+
+/* 1번: 부분 찾기 */
+function renderFind(){
+  const p = bpart(), solved = !!body.solved;
+  app.innerHTML = `${bodyTop()}
+    <div class="panel">
+      <div class="qtext"><span class="chip">1 · 찾기</span>${solved ? `<p class="say">맞아! 이건 ${esc(BODY[body.aid].who)}의 ${esc(p.name)}${iy(p.name)}!</p>` : sayBlock(p.findQ)}</div>
+      <div class="bodywrap">${bodySVG({touch:!solved, highlight:solved, label:solved && textOn(), marker:body.marker})}</div>
+      ${body.msg && !solved ? `<div class="feedback fb-hint" role="status">${textOn() ? esc(body.msg) : '🔊 다시 찾아볼까요?'}</div>` : ''}
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 다시 듣기</button>${revealBtn()}
+        <button class="btn btn-next ${solved?'pulse':''}" id="next" ${solved?'':'disabled'}>2 · 크게 보기 ▶</button>
+      </div>
+    </div>`;
+  const svg = document.getElementById('bodySvg');
+  if (!solved) svg.addEventListener('click', ev => {
+    const t = ev.target, B = BODY[body.aid];
+    const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY;
+    let loc = null; try{ loc = pt.matrixTransform(svg.getScreenCTM().inverse()); }catch(e){}
+    if (t.dataset && t.dataset.target){
+      body.solved = true; body.marker = null;
+      const r = brec(); r.find = (body.wrong || 0) + 1; r.at = today(); save();
+      renderFind(); praise('맞아!'); speak(`맞아! 이건 ${p.owner || B.who}의 ${p.name}${iy(p.name)}!`);
+      return;
+    }
+    body.wrong = (body.wrong || 0) + 1;
+    const other = t.dataset && t.dataset.other != null ? B.others[+t.dataset.other] : null;
+    body.marker = loc ? {x: loc.x, y: loc.y, name: other ? other.name : ''} : null;
+    body.msg = other ? `이건 ${other.name}${iy(other.name)}. ${p.name}${hasBatchim(p.name)?'은':'는'} 어디 있을까?`
+                     : `거기는 ${p.name}${hasBatchim(p.name)?'이':'가'} 아니야. ${p.name}${hasBatchim(p.name)?'은':'는'} 어디 있을까?`;
+    renderFind(); speak(body.msg);
+  });
+  document.getElementById('again').addEventListener('click', () => speak(solved ? `맞아! 이건 ${p.owner || BODY[body.aid].who}의 ${p.name}${iy(p.name)}!` : (body.msg || p.findQ), true));
+  document.getElementById('next').addEventListener('click', () => { if (!body.solved) return; bodyGo('zoom'); speak(`${p.name}! ${p.featureSay}`); });
+  bindReveal(renderFind); bindBodyTop();
+}
+
+/* 2번: 같은 사진에서 그 부분을 크게 */
+function renderZoom(){
+  const B = BODY[body.aid], p = bpart(), z = p.zoom;
+  const target = [z.x*B.W, z.y*B.H, z.w*B.W, z.h*B.H];
+  app.innerHTML = `${bodyTop()}
+    <div class="panel">
+      <div class="qtext"><span class="chip">2 · 크게 보기</span>${textOn() ? `<p class="say"><b class="big">${esc(p.name)}</b> ${esc(p.featureSay)}</p>` : sayBlock('')}</div>
+      <div class="bodywrap">${bodySVG({vb: body.zoomed ? target : [0,0,B.W,B.H]})}</div>
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 다시 듣기</button>${revealBtn()}
+        <button class="btn btn-next pulse" id="next">3 · 말하기 ▶</button>
+      </div>
+    </div>`;
+  if (!body.zoomed){
+    body.zoomed = true;
+    const r = brec(); r.zoom = 1; r.at = today(); save();
+    animateVB(document.getElementById('bodySvg'), [0,0,B.W,B.H], target, reduceMotion ? 0 : 1100);
+  }
+  document.getElementById('again').addEventListener('click', () => speak(`${p.name}! ${p.featureSay}`, true));
+  document.getElementById('next').addEventListener('click', () => { bodyGo('say'); speak(`따라 말해 봐요. ${p.sentence}`); });
+  bindReveal(renderZoom); bindBodyTop();
+}
+function animateVB(svg, from, to, ms){
+  if (!svg) return;
+  const final = () => svg.setAttribute('viewBox', to.join(' '));
+  if (!ms){ final(); return; }
+  let t0 = null, done = false;
+  const ease = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+  function tick(now){
+    if (done) return;
+    if (t0 === null) t0 = now;                       // 첫 프레임 시간을 기준으로
+    const k = ease(Math.max(0, Math.min(1, (now - t0) / ms)));
+    svg.setAttribute('viewBox', from.map((v,i) => (v + (to[i]-v)*k).toFixed(1)).join(' '));
+    if (k < 1) requestAnimationFrame(tick); else done = true;
+  }
+  requestAnimationFrame(tick);
+  setTimeout(() => { done = true; final(); }, ms + 150);   // 화면 갱신이 멈춰도 반드시 확대된 모습으로 끝나게
+}
+
+/* 3번 / D: 문장으로 말하기 (음성인식 없이 보호자가 확인) */
+function sayButtons(){
+  return `<div class="saybtns">
+    <button class="btn btn-next big" id="saidFull">🗣️ 말했어요!</button>
+    <button class="btn" id="saidPart">💬 한 단어나 일부만 말했어요</button>
+  </div>`;
+}
+function bindSay(onDone){
+  document.getElementById('saidFull').addEventListener('click', () => { body.reveal = true; onDone('full'); praise('잘했어! 최고야!'); speak(`잘했어! 최고야! ${body.sentenceNow}`, true); });
+  document.getElementById('saidPart').addEventListener('click', () => { body.reveal = true; onDone('part'); praise('잘했어! 좋아!'); speak(`잘했어! 같이 말해 볼까? ${body.sentenceNow}`, true); });
+}
+function renderSay(){
+  const p = bpart();
+  body.sentenceNow = p.sentence;
+  const done = !!body.done;
+  app.innerHTML = `${bodyTop()}
+    <div class="panel">
+      <div class="qtext"><span class="chip">3 · 말하기</span>${textOn() || done ? `<p class="say">${esc(p.sentence)}</p>` : sayBlock('')}
+        <p class="small">문장을 듣고 따라 말해 봐요. 보호자가 듣고 아래 버튼을 눌러 주세요.</p></div>
+      <div class="bodywrap">${bodySVG({highlight:true, label:textOn() || done})}</div>
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 문장 듣기</button>${done ? '' : revealBtn()}
+        ${done ? `<button class="btn btn-next pulse" id="toHub2">🔍 몸 탐험으로 ▶</button>` : ''}
+      </div>
+      ${done ? '' : sayButtons()}
+    </div>`;
+  document.getElementById('again').addEventListener('click', () => speak(p.sentence, true));
+  if (done) document.getElementById('toHub2').addEventListener('click', () => bodyGo('hub'));
+  else bindSay(level => { const r = brec(); r.say = level; r.at = today(); save(); body.done = true; renderSay(); });
+  bindReveal(renderSay); bindBodyTop();
+}
+function renderAct(){
+  const B = BODY[body.aid];
+  body.sentenceNow = B.D.model;
+  const done = !!body.done;
+  app.innerHTML = `${bodyTop()}
+    <div class="panel">
+      <div class="qtext"><span class="chip">🗣️ 문장으로 말하기</span>${textOn() ? `<p class="say">${esc(B.D.q)}</p>` : sayBlock('')}
+        <p class="small">사진을 보고 아이가 먼저 말해요. 어려워하면 '예시 문장 듣기'를 눌러 주세요.</p></div>
+      <div class="bodywrap">${bodySVG({})}</div>
+      ${done ? `<div class="feedback fb-good">${esc(B.D.model)}</div>` : ''}
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 질문 듣기</button>
+        <button class="btn" id="model">💡 예시 문장 듣기</button>
+        ${done ? `<button class="btn btn-next pulse" id="toHub2">🔍 몸 탐험으로 ▶</button>` : revealBtn()}
+      </div>
+      ${done ? '' : sayButtons()}
+      ${body.showModel && !done && textOn() ? `<div class="feedback fb-hint">${esc(B.D.model)}</div>` : ''}
+    </div>`;
+  document.getElementById('again').addEventListener('click', () => speak(B.D.q, true));
+  document.getElementById('model').addEventListener('click', () => { body.showModel = true; renderAct(); speak(B.D.model, true); });
+  if (done) document.getElementById('toHub2').addEventListener('click', () => bodyGo('hub'));
+  else bindSay(level => { const r = brec(); r.D = level; r.at = today(); save(); body.done = true; renderAct(); });
+  bindReveal(renderAct); bindBodyTop();
+}
+
+/* 어휘 퀴즈 A·B·C: 숫자 보기 + 각 보기 듣기 버튼 */
+function startBQuiz(k){
+  if (k === 'D'){ bodyGo('act'); speak(BODY[body.aid].D.q); return; }
+  const Q = bpart().quiz[k];
+  const opts = shuffle([{w:Q.ok, ok:true}, ...shuffle(Q.wrong).slice(0, store.nOpts - 1).map(w => ({w}))]);
+  bodyGo('quiz', {qk:k, opts, wrongs:[], solved:false, tries:0});
+  speak(Q.q);
+}
+function renderBQuiz(){
+  const Q = bpart().quiz[body.qk];
+  const label = QUIZ_TYPES.find(x => x[0] === body.qk);
+  const show = textOn() || body.solved;
+  app.innerHTML = `${bodyTop()}
+    <div class="panel">
+      <div class="qtext"><span class="chip">${label[1]} ${label[2]}</span>${textOn() ? `<p class="say">${esc(Q.q)}</p>` : sayBlock('')}</div>
+      <div class="bodywrap small">${bodySVG({highlight: true, label: body.solved})}</div>
+      <div class="opts n${body.opts.length} bopts">
+        ${body.opts.map((o,i) => {
+          const wrong = body.wrongs.includes(i), right = body.solved && o.ok;
+          return `<div class="bopt ${right?'right':''} ${wrong?'tried':''}">
+            <button class="pick" data-i="${i}" ${body.solved?'disabled':''}><span class="n">${i+1}</span><span class="w">${show || wrong ? esc(o.w) : '● ● ●'}</span></button>
+            <button class="listen" data-i="${i}" aria-label="${i+1}번 듣기">🔊 ${i+1}번 듣기</button>
+          </div>`; }).join('')}
+      </div>
+      ${body.solved ? `<div class="feedback fb-good" role="status">${esc(Q.yes)}</div>` : body.msg ? `<div class="feedback fb-hint" role="status">${textOn() ? esc(body.msg) : '🔊 다시 골라 볼까요?'}</div>` : ''}
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 질문 듣기</button>${body.solved ? '' : revealBtn()}
+        <button class="btn btn-next ${body.solved?'pulse':''}" id="next" ${body.solved?'':'disabled'}>🔍 몸 탐험으로 ▶</button>
+      </div>
+    </div>`;
+  app.querySelectorAll('.listen').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.i; speak(`${i+1}번, ${body.opts[i].w}`, true); }));
+  app.querySelectorAll('.pick').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, o = body.opts[i];
+    if (body.solved) return;
+    body.tries++;
+    if (o.ok){
+      body.solved = true; body.msg = '';
+      const r = brec(); r[body.qk] = body.tries; r.at = today(); save();
+      renderBQuiz(); praise('맞아요!'); speak(Q.yes);
+    } else {
+      if (!body.wrongs.includes(i)) body.wrongs.push(i);
+      body.msg = (/요$/.test(o.w) ? `${WORD_INFO[o.w] || ''} 다시 골라 볼까?` : `그건 ${o.w}${iy(o.w)}. ${WORD_INFO[o.w] || ''} 다시 골라 볼까?`).replace(/\s+/g,' ').trim();
+      renderBQuiz(); speak(body.msg);
+    }
+  }));
+  document.getElementById('again').addEventListener('click', () => speak(body.solved ? Q.yes : Q.q, true));
+  document.getElementById('next').addEventListener('click', () => { if (body.solved) bodyGo('hub'); });
+  bindReveal(renderBQuiz); bindBodyTop();
+}
+function today(){ return new Date().toISOString().slice(0,10); }
+
 /* ---------- 부모님 ---------- */
 function parentHTML(){
   const tag = n => n===0 ? '<span class="tag t0">-</span>' : n===1 ? '<span class="tag t1">한 번에</span>' : n===2 ? '<span class="tag t2">두 번째</span>' : `<span class="tag t3">${n}번째</span>`;
@@ -752,6 +1209,9 @@ function parentHTML(){
       <label class="check" for="readIn"><input type="checkbox" id="readIn" ${store.autoRead?'checked':''}> 화면마다 소리 내어 읽어주기</label>
       <div class="field">보기 개수
         <div class="seg"><button type="button" data-n="2" aria-pressed="${store.nOpts===2}">2개 (쉬움)</button><button type="button" data-n="3" aria-pressed="${store.nOpts===3}">3개</button></div></div>
+      <div class="field">몸 탐험 글자 표시
+        <div class="seg"><button type="button" data-tm="text" aria-pressed="${store.textMode!=='voice'}">글자 표시</button><button type="button" data-tm="voice" aria-pressed="${store.textMode==='voice'}">그림·음성 중심</button></div>
+        <span class="small">그림·음성 중심: 정답 단어를 처음에는 숨기고 소리로 들려줘요. 숫자는 항상 보여요. 소리가 안 나면 '글자 보기'로 볼 수 있어요.</span></div>
       <label class="field" for="voiceSel">목소리
         <select id="voiceSel"><option value="">자동 선택</option></select></label>
       <div class="testrow"><button class="btn btn-sun" type="button" id="soundTestBtn">🔊 소리 테스트</button><button class="btn" type="button" id="beepBtn">🔔 삐 소리 테스트</button><button class="btn" type="button" id="plainBtn">🗣️ 기본 목소리로 테스트</button></div>
@@ -759,9 +1219,20 @@ function parentHTML(){
     </div>
     <p class="small">각 동물의 가장 최근 탐험 기록이에요. 보기가 두 개면 우연히 맞힐 수도 있으니, 맞힌 뒤 "왜 그렇게 생각했어?" 하고 물어봐 주세요. 기록과 스티커는 이 기기에만 저장돼요.</p>
     ${rows ? `<table><thead><tr><th>동물</th><th>사는 곳</th><th>먹이</th><th>누구?</th></tr></thead><tbody>${rows}</tbody></table>` : '<p class="small">아직 기록이 없어요.</p>'}
+    ${bodyRecordHTML()}
     <p class="small">사진 출처: <a href="../CREDITS.md">동물 사진</a> · <a href="../assets/images/habitats/CREDITS.md">사는 곳 사진</a></p>
     <p><button class="btn" type="button" id="resetBtn">스티커와 기록 지우기</button> <span class="small" id="resetMsg"></span></p>
   </details>`;
+}
+function bodyRecordHTML(){
+  const ids = Object.keys(BODY).filter(id => store.body && store.body[id]);
+  if (!ids.length) return '<p class="small">몸 탐험 기록이 아직 없어요.</p>';
+  const tag = n => !n ? '<span class="tag t0">-</span>' : n===1 ? '<span class="tag t1">한 번에</span>' : n===2 ? '<span class="tag t2">두 번째</span>' : `<span class="tag t3">${n}번째</span>`;
+  const said = v => v === 'full' ? '<span class="tag t1">문장</span>' : v === 'part' ? '<span class="tag t2">단어·일부</span>' : '<span class="tag t0">-</span>';
+  const rows = ids.map(id => { const r = store.body[id];
+    return `<tr><td>${BODY[id].who}<br><span class="small">${r.at||''}</span></td><td>${tag(r.find)}</td><td>${said(r.say)}</td><td>${tag(r.A)}</td><td>${tag(r.B)}</td><td>${tag(r.C)}</td><td>${said(r.D)}</td></tr>`; }).join('');
+  return `<p class="small"><b>몸 탐험 기록</b> (찾기는 몇 번째에 찾았는지, 말하기는 보호자가 누른 버튼)</p>
+    <div style="overflow-x:auto"><table><thead><tr><th>동물</th><th>1 찾기</th><th>3 말하기</th><th>이름</th><th>어떤지</th><th>하는 일</th><th>문장</th></tr></thead><tbody>${rows}</tbody></table></div>`;
 }
 let resetArmed = false;
 function bindParent(){
@@ -769,7 +1240,8 @@ function bindParent(){
   if (n) n.addEventListener('change', e => { store.name = e.target.value.trim() || '토리'; save(); renderMap(); });
   const r = document.getElementById('readIn');
   if (r) r.addEventListener('change', e => { store.autoRead = e.target.checked; save(); });
-  app.querySelectorAll('.seg button').forEach(b => b.addEventListener('click', () => { store.nOpts = +b.dataset.n; save(); renderMap(); app.querySelector('details.parent').open = true; }));
+  app.querySelectorAll('.seg button[data-tm]').forEach(b => b.addEventListener('click', () => { store.textMode = b.dataset.tm; save(); renderMap(); app.querySelector('details.parent').open = true; }));
+  app.querySelectorAll('.seg button[data-n]').forEach(b => b.addEventListener('click', () => { store.nOpts = +b.dataset.n; save(); renderMap(); app.querySelector('details.parent').open = true; }));
   const t = document.getElementById('soundTestBtn');
   if (t) t.addEventListener('click', soundTest);
   const bb = document.getElementById('beepBtn'); if (bb) bb.addEventListener('click', beepTest);
@@ -780,16 +1252,17 @@ function bindParent(){
   const rs = document.getElementById('resetBtn');
   if (rs) rs.addEventListener('click', () => {
     if (!resetArmed){ resetArmed = true; rs.textContent = '정말 지울까요? 한 번 더 누르면 지워져요'; return; }
-    store.stickers = {}; store.log = {}; save(); resetArmed = false; renderMap();
+    store.stickers = {}; store.log = {}; store.body = {}; save(); resetArmed = false; renderMap();
   });
 }
 
 function bindTop(){ const m = document.getElementById('toMap'); if (m) m.addEventListener('click', goMap); }
-function goMap(){ step = 'map'; cur = null; stopSpeech(); hideSoundFix(); render(); window.scrollTo({top:0}); }
+function goMap(){ step = 'map'; cur = null; body = null; stopSpeech(); hideSoundFix(); render(); window.scrollTo({top:0}); }
 function render(){
   if (step === 'map') renderMap();
   else if (step === 'meet') renderMeet();
   else if (step === 'sticker') {}
+  else if (step === 'body') renderBody();
   else renderQ();
   if (step !== 'map') window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
 }
