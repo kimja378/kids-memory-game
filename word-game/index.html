@@ -493,10 +493,15 @@ function getZoom(it, key){
   return {x: Math.min(Math.max(0, cx - w/2), 1 - w), y: Math.min(Math.max(0, cy - h/2), 1 - h), w, h};
 }
 function bbox(s){
+  if (s.t === 'multi'){   // 여러 곳(예: 앞바퀴와 뒷바퀴)을 한 부분으로
+    const bs = s.shapes.map(bbox), x = Math.min(...bs.map(b => b.x)), y = Math.min(...bs.map(b => b.y));
+    return {x, y, w: Math.max(...bs.map(b => b.x + b.w)) - x, h: Math.max(...bs.map(b => b.y + b.h)) - y};
+  }
   if (s.t === 'ellipse') return {x: s.cx - s.rx, y: s.cy - s.ry, w: s.rx*2, h: s.ry*2};
   return {x: s.x, y: s.y, w: s.w, h: s.h};
 }
 function shapeSVG(s, W, H, attrs){
+  if (s.t === 'multi') return s.shapes.map(x => shapeSVG(x, W, H, attrs)).join('');
   if (s.t === 'ellipse') return `<ellipse cx="${s.cx*W}" cy="${s.cy*H}" rx="${s.rx*W}" ry="${s.ry*H}" ${attrs}/>`;
   return `<rect x="${s.x*W}" y="${s.y*H}" width="${s.w*W}" height="${s.h*H}" rx="${Math.min(s.w*W, s.h*H)*.12}" ${attrs}/>`;
 }
