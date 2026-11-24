@@ -1,0 +1,1089 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>우리 아이 어휘 탐험대</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Jua&family=Gowun+Dodum&display=swap" rel="stylesheet">
+<style>
+:root{
+  /* 카테고리 → 사물 → 숫자 1·2·3·4 단계 + 퀴즈. 하늘색 바탕에 노란 버튼, 탈것 놀이터 느낌 */
+  --bg:#e6f1fb;
+  --paper:#fffefa;
+  --ink:#24323f;
+  --muted:#5e6d7a;
+  --accent:#2f7fc1;
+  --sun:#ffc63d;
+  --good:#2e9e62;
+  --line:#d3e0ec;
+  --display:'Jua','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  --body:'Gowun Dodum','Apple SD Gothic Neo','Malgun Gothic',sans-serif;
+  color-scheme:light;
+}
+*{box-sizing:border-box}
+html,body{margin:0}
+body{background:var(--bg);color:var(--ink);font-family:var(--body);-webkit-tap-highlight-color:transparent}
+.wrap{max-width:900px;margin:0 auto;padding:16px 16px 40px}
+button{font:inherit;color:inherit}
+.btn{font-family:var(--display);font-size:clamp(18px,3.8vw,22px);border:none;border-radius:999px;padding:12px 22px;cursor:pointer;background:#e4ebf2;color:var(--ink);min-height:52px}
+.btn:focus-visible,.card:focus-visible,.num:focus-visible,.qt:focus-visible,.pick:focus-visible,.listen:focus-visible,a:focus-visible,input:focus-visible,select:focus-visible{outline:4px solid var(--accent);outline-offset:3px}
+.btn-next{background:var(--accent);color:#fff;min-width:130px}
+.btn-next:disabled{background:#cfd8df;color:#738088;cursor:not-allowed}
+.btn-sun{background:var(--sun);color:#3d2c00}
+.btn.mini{font-size:16px;padding:8px 14px;min-height:44px}
+.btn.big{font-size:clamp(22px,4.6vw,28px);padding:16px 30px}
+.pulse{animation:pulse 1.2s ease-in-out infinite}
+.topbar{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:12px;flex-wrap:wrap}
+.pill{display:inline-flex;align-items:center;gap:6px;font-family:var(--display);font-size:19px;background:#fff;border-radius:999px;padding:10px 16px;text-decoration:none;color:var(--ink);box-shadow:0 3px 0 var(--line);border:none;cursor:pointer;min-height:48px}
+.panel{background:var(--paper);border-radius:26px;box-shadow:0 8px 26px rgba(30,60,90,.12);overflow:hidden}
+h1{font-family:var(--display);font-weight:400;font-size:clamp(28px,6vw,40px);margin:0;text-wrap:balance}
+h2.zone{font-family:var(--display);font-weight:400;font-size:clamp(20px,4vw,26px);margin:10px 20px 8px}
+.say{font-family:var(--display);font-size:clamp(22px,4.8vw,30px);line-height:1.5;margin:0;word-break:keep-all}
+.say .big{font-size:1.25em;color:#b35c00}
+.hiddenTxt{color:var(--muted)}
+.small{font-size:16px;color:var(--muted);line-height:1.6}
+.chip{display:inline-block;font-family:var(--display);font-size:16px;background:#fff0c2;color:#6b4c00;border-radius:999px;padding:3px 12px;margin-bottom:8px}
+.qtext{padding:18px 22px 8px}
+.controls{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:12px 18px 18px;flex-wrap:wrap}
+.note{margin:0 18px 10px;font-size:15px;color:#6e4e00;background:#fff3cf;border-radius:12px;padding:8px 12px;line-height:1.6}
+.feedback{margin:0 18px 8px;padding:12px 16px;border-radius:16px;font-family:var(--display);font-size:clamp(18px,4vw,23px);line-height:1.45;word-break:keep-all}
+.fb-good{background:#e5f6ec;color:#1b6640}
+.fb-hint{background:#fff3cf;color:#6e4e00}
+
+/* 첫 화면 */
+.hero{display:flex;align-items:center;gap:16px;padding:18px 22px}
+.avatar{width:96px;height:96px;flex:none}
+.count{font-family:var(--display);font-size:19px;color:#7a5a00;background:#fff3c4;border-radius:999px;padding:4px 14px;display:inline-block;margin-top:6px}
+.cats{display:grid;grid-template-columns:repeat(2,1fr);gap:14px;padding:6px 18px 20px}
+.cat{border:4px solid var(--line);background:#fff;border-radius:26px;padding:18px 10px;min-height:170px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;font-family:var(--display);font-size:clamp(20px,4.2vw,26px)}
+.cat .ic{font-size:clamp(52px,10vw,72px);line-height:1}
+.cat .cnt{font-size:16px;color:#7a5a00;background:#fff3c4;border-radius:999px;padding:2px 12px}
+.grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(170px,1fr));gap:14px;padding:4px 18px 20px}
+.card{position:relative;display:flex;flex-direction:column;align-items:center;gap:8px;background:#fff;border:4px solid var(--line);border-radius:24px;padding:12px 8px 14px;cursor:pointer}
+.card img{width:130px;height:130px;border-radius:20px;object-fit:cover}
+.card .ph{width:130px;height:130px;border-radius:20px;border:3px dashed #b9c7d4;display:flex;align-items:center;justify-content:center;text-align:center;font-size:15px;color:var(--muted);padding:8px}
+.card .nm{font-family:var(--display);font-size:22px}
+.card.got{border-color:#f2c94c;background:#fffaea}
+.badge{position:absolute;top:6px;right:8px;font-size:30px}
+
+/* 사물 학습 */
+.hubhead{display:flex;gap:14px;align-items:center;padding:18px 20px 6px}
+.hubhead img{width:90px;height:90px;border-radius:20px;object-fit:cover;border:4px solid #fff;box-shadow:0 2px 8px rgba(0,0,0,.15)}
+.parts{display:flex;gap:10px;flex-wrap:wrap;padding:6px 20px}
+.partbtn{font-family:var(--display);font-size:19px;border:3px solid var(--line);background:#fff;border-radius:999px;padding:8px 16px;min-height:48px;cursor:pointer}
+.partbtn.on{border-color:var(--accent);background:#e3f0fb}
+.nums{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding:12px 18px 6px}
+.num{position:relative;border:4px solid var(--line);background:#fff;border-radius:24px;padding:12px 6px;min-height:150px;cursor:pointer;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:4px;font-family:var(--display)}
+.num .n{font-size:clamp(44px,9vw,64px);line-height:1;color:var(--accent)}
+.num .ic{font-size:28px}.num .t{font-size:clamp(15px,3.2vw,20px);word-break:keep-all;text-align:center}
+.num.done{border-color:#f2c94c;background:#fffaea}
+.num .st{position:absolute;top:6px;right:10px;font-size:22px}
+.num:disabled{opacity:.45;cursor:not-allowed}
+.qtypes{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;padding:0 18px 20px}
+.qt{border:3px solid var(--line);background:#fff;border-radius:18px;padding:12px 6px;min-height:96px;cursor:pointer;font-family:var(--display);font-size:clamp(15px,3.2vw,19px);display:flex;flex-direction:column;align-items:center;gap:4px;word-break:keep-all;text-align:center}
+.qt .ic{font-size:30px}.qt.done{border-color:#f2c94c;background:#fffaea}
+.qt:disabled{opacity:.45;cursor:not-allowed}
+.photowrap{margin:6px 18px 8px;border-radius:20px;overflow:hidden;background:#e9eef3;display:flex;justify-content:center}
+.wsvg{display:block;width:100%;height:auto;max-height:58vh;touch-action:manipulation}
+.photowrap.small .wsvg{max-height:34vh}
+.plabel{font-family:var(--display);fill:#fff;stroke:#24323f;stroke-width:5px;paint-order:stroke}
+.glow{animation:glow 1.2s ease-in-out infinite}
+.missing{margin:12px 18px;padding:18px;border:3px dashed #b9c7d4;border-radius:18px;text-align:center;color:var(--muted);font-size:17px;line-height:1.6}
+.missing code{background:#eef3f8;border-radius:6px;padding:2px 6px}
+
+/* 퀴즈 보기 */
+.bopts{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:14px;padding:6px 18px 14px}
+.bopt{display:flex;flex-direction:column;gap:6px;border:4px solid var(--line);background:#fff;border-radius:22px;padding:8px}
+.bopt.right{border-color:var(--good);background:#e5f6ec}
+.bopt.tried{background:#f3f5f7}
+.bopt .pick{border:none;background:transparent;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:6px;min-height:110px;justify-content:center;font-family:var(--display);color:var(--ink)}
+.bopt .pick .n{font-size:clamp(40px,8vw,56px);line-height:1;color:var(--accent)}
+.bopt .pick .w{font-size:clamp(18px,4vw,24px);word-break:keep-all;text-align:center}
+.bopt .listen{border:none;border-radius:999px;background:#fff3c4;font-family:var(--display);font-size:16px;padding:8px;cursor:pointer;min-height:44px}
+.saybtns{display:flex;flex-wrap:wrap;gap:12px;justify-content:center;padding:0 18px 20px}
+
+/* 칭찬 */
+.star{position:fixed;font-size:30px;color:var(--sun);pointer-events:none;text-shadow:0 1px 0 #d99a00;animation:pop 1.4s ease-out forwards;z-index:5}
+.praise{position:fixed;left:50%;top:40%;transform:translate(-50%,-50%);z-index:20;background:#fff;border-radius:28px;padding:18px 28px;box-shadow:0 10px 30px rgba(0,0,0,.25);display:flex;align-items:center;gap:14px;font-family:var(--display);font-size:clamp(24px,5vw,34px);animation:praise 2.2s ease-out forwards;pointer-events:none}
+.praise .avatar{width:80px;height:80px;animation:hop .5s ease-in-out 3}
+.sticker{position:relative;width:min(280px,66vw);aspect-ratio:1;margin:18px auto 6px;border-radius:50%;background:radial-gradient(circle,#fff7cf 0 60%,#ffd96b 61% 100%);display:grid;place-items:center;animation:spin-in .8s ease-out}
+.sticker img{width:76%;aspect-ratio:1;border-radius:50%;object-fit:cover;border:6px solid #fff}
+.sticker .st{position:absolute;bottom:-6px;right:6px;font-size:60px}
+
+/* 부모님 */
+details.parent{margin-top:18px;background:var(--paper);border-radius:20px;padding:12px 18px;box-shadow:0 4px 14px rgba(30,60,90,.08)}
+details.parent summary{font-family:var(--display);font-size:20px;cursor:pointer;min-height:40px}
+.form{display:grid;gap:12px;margin:12px 0}
+.field{display:grid;gap:6px;font-size:16px;color:var(--muted)}
+.field input[type=text]{font-family:var(--display);font-size:22px;padding:8px 12px;border-radius:12px;border:3px solid var(--line);max-width:260px;color:var(--ink);background:#fff}
+.check{display:flex;align-items:center;gap:10px;font-size:17px}
+.check input{width:22px;height:22px}
+.seg{display:flex;gap:8px;flex-wrap:wrap}
+.seg button{font-family:var(--display);font-size:18px;border:3px solid var(--line);background:#fff;border-radius:999px;padding:6px 16px;cursor:pointer;min-height:44px}
+.seg button[aria-pressed="true"]{border-color:var(--accent);background:#e3f0fb}
+select{font-family:var(--body);font-size:17px;padding:8px 10px;border-radius:12px;border:3px solid var(--line);background:#fff;color:var(--ink);max-width:100%}
+.testrow{display:flex;flex-wrap:wrap;gap:10px}
+.vbox{background:#fff;border:2px solid var(--line);border-radius:14px;padding:10px 14px;color:var(--ink)}
+.vs{margin:0;padding-left:18px;font-size:15px;line-height:1.7}
+.diag{margin:8px 0 0;font-size:15px;line-height:1.6;background:#fff6d6;border-radius:10px;padding:8px 10px}
+.vlog summary{cursor:pointer;font-size:14px;color:var(--muted);margin-top:6px}
+.vlog pre{white-space:pre-wrap;font-size:12px;margin:6px 0 0;color:var(--muted)}
+.soundfix{position:fixed;left:50%;bottom:20px;transform:translateX(-50%);z-index:10;font-family:var(--display);font-size:22px;border:none;border-radius:999px;padding:14px 26px;background:#ff8f3d;color:#fff;box-shadow:0 6px 18px rgba(0,0,0,.25);cursor:pointer}
+.soundfix[hidden]{display:none}
+table{width:100%;border-collapse:collapse;font-size:15px}
+th,td{text-align:left;padding:8px 6px;border-top:1px solid var(--line)}
+th{font-weight:600;color:var(--muted)}
+.tag{font-family:var(--display);font-size:14px;border-radius:999px;padding:3px 10px;white-space:nowrap}
+.t1{background:#dff3e7;color:#1b6640}.t2{background:#fff0c7;color:#6e4e00}.t3{background:#fde0d8;color:#8a3a22}.t0{background:#eee;color:#888}
+
+/* 터치 영역 만들기 (보호자용) */
+.ed svg{touch-action:none;cursor:crosshair}
+.ed .row{display:flex;gap:10px;flex-wrap:wrap;align-items:center;padding:8px 18px}
+.ed textarea{width:100%;min-height:110px;font-size:13px;font-family:ui-monospace,Menlo,monospace;border-radius:12px;border:2px solid var(--line);padding:8px}
+.ed .targets{display:flex;gap:8px;flex-wrap:wrap;padding:6px 18px}
+.ed .tbtn{font-family:var(--display);font-size:17px;border:3px solid var(--line);background:#fff;border-radius:999px;padding:6px 14px;cursor:pointer;min-height:44px}
+.ed .tbtn.on{border-color:var(--accent);background:#e3f0fb}
+.ed .tbtn.set::after{content:' ✔';color:var(--good)}
+
+@keyframes pulse{0%,100%{transform:scale(1)}50%{transform:scale(1.07)}}
+@keyframes glow{0%,100%{stroke-opacity:1}50%{stroke-opacity:.45}}
+@keyframes pop{0%{transform:translateY(0) scale(.4);opacity:1}100%{transform:translateY(-110px) scale(1.2);opacity:0}}
+@keyframes praise{0%{opacity:0;transform:translate(-50%,-40%) scale(.7)}15%{opacity:1;transform:translate(-50%,-50%) scale(1.05)}80%{opacity:1}100%{opacity:0;transform:translate(-50%,-55%) scale(1)}}
+@keyframes hop{0%,100%{transform:translateY(0)}50%{transform:translateY(-14px)}}
+@keyframes spin-in{from{transform:rotate(-180deg) scale(.2)}to{transform:rotate(0) scale(1)}}
+@media (prefers-reduced-motion: reduce){*{animation:none!important;transition:none!important}}
+@media (max-width:560px){.nums{grid-template-columns:1fr 1fr}.qtypes{grid-template-columns:1fr}.cats{grid-template-columns:1fr 1fr}.cat{min-height:140px}.grid{grid-template-columns:1fr 1fr}.card img,.card .ph{width:110px;height:110px}}
+@media (orientation:landscape) and (min-width:900px){.wsvg{max-height:62vh}}
+</style>
+</head>
+<body>
+<main class="wrap" id="app"></main>
+<script src="words.js"></script>
+<script>
+/* ---------- 데이터 ---------- */
+const DATA = window.WORD_DATA || {categories:[], items:[], wordInfo:{}};
+const FACE = 'data:image/webp;base64,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';
+const itemById = Object.fromEntries(DATA.items.map(it => [it.id, it]));
+
+/* ---------- 저장 (이 기기에만) ---------- */
+const KEY = 'wordExplorer.v1';
+let store = {name:'토리', autoRead:true, nOpts:2, voiceURI:'', textMode:'voice', stickers:{}, prog:{}, quiz:{}, overrides:{}};
+try{ const s = JSON.parse(localStorage.getItem(KEY) || 'null'); if (s) store = Object.assign(store, s); }catch(e){}
+function save(){ try{ localStorage.setItem(KEY, JSON.stringify(store)); }catch(e){} }
+
+/* ---------- 글자 도우미 ---------- */
+function hasBatchim(w){ const c=w.charCodeAt(w.length-1); if(c<0xAC00||c>0xD7A3) return false; return (c-0xAC00)%28!==0; }
+function nm(){ const n = store.name || '토리'; return hasBatchim(n) ? n+'이' : n; }
+function voc(){ const n = store.name || '토리'; if (hasBatchim(n)) return n+'아'; if (n.length>=2 && n.endsWith('이') && hasBatchim(n.slice(0,-1))) return n.slice(0,-1)+'아'; return n+'야'; }
+function iy(w){ return hasBatchim(w) ? '이야' : '야'; }
+function eun(w){ return w + (hasBatchim(w) ? '은' : '는'); }
+function iga(w){ return w + (hasBatchim(w) ? '이' : '가'); }
+function esc(s){ return String(s).replace(/[&<>"]/g, c => ({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;'}[c])); }
+function shuffle(a){ a = a.slice(); for (let i=a.length-1;i>0;i--){ const j=Math.floor(Math.random()*(i+1)); [a[i],a[j]]=[a[j],a[i]]; } return a; }
+function today(){ return new Date().toISOString().slice(0,10); }
+
+/* ---------- 읽어주기 (아이패드 Safari 대응) ----------
+   원칙
+   1) 말하기는 아이가 누른 그 순간(클릭 처리 안)에서 바로 speechSynthesis.speak()를 불러요.
+   2) 아이패드에서는 앞 말이 실제로 남아 있을 때만 cancel()하고, 기다리는 타이머 없이 바로 말해요.
+   3) 시작 신호(onstart)가 안 오면 한 번만 다시 시도하고, 그래도 안 되면 '소리 켜기' 버튼을 띄워요.
+   4) 모든 시작·끝·오류 신호는 부모님 설정의 '음성 상태'에 기록돼요. */
+const hasTTS = ('speechSynthesis' in window) && ('SpeechSynthesisUtterance' in window);
+const isIOS = /iPad|iPhone|iPod/.test(navigator.userAgent) || (navigator.platform === 'MacIntel' && navigator.maxTouchPoints > 1);
+const V = {
+  voices: [], koVoices: [], chosen: null, bad: new Set(),
+  gesture: false, silentUnlock: 'none',   // none | trying | ok | failed | skipped
+  everStarted: false, last: null, log: [], diag: ''
+};
+let uttSeq = 0, currentUtt = null, startWatch = null;
+
+function vlog(msg){
+  const t = new Date().toTimeString().slice(0,8);
+  V.log.unshift(`${t} ${msg}`); if (V.log.length > 14) V.log.length = 14;
+  updateVoiceStatus();
+}
+function isKo(v){ return !!(v && v.lang && v.lang.toLowerCase().replace('_','-').startsWith('ko')); }
+function rankVoice(v){
+  const n = (v.name || '').toLowerCase(); let s = 0;
+  if (v.lang.toLowerCase().replace('_','-') === 'ko-kr') s += 4;
+  if (v.localService) s += 3;          // 기기에 설치된 목소리
+  if (v.default) s += 2;
+  if (/yuna|유나/.test(n)) s += 2;      // 아이패드 기본 한국어 목소리
+  if (/enhanced|premium|고급|향상/.test(n)) s -= 3;   // 내려받지 않았으면 소리가 안 나는 경우가 있어 뒤로
+  return s;
+}
+function loadVoices(){
+  if (!hasTTS) return;
+  try{
+    V.voices = speechSynthesis.getVoices() || [];
+    V.koVoices = V.voices.filter(isKo).sort((a,b) => rankVoice(b) - rankVoice(a));
+    const want = store.voiceURI;
+    V.chosen = (want && V.koVoices.find(v => v.voiceURI === want)) || V.koVoices[0] || null;
+  }catch(e){ V.log.unshift('목소리 목록 오류: ' + e.message); }
+  updateVoiceStatus();
+}
+if (hasTTS){
+  loadVoices();
+  try{ speechSynthesis.addEventListener('voiceschanged', loadVoices); }catch(e){}
+  /* Safari는 목소리 목록을 늦게 주는 경우가 있어 몇 번 더 확인 (말하기와는 무관한 타이머) */
+  [400, 1200, 3000].forEach(ms => setTimeout(() => { if (!V.koVoices.length) loadVoices(); }, ms));
+}
+function voiceFor(){
+  const v = V.chosen;
+  return (v && !V.bad.has(v.voiceURI)) ? v : null;
+}
+function makeUtt(text, opt){
+  opt = opt || {};
+  const u = new SpeechSynthesisUtterance(text);
+  u.lang = 'ko-KR';
+  const v = opt.noVoice ? null : voiceFor();
+  if (v) u.voice = v;
+  u.rate = 0.85; u.pitch = 1.1; u.volume = 1;
+  const rec = {id: ++uttSeq, text, status:'요청함', error:'', voice: v ? v.name : '기본 한국어(ko-KR)', voiceURI: v ? v.voiceURI : '', tReq: Date.now(), tStart: 0};
+  u.onstart = () => { rec.status = '재생 중'; rec.tStart = Date.now(); V.everStarted = true; hideSoundFix(); vlog(`▶ 시작 #${rec.id} (${rec.tStart - rec.tReq}ms, ${rec.voice})`); };
+  u.onend = () => { rec.tEnd = Date.now(); if (rec.status !== '오류') rec.status = '끝남'; vlog(`■ 끝 #${rec.id} (재생 ${rec.tStart ? rec.tEnd - rec.tStart : 0}ms)`); };
+  u.onerror = e => {
+    const err = (e && e.error) || 'unknown';
+    rec.status = '오류'; rec.error = err;
+    vlog(`✕ 오류 #${rec.id}: ${err}`);
+    if (rec.voiceURI && /voice-unavailable|synthesis-failed|synthesis-unavailable|language-unavailable/.test(err)){
+      V.bad.add(rec.voiceURI); vlog('이 목소리는 빼고 기본 한국어 목소리를 써요');
+    }
+  };
+  u._rec = rec;
+  return u;
+}
+function startUtt(text, isRetry, opt){
+  const u = makeUtt(text, opt);
+  currentUtt = u; V.last = u._rec;
+  try{ speechSynthesis.resume(); }catch(e){}   // 멈춰 있는 대기열 깨우기
+  speechSynthesis.speak(u);
+  vlog(`요청 #${u._rec.id}${isRetry ? ' (다시 시도)' : ''}: ${text.slice(0,16)}${text.length > 16 ? '…' : ''}`);
+  clearTimeout(startWatch);
+  /* 시작 신호 확인용 타이머: 재생을 늦추지 않고, 신호가 안 올 때만 움직여요 */
+  startWatch = setTimeout(() => {
+    const r = u._rec;
+    if (currentUtt !== u || r.status !== '요청함') return;
+    if (!isRetry){
+      vlog(`시작 신호 없음 #${r.id} → 기본 목소리로 한 번 더`);
+      if (r.voiceURI) V.bad.add(r.voiceURI);
+      try{ if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel(); }catch(e){}
+      startUtt(text, true);
+    } else {
+      r.status = '시작 안 됨'; vlog(`시작 신호 없음 #${r.id} → '소리 켜기' 버튼 표시`);
+      showSoundFix(text);
+    }
+  }, 1500);
+}
+function speak(text, force){
+  if (!hasTTS) return;
+  if (!store.autoRead && !force) return;
+  text = String(text).replace(/["“”]/g,'').replace(/\s+/g,' ').trim();
+  if (!text) return;
+  try{
+    const busy = speechSynthesis.speaking || speechSynthesis.pending;
+    if (isIOS){
+      /* 아이패드: 같은 클릭 안에서 바로 말하기. 앞 말이 남아 있을 때만 멈춤 */
+      if (busy){
+        const r = currentUtt && currentUtt._rec;
+        const stuck = r && (r.status === '끝남' || r.status === '오류' || r.status === '시작 안 됨');
+        speechSynthesis.cancel();
+        vlog(stuck ? '멈춘 대기열 정리' : '앞 말 멈춤');
+      }
+      startUtt(text);
+    } else {
+      /* 다른 기기: 기존 방식 유지 (말하는 중이면 멈추고 잠깐 뒤에 말하기) */
+      if (busy){ speechSynthesis.cancel(); setTimeout(() => startUtt(text), 150); }
+      else startUtt(text);
+    }
+  }catch(e){ vlog('말하기 오류: ' + e.message); }
+}
+function stopSpeech(){
+  clearTimeout(startWatch);
+  try{ if (hasTTS && (speechSynthesis.speaking || speechSynthesis.pending)) speechSynthesis.cancel(); }catch(e){}
+}
+
+/* 첫 터치: 음성 기능 깨우기 */
+function onFirstGesture(){
+  if (V.gesture) return;
+  V.gesture = true;
+  try{ if (navigator.audioSession) navigator.audioSession.type = 'playback'; }catch(e){}   // 새 iPadOS: 무음 스위치 영향 줄이기
+  if (hasTTS){ try{ speechSynthesis.getVoices(); speechSynthesis.resume(); }catch(e){} loadVoices(); }
+  vlog('첫 터치 확인');
+}
+/* 무음 활성화: 첫 클릭에서 진짜 말하기가 없었을 때만 시도. 실패해도 다음 진짜 말하기가 활성화를 대신해요 */
+function trySilentUnlock(){
+  if (!hasTTS || V.silentUnlock !== 'none') return;
+  const r = currentUtt && currentUtt._rec;
+  if (V.everStarted || speechSynthesis.speaking || speechSynthesis.pending || (r && r.status === '요청함')){
+    V.silentUnlock = 'skipped'; updateVoiceStatus(); return;   // 이 클릭에서 이미 진짜 말하기를 시작함
+  }
+  V.silentUnlock = 'trying';
+  let settled = false;
+  const fail = why => {
+    if (settled) return; settled = true; V.silentUnlock = 'failed';
+    vlog(`무음 활성화 실패(${why}) → 다음 말하기로 활성화`);
+    try{ if (!currentUtt && (speechSynthesis.speaking || speechSynthesis.pending)) speechSynthesis.cancel(); }catch(e){}
+  };
+  try{
+    const u = new SpeechSynthesisUtterance(' ');
+    u.lang = 'ko-KR'; u.volume = 0;
+    const ok = () => { if (settled) return; settled = true; V.silentUnlock = 'ok'; vlog('무음 활성화 성공'); };
+    u.onstart = ok; u.onend = ok;
+    u.onerror = e => fail((e && e.error) || 'error');
+    speechSynthesis.speak(u);
+    setTimeout(() => fail('신호 없음'), 1500);
+  }catch(e){ fail(e.message); }
+}
+document.addEventListener('touchend', onFirstGesture, {passive:true});
+document.addEventListener('click', () => { onFirstGesture(); trySilentUnlock(); });   // 버튼 처리 뒤에 실행됨
+
+/* 소리가 시작되지 않았을 때 보여주는 버튼: 새로 누르는 순간에 다시 말해요 */
+let soundFixText = '';
+function showSoundFix(text){
+  soundFixText = text;
+  let b = document.getElementById('soundFix');
+  if (!b){
+    b = document.createElement('button');
+    b.id = 'soundFix'; b.type = 'button'; b.className = 'soundfix';
+    b.textContent = '🔊 소리가 안 나요? 여기를 눌러요';
+    b.addEventListener('click', () => { hideSoundFix(); speak(soundFixText, true); });
+    document.body.appendChild(b);
+  }
+  b.hidden = false;
+}
+function hideSoundFix(){ const b = document.getElementById('soundFix'); if (b) b.hidden = true; }
+
+/* 부모님 설정: 음성 상태 표시 */
+function voiceStatusHTML(){
+  const r = V.last;
+  const unlockTxt = {none:'아직 시도 안 함', trying:'시도 중', ok:'성공', failed:'실패 (다음 말하기로 대신 활성화)', skipped:'필요 없음 (첫 말하기로 바로 활성화)'}[V.silentUnlock];
+  const lastTxt = !r ? '아직 없음'
+    : r.status === '오류' ? `#${r.id} 오류: ${esc(r.error)}`
+    : r.status === '요청함' ? `#${r.id} 시작 신호 기다리는 중`
+    : r.status === '시작 안 됨' ? `#${r.id} 시작 신호가 오지 않음`
+    : r.status === '끝남' ? `#${r.id} 끝남 (시작까지 ${r.tStart - r.tReq}ms, 재생 ${r.tEnd - r.tStart}ms${(r.tEnd - r.tStart) < r.text.length * 40 ? ' ⚠️ 문장 길이에 비해 너무 빨리 끝남' : ''})`
+    : `#${r.id} ${r.status} (시작까지 ${r.tStart - r.tReq}ms)`;
+  let q = '-';
+  try{ if (hasTTS) q = `말하는 중 ${speechSynthesis.speaking ? '예' : '아니오'} · 대기 ${speechSynthesis.pending ? '있음' : '없음'} · 일시정지 ${speechSynthesis.paused ? '예' : '아니오'}`; }catch(e){}
+  const v = voiceFor();
+  return `<ul class="vs">
+    ${V.beep ? `<li>삐 소리 테스트: ${V.beep}</li>` : ''}
+    <li>음성 기능: ${hasTTS ? '있음' : '없음 (이 브라우저는 읽어주기를 지원하지 않아요)'}</li>
+    <li>기기: ${isIOS ? '아이패드·아이폰 방식으로 동작' : '일반 브라우저 방식으로 동작'}</li>
+    <li>한국어 목소리: ${V.koVoices.length ? V.koVoices.length + '개' : (V.voices.length ? `없음 (전체 ${V.voices.length}개)` : '목록을 아직 받지 못했어요')}</li>
+    <li>사용할 목소리: ${v ? esc(v.name) + (v.localService ? ' (기기에 설치됨)' : ' (온라인)') : '기본 한국어 목소리'}</li>
+    <li>첫 터치: ${V.gesture ? '확인됨' : '아직'} · 무음 활성화: ${unlockTxt}</li>
+    <li>마지막 말하기: ${lastTxt}</li>
+    <li>대기열: ${q}</li>
+  </ul>
+  ${V.diag ? `<p class="diag">${V.diag}</p>` : ''}
+  <details class="vlog"><summary>자세한 기록</summary><pre>${esc(V.log.join('\n') || '기록 없음')}</pre></details>`;
+}
+function updateVoiceStatus(){
+  const el = document.getElementById('voiceStatus');
+  if (el){ const lg = el.querySelector('.vlog'); const wasOpen = !!(lg && lg.open); el.innerHTML = voiceStatusHTML(); if (wasOpen){ const n = el.querySelector('.vlog'); if (n) n.open = true; } }
+  const sel = document.getElementById('voiceSel');
+  if (sel){
+    const want = store.voiceURI || '';
+    const opts = ['<option value="">자동 선택</option>'].concat(V.koVoices.map(v =>
+      `<option value="${esc(v.voiceURI)}">${esc(v.name)}${v.localService ? '' : ' (온라인)'}${V.bad.has(v.voiceURI) ? ' - 이번엔 실패' : ''}</option>`)).join('');
+    if (sel.innerHTML !== opts) sel.innerHTML = opts;
+    sel.value = V.koVoices.some(v => v.voiceURI === want) ? want : '';
+  }
+}
+
+/* 추가 진단 1: 음성 말고 일반 소리(삐)가 나는지 — 무음 모드·볼륨 문제인지 가려내기 */
+function beepTest(){
+  try{
+    const AC = window.AudioContext || window.webkitAudioContext;
+    if (!AC){ V.beep = '이 브라우저는 지원하지 않아요'; updateVoiceStatus(); return; }
+    const ctx = window.__beepCtx || (window.__beepCtx = new AC());
+    if (ctx.resume) ctx.resume();
+    const o = ctx.createOscillator(), g = ctx.createGain();
+    o.type = 'sine'; o.frequency.value = 660; g.gain.value = 0.35;
+    o.connect(g); g.connect(ctx.destination);
+    o.start(); o.stop(ctx.currentTime + 0.6);
+    V.beep = `재생 요청함 (오디오 상태: ${ctx.state}) — 들렸는지 확인해 주세요`;
+    vlog('삐 소리 재생 요청 (' + ctx.state + ')');
+  }catch(e){ V.beep = '오류: ' + e.message; vlog('삐 소리 오류: ' + e.message); }
+}
+/* 추가 진단 2: 목소리를 지정하지 않고 기기 기본 한국어 목소리로 말하기 */
+function plainVoiceTest(){
+  if (!hasTTS) return;
+  V.diag = '목소리 지정 없이 확인 중…';
+  try{ if (speechSynthesis.speaking || speechSynthesis.pending) speechSynthesis.cancel(); }catch(e){}
+  startUtt('안녕! 이번에는 기본 목소리예요. 소리가 들리나요?', true, {noVoice:true});
+  const id = uttSeq;
+  setTimeout(() => {
+    const r = V.last; if (!r || r.id < id) return;
+    V.diag = r.status === '끝남' || r.status === '재생 중'
+      ? `기본 목소리 신호 정상 (재생 ${r.tEnd ? r.tEnd - r.tStart + 'ms' : '진행 중'}). 이걸로 들렸다면 목소리 선택을 '자동 선택' 대신 다른 것으로 바꿔 볼게요.`
+      : `기본 목소리도 ${r.status}${r.error ? ' (' + esc(r.error) + ')' : ''}.`;
+    updateVoiceStatus();
+  }, 4500);
+}
+function soundTest(){
+  V.diag = '확인 중…';
+  speak('안녕! 소리가 잘 들리나요? 어휘 탐험대예요.', true);   // 클릭 안에서 바로 말하기
+  const id = uttSeq;
+  setTimeout(() => {
+    const r = V.last;
+    if (!r || r.id < id) return;
+    if (r.status === '재생 중' || r.status === '끝남')
+      V.diag = (r.tEnd && (r.tEnd - r.tStart) < r.text.length * 40)
+        ? `⚠️ 시작·끝 신호는 왔지만 ${r.tEnd - r.tStart}ms 만에 끝났어요. 실제로 말을 만들지 못한 것 같아요. 아래 '기본 목소리로 테스트'를 눌러 보세요.`
+        : '✅ 말하기 시작 신호를 받았어요. 그래도 소리가 안 들리면 아래 \'삐 소리 테스트\'로 무음 모드·볼륨 문제인지 확인해 주세요.';
+    else if (r.status === '오류')
+      V.diag = `⚠️ 말하기 오류(${esc(r.error)})가 났어요. 위에서 다른 목소리를 골라 다시 테스트해 보세요.`;
+    else
+      V.diag = '⚠️ 말하기 시작 신호가 오지 않았어요. 설정 → 손쉬운 사용 → 읽기 및 말하기 → 음성 → 한국어에서 목소리를 내려받았는지 확인하고, 이 페이지를 새로고침한 뒤 다시 테스트해 주세요.';
+    updateVoiceStatus();
+  }, 4500);
+}
+
+
+/* ---------- 상태 ---------- */
+const app = document.getElementById('app');
+const reduceMotion = (() => { try { return matchMedia('(prefers-reduced-motion: reduce)').matches; } catch(e){ return false; } })();
+let S = {screen:'home'};   // home | cat | hub | s1 | s2 | s3 | s4 | qa | qb | qc | sticker | edit
+
+function textOn(){ return store.textMode === 'text' || S.reveal || !hasTTS; }
+
+/* ---------- 사진: 있는지 확인하고 실제 크기를 읽어요 ---------- */
+const PHOTO = {};   // id → {state:'loading'|'ok'|'missing', W, H}
+function photoInfo(it){
+  if (!PHOTO[it.id]){
+    PHOTO[it.id] = {state:'loading'};
+    const im = new Image();
+    im.onload = () => { PHOTO[it.id] = {state:'ok', W: im.naturalWidth, H: im.naturalHeight}; photoChanged(); };
+    im.onerror = () => { PHOTO[it.id] = {state:'missing'}; photoChanged(); };
+    im.src = it.photo;
+  }
+  return PHOTO[it.id];
+}
+let photoTimer = null;
+function photoChanged(){   // 사진 확인이 끝나면 지금 화면만 다시 그려요 (스크롤은 그대로)
+  clearTimeout(photoTimer);
+  photoTimer = setTimeout(() => {
+    const f = {home:renderHome, cat:renderCat, hub:renderHub, edit:renderEdit}[S.screen];
+    if (!f) return;
+    const d = app.querySelector('details.parent'), open = d && d.open;
+    f();
+    const d2 = app.querySelector('details.parent'); if (open && d2) d2.open = true;
+  }, 30);
+}
+/* 데이터 + 이 기기에서 그린 터치 영역(우선) */
+function getShape(it, key){
+  const ov = store.overrides[it.id] && store.overrides[it.id][key];
+  if (ov && ov.shape) return ov.shape;
+  const p = it.parts.find(x => x.id === key) || (it.others || []).find(x => x.id === key);
+  return p ? p.shape : null;
+}
+function getZoom(it, key){
+  const ov = store.overrides[it.id] && store.overrides[it.id][key];
+  if (ov && ov.zoom) return ov.zoom;
+  const p = it.parts.find(x => x.id === key);
+  if (p && p.zoom) return p.zoom;
+  const s = getShape(it, key); if (!s) return null;
+  const b = bbox(s), cx = b.x + b.w/2, cy = b.y + b.h/2;   // 자동: 부분 주변을 넉넉히
+  const w = Math.min(1, Math.max(b.w * 1.8, .25)), h = Math.min(1, Math.max(b.h * 1.8, .25));
+  return {x: Math.min(Math.max(0, cx - w/2), 1 - w), y: Math.min(Math.max(0, cy - h/2), 1 - h), w, h};
+}
+function bbox(s){
+  if (s.t === 'ellipse') return {x: s.cx - s.rx, y: s.cy - s.ry, w: s.rx*2, h: s.ry*2};
+  return {x: s.x, y: s.y, w: s.w, h: s.h};
+}
+function shapeSVG(s, W, H, attrs){
+  if (s.t === 'ellipse') return `<ellipse cx="${s.cx*W}" cy="${s.cy*H}" rx="${s.rx*W}" ry="${s.ry*H}" ${attrs}/>`;
+  return `<rect x="${s.x*W}" y="${s.y*H}" width="${s.w*W}" height="${s.h*H}" rx="${Math.min(s.w*W, s.h*H)*.12}" ${attrs}/>`;
+}
+function partReady(it, part){ const p = PHOTO[it.id]; return p && p.state === 'ok' && !!getShape(it, part.id); }
+
+/* 사진과 터치 영역을 한 SVG 안에 두어서 화면 크기가 바뀌어도 좌표가 그대로 맞아요 */
+function photoSVG(it, o){
+  const ph = PHOTO[it.id], W = ph.W, H = ph.H;
+  const vb = o.vb || [0, 0, W, H];
+  let s = `<svg class="wsvg" id="wSvg" viewBox="${vb.join(' ')}" preserveAspectRatio="xMidYMid meet" role="img" aria-label="${esc(it.name)} 사진">`;
+  const part = o.part, shp = part ? getShape(it, part.id) : null;
+  if (shp) s += `<defs><mask id="hl"><rect width="${W}" height="${H}" fill="white"/>${shapeSVG(shp, W, H, 'fill="black"')}</mask></defs>`;
+  s += `<image href="${esc(it.photo)}" x="0" y="0" width="${W}" height="${H}"/>`;
+  if (o.touch){
+    const pad = Math.round(W * .025);
+    const hit = `fill="transparent" stroke="transparent" stroke-width="${pad}" style="pointer-events:all;cursor:pointer"`;
+    s += `<rect class="hs-miss" width="${W}" height="${H}" fill="transparent" style="pointer-events:all"/>`;
+    const others = it.parts.filter(p => p.id !== part.id).map(p => ({id:p.id, name:p.name})).concat((it.others || []).map(p => ({id:p.id, name:p.name})));
+    others.forEach(ot => { const sh = getShape(it, ot.id); if (sh) s += shapeSVG(sh, W, H, `class="hs" data-name="${esc(ot.name)}" ${hit}`); });
+    s += shapeSVG(shp, W, H, `class="hs" data-target="1" ${hit}`);
+  }
+  if (o.highlight && shp){
+    s += `<rect width="${W}" height="${H}" fill="rgba(0,0,0,.45)" mask="url(#hl)" style="pointer-events:none"/>`;
+    s += shapeSVG(shp, W, H, `fill="none" stroke="#ffd23f" stroke-width="${Math.round(W*.012)}" class="glow" style="pointer-events:none"`);
+    if (o.label){
+      const b = bbox(shp);
+      const lv = o.labelVb || vb, fs = Math.round(Math.min(lv[2], lv[3]) * .08);   // 확대돼 있으면 글자도 그만큼 작게
+      s += `<text x="${(b.x + b.w/2)*W}" y="${Math.max(lv[1] + fs*1.1, b.y*H - fs*.3)}" text-anchor="middle" class="plabel" font-size="${fs}">${esc(part.name)}</text>`;
+    }
+  }
+  if (o.marker){
+    const m = o.marker;
+    s += `<g style="pointer-events:none"><circle cx="${m.x}" cy="${m.y}" r="${W*.02}" fill="#fff" stroke="#2f7fc1" stroke-width="${W*.006}"/>
+      ${m.name ? `<text x="${m.x}" y="${m.y - W*.035}" text-anchor="middle" class="plabel" font-size="${Math.round(Math.min(W,H)*.06)}">${esc(m.name)}</text>` : ''}</g>`;
+  }
+  return s + '</svg>';
+}
+function animateVB(svg, from, to, ms){
+  if (!svg) return;
+  const final = () => svg.setAttribute('viewBox', to.join(' '));
+  if (!ms){ final(); return; }
+  let t0 = null, done = false;
+  const ease = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+  function tick(now){
+    if (done) return;
+    if (t0 === null) t0 = now;
+    const k = ease(Math.max(0, Math.min(1, (now - t0) / ms)));
+    svg.setAttribute('viewBox', from.map((v,i) => (v + (to[i]-v)*k).toFixed(1)).join(' '));
+    if (k < 1) requestAnimationFrame(tick); else done = true;
+  }
+  requestAnimationFrame(tick);
+  setTimeout(() => { done = true; final(); }, ms + 150);
+}
+
+/* ---------- 칭찬 ---------- */
+function stars(n=16){
+  if (reduceMotion) return;
+  for (let i=0;i<n;i++){
+    const s = document.createElement('span'); s.className='star'; s.textContent='★';
+    s.style.left = (10+Math.random()*80)+'vw'; s.style.top = (35+Math.random()*45)+'vh';
+    s.style.animationDelay = (Math.random()*.4)+'s';
+    document.body.appendChild(s); setTimeout(() => s.remove(), 2000);
+  }
+}
+function avatarSVG(){
+  return `<svg class="avatar" viewBox="-50 -62 100 112" aria-hidden="true">
+    <circle cx="0" cy="0" r="44" fill="#4f9be0"/>
+    <image href="${FACE}" x="-40" y="-40" width="80" height="80"/>
+    <path d="M-36 -36 Q0 -78 36 -36 Z" fill="#ffc63d"/><rect x="-40" y="-40" width="80" height="8" rx="4" fill="#e0a21c"/>
+  </svg>`;
+}
+function praise(msg){
+  const d = document.createElement('div');
+  d.className = 'praise'; d.setAttribute('role','status');
+  d.innerHTML = `${avatarSVG()}<span>${esc(msg || '잘했어! 최고야!')}</span>`;
+  document.body.appendChild(d);
+  setTimeout(() => d.remove(), 2200);
+  stars(20);
+}
+
+/* ---------- 진행 기록 ---------- */
+function prog(itId){ return (store.prog[itId] = store.prog[itId] || {s1:0, parts:{}}); }
+function pprog(itId, pid){ const p = prog(itId); return (p.parts[pid] = p.parts[pid] || {}); }
+function itemComplete(it){   // 1단계 + 한 부분 이상 2·3·4단계
+  const p = store.prog[it.id]; if (!p || !p.s1) return false;
+  return Object.values(p.parts || {}).some(x => x.s2 && x.s3 && x.s4);
+}
+function maybeSticker(it){
+  if (!store.stickers[it.id] && itemComplete(it)){ store.stickers[it.id] = today(); save(); return true; }
+  return false;
+}
+
+/* ---------- 공통 조각 ---------- */
+function curItem(){ return itemById[S.item]; }
+function curPart(){ const it = curItem(); return it.parts.find(p => p.id === S.part) || it.parts[0]; }
+function sayBlock(text){
+  if (textOn()) return `<p class="say">${esc(text)}</p>`;
+  return `<p class="say hiddenTxt">🔊 잘 들어 보세요</p>`;
+}
+function revealBtn(){ return textOn() ? '' : `<button class="btn mini" type="button" id="revealBtn">👀 글자 보기</button>`; }
+function ttsNote(){ return hasTTS ? '' : `<p class="note">이 기기에서는 읽어주기가 안 돼서 글자로 보여 드려요.</p>`; }
+function bindCommon(rerender){
+  const r = document.getElementById('revealBtn');
+  if (r) r.addEventListener('click', () => { S.reveal = true; rerender(); });
+  const h = document.getElementById('toHome'); if (h) h.addEventListener('click', () => go({screen:'home'}));
+  const c = document.getElementById('toCat'); if (c) c.addEventListener('click', () => go({screen:'cat', cat: curItem().cat}));
+  const b = document.getElementById('toHub'); if (b) b.addEventListener('click', () => { stopSpeech(); go({screen:'hub', item:S.item, part:S.part}); });
+}
+function topbar(level){
+  const it = S.item ? curItem() : null;
+  const cat = it ? DATA.categories.find(c => c.id === it.cat) : null;
+  return `<div class="topbar">
+    <button class="pill" id="toHome">🗺️ 처음으로</button>
+    ${level >= 2 && cat ? `<button class="pill" id="toCat">${cat.icon} ${esc(cat.name)}</button>` : ''}
+    ${level >= 3 && it ? `<button class="pill" id="toHub">🔍 ${textOn() ? esc(it.name) : '사물'} 탐험</button>` : ''}
+  </div>`;
+}
+function go(next){ S = Object.assign({reveal:false}, next); hideSoundFix(); render(); }
+
+/* ---------- 첫 화면: 카테고리 ---------- */
+function renderHome(){
+  const total = DATA.items.length, got = DATA.items.filter(it => store.stickers[it.id]).length;
+  const homeLink = location.hostname.endsWith('github.io') ? `<a class="pill" href="../home.html">🏠 처음 화면</a>` : '';
+  app.innerHTML = `
+    <div class="topbar">${homeLink}<span></span></div>
+    <div class="panel">
+      <div class="hero">${avatarSVG()}<div>
+        <h1>우리 아이 어휘 탐험대</h1>
+        <p class="say" style="font-size:clamp(18px,3.8vw,22px)">${esc(nm())} 탐험대장님, 어디로 탐험을 떠날까요?</p>
+        <span class="count">⭐ 스티커 ${got} / ${total}</span></div></div>
+      <div class="cats">
+        ${DATA.categories.map(c => { const its = DATA.items.filter(it => it.cat === c.id);
+          const g = its.filter(it => store.stickers[it.id]).length;
+          return `<button class="cat" data-cat="${c.id}"><span class="ic" aria-hidden="true">${c.icon}</span>${esc(c.name)}<span class="cnt">⭐ ${g} / ${its.length}</span></button>`; }).join('')}
+      </div>
+    </div>
+    ${parentHTML()}`;
+  app.querySelectorAll('.cat').forEach(b => b.addEventListener('click', () => go({screen:'cat', cat:b.dataset.cat})));
+  bindParent();
+}
+
+/* ---------- 카테고리: 사물 고르기 ---------- */
+function renderCat(){
+  const c = DATA.categories.find(x => x.id === S.cat);
+  const its = DATA.items.filter(it => it.cat === c.id);
+  its.forEach(it => photoInfo(it));
+  app.innerHTML = `
+    <div class="topbar"><button class="pill" id="toHome">🗺️ 처음으로</button></div>
+    <div class="panel">
+      <div class="qtext"><h1>${c.icon} ${esc(c.name)}</h1><p class="small">탐험하고 싶은 것을 골라요.</p></div>
+      ${its.length ? `<div class="grid">${its.map((it, i) => { const ph = PHOTO[it.id] || {};
+        return `<button class="card ${store.stickers[it.id]?'got':''}" data-id="${it.id}">
+          ${store.stickers[it.id] ? '<span class="badge" aria-hidden="true">⭐</span>' : ''}
+          ${ph.state === 'ok' ? `<img src="${esc(it.photo)}" alt="">` : `<span class="ph">${ph.state === 'missing' ? `📷 사진 필요<br>(${esc(it.name)})` : '불러오는 중'}</span>`}
+          <span class="nm">${textOn() ? esc(it.name) : (i+1)}</span></button>`; }).join('')}</div>`
+        : `<p class="missing">아직 준비된 사물이 없어요. 곧 추가할게요.</p>`}
+    </div>`;
+  app.querySelectorAll('.card').forEach(b => b.addEventListener('click', () => {
+    const it = itemById[b.dataset.id];
+    go({screen:'hub', item:it.id, part:it.parts[0].id});
+    if ((PHOTO[it.id] || {}).state === 'ok') speak(`${it.name} 탐험! 1, 2, 3, 4 중에서 골라 봐요.`);
+  }));
+  bindCommon(renderCat);
+}
+
+/* ---------- 사물 허브: 숫자 1·2·3·4 + 퀴즈 ---------- */
+function renderHub(){
+  const it = curItem(), ph = photoInfo(it);
+  const part = curPart(), pp = (store.prog[it.id] && store.prog[it.id].parts[part.id]) || {};
+  const okPhoto = ph.state === 'ok', okPart = partReady(it, part);
+  const s1 = !!(store.prog[it.id] && store.prog[it.id].s1);
+  const done = {s1, s2:!!pp.s2, s3:!!pp.s3, s4:!!pp.s4};
+  const steps = [['s1','1','📸','전체 알아보기', okPhoto],['s2','2','👆','부분 찾기', okPart],['s3','3','🔍','특징과 기능', okPart],['s4','4','🗣️','문장 말하기', okPhoto]];
+  const next = steps.find(s => s[4] && !done[s[0]]);
+  const qd = (store.quiz[it.id] || {});
+  const anyPart = it.parts.some(p => partReady(it, p));
+  app.innerHTML = `${topbar(2)}
+    <div class="panel">
+      <div class="hubhead">${okPhoto ? `<img src="${esc(it.photo)}" alt="">` : ''}<div><h1>${textOn() ? esc(it.name) : '무엇일까요?'} 탐험</h1>
+        <p class="small">숫자를 골라요. 순서대로 하지 않아도 돼요.</p></div></div>
+      ${!okPhoto && ph.state === 'missing' ? `<div class="missing">📷 이 사물의 사진이 아직 없어요.<br><code>word-game/${esc(it.photo)}</code> 에 사진을 넣어 주세요.</div>` : ''}
+      ${okPhoto && !anyPart ? `<p class="note">사진은 있어요. 부분 찾기(2·3번)와 퀴즈 A는 터치 영역을 정하면 열려요. 부모님 설정 → 터치 영역 만들기</p>` : ''}
+      <div class="parts">${it.parts.map((p, i) => `<button class="partbtn ${p.id===part.id?'on':''}" data-pid="${p.id}">부분 ${i+1}${textOn() ? ' · ' + esc(p.name) : ''}${partReady(it,p) ? '' : ' (준비 중)'}</button>`).join('')}</div>
+      <div class="nums">
+        ${steps.map(([k,n,ic,t,ok]) => `<button class="num ${done[k]?'done':''} ${next && next[0]===k?'pulse':''}" data-k="${k}" ${ok?'':'disabled'}>
+          <span class="n">${n}</span><span class="ic" aria-hidden="true">${ic}</span><span class="t">${t}</span>${done[k]?'<span class="st">⭐</span>':''}</button>`).join('')}
+      </div>
+      <h2 class="zone">어휘 퀴즈 <span class="small">하고 싶은 것만 골라요</span></h2>
+      <div class="qtypes">
+        <button class="qt ${qd.A?'done':''}" data-q="qa" ${anyPart?'':'disabled'}><span class="ic" aria-hidden="true">🔎</span>A · 어디 있을까?${qd.A?' ⭐':''}</button>
+        <button class="qt ${qd.B?'done':''}" data-q="qb" ${okPhoto?'':'disabled'}><span class="ic" aria-hidden="true">✋</span>B · 어떻게 움직일까?${qd.B?' ⭐':''}</button>
+        <button class="qt ${qd.C?'done':''}" data-q="qc" ${okPhoto?'':'disabled'}><span class="ic" aria-hidden="true">⚙️</span>C · 무엇을 할까?${qd.C?' ⭐':''}</button>
+      </div>
+    </div>`;
+  app.querySelectorAll('.partbtn').forEach(b => b.addEventListener('click', () => { S.part = b.dataset.pid; renderHub(); }));
+  app.querySelectorAll('.num').forEach(b => b.addEventListener('click', () => startStep(b.dataset.k)));
+  app.querySelectorAll('.qt').forEach(b => b.addEventListener('click', () => startQuiz(b.dataset.q)));
+  bindCommon(renderHub);
+}
+function startStep(k){
+  const it = curItem(), part = curPart();
+  go({screen:k, item:it.id, part:part.id});
+  if (k === 's1') speak(it.intro);
+  else if (k === 's2') speak(part.findQ);
+  else if (k === 's3') speak(`${part.name}! ${part.feature}`);
+  else speak(`${it.name} 사진을 보고 말해 볼까요?`);
+}
+
+/* 1단계: 전체 알아보기 */
+function renderS1(){
+  const it = curItem();
+  const r = prog(it.id); if (!r.s1){ r.s1 = 1; r.at = today(); save(); }
+  app.innerHTML = `${topbar(3)}
+    <div class="panel">
+      <div class="qtext"><span class="chip">1 · 전체 알아보기</span>${textOn() ? `<p class="say"><b class="big">${esc(it.name)}</b> ${esc(it.intro.replace(/^이건 [^.]*\. ?/, ''))}</p>` : sayBlock('')}</div>
+      <div class="photowrap">${photoSVG(it, {})}</div>
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 다시 듣기</button>${revealBtn()}
+        <button class="btn btn-next pulse" id="next" ${partReady(it, curPart()) ? '' : 'disabled'}>2 · 부분 찾기 ▶</button>
+      </div>
+    </div>`;
+  document.getElementById('again').addEventListener('click', () => speak(it.intro, true));
+  document.getElementById('next').addEventListener('click', () => startStep('s2'));
+  bindCommon(renderS1);
+}
+
+/* 2단계: 부분 찾기 → 맞히면 강조하고 확대 */
+function renderS2(){
+  const it = curItem(), part = curPart(), ph = PHOTO[it.id];
+  const solved = !!S.solved;
+  const z = getZoom(it, part.id), target = [z.x*ph.W, z.y*ph.H, z.w*ph.W, z.h*ph.H];
+  app.innerHTML = `${topbar(3)}
+    <div class="panel">
+      <div class="qtext"><span class="chip">2 · 부분 찾기</span>${solved ? `<p class="say">맞아! 이건 ${esc(it.name)}의 ${esc(part.name)}${iy(part.name)}!</p>` : sayBlock(part.findQ)}</div>
+      <div class="photowrap">${photoSVG(it, {part, touch:!solved, highlight:solved, label:solved, marker:S.marker, vb: S.zoomed ? target : null, labelVb: solved ? target : null})}</div>
+      ${S.msg && !solved ? `<div class="feedback fb-hint" role="status">${textOn() ? esc(S.msg) : '🔊 다시 찾아볼까요?'}</div>` : ''}
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 다시 듣기</button>${solved ? '' : revealBtn()}
+        <button class="btn btn-next ${solved?'pulse':''}" id="next" ${solved?'':'disabled'}>3 · 특징과 기능 ▶</button>
+      </div>
+    </div>`;
+  const svg = document.getElementById('wSvg');
+  if (solved && !S.zoomed){ S.zoomed = true; animateVB(svg, [0,0,ph.W,ph.H], target, reduceMotion ? 0 : 1100); }
+  if (!solved) svg.addEventListener('click', ev => {
+    const t = ev.target;
+    let loc = null; try{ const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY; loc = pt.matrixTransform(svg.getScreenCTM().inverse()); }catch(e){}
+    if (t.dataset && t.dataset.target){
+      S.solved = true; S.marker = null;
+      const r = pprog(it.id, part.id); r.s2 = (S.wrong || 0) + 1; prog(it.id).at = today(); save();
+      renderS2(); praise('맞아!'); speak(`맞아! 이건 ${it.name}의 ${part.name}${iy(part.name)}!`);
+      return;
+    }
+    S.wrong = (S.wrong || 0) + 1;
+    const nm2 = t.dataset && t.dataset.name ? t.dataset.name : '';
+    S.marker = loc ? {x: loc.x, y: loc.y, name: nm2} : null;
+    S.msg = nm2 ? `이건 ${nm2}${iy(nm2)}. ${eun(part.name)} 어디 있을까?` : `거기는 ${iga(part.name)} 아니야. ${eun(part.name)} 어디 있을까?`;
+    renderS2(); speak(S.msg);
+  });
+  document.getElementById('again').addEventListener('click', () => speak(solved ? `맞아! 이건 ${it.name}의 ${part.name}${iy(part.name)}!` : (S.msg || part.findQ), true));
+  document.getElementById('next').addEventListener('click', () => { if (S.solved) startStep('s3'); });
+  bindCommon(renderS2);
+}
+
+/* 3단계: 특징과 기능 (같은 사진의 그 부분을 크게) */
+function renderS3(){
+  const it = curItem(), part = curPart(), ph = PHOTO[it.id];
+  const z = getZoom(it, part.id), target = [z.x*ph.W, z.y*ph.H, z.w*ph.W, z.h*ph.H];
+  const r = pprog(it.id, part.id); if (!r.s3){ r.s3 = 1; save(); }
+  app.innerHTML = `${topbar(3)}
+    <div class="panel">
+      <div class="qtext"><span class="chip">3 · 특징과 기능</span>${textOn() ? `<p class="say"><b class="big">${esc(part.name)}</b> ${esc(part.feature)}</p>` : sayBlock('')}</div>
+      <div class="photowrap">${photoSVG(it, {part, highlight:true, vb: S.zoomed ? target : null})}</div>
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 다시 듣기</button>${revealBtn()}
+        <button class="btn btn-next pulse" id="next">4 · 문장 말하기 ▶</button>
+      </div>
+    </div>`;
+  if (!S.zoomed){ S.zoomed = true; animateVB(document.getElementById('wSvg'), [0,0,ph.W,ph.H], target, reduceMotion ? 0 : 1100); }
+  document.getElementById('again').addEventListener('click', () => speak(`${part.name}! ${part.feature}`, true));
+  document.getElementById('next').addEventListener('click', () => startStep('s4'));
+  bindCommon(renderS3);
+}
+
+/* 4단계: 문장 말하기 — 아이가 먼저, 필요하면 문장 듣기. 보호자가 확인 */
+function renderS4(){
+  const it = curItem(), part = curPart();
+  const done = !!S.done, hasShape = !!getShape(it, part.id);
+  app.innerHTML = `${topbar(3)}
+    <div class="panel">
+      <div class="qtext"><span class="chip">4 · 문장 말하기</span>
+        ${done || (textOn() && S.heard) ? `<p class="say">${esc(part.sentence)}</p>` : `<p class="say">${textOn() ? '사진을 보고 말해 볼까요?' : '🗣️ 말해 볼까요?'}</p>`}
+        <p class="small">아이가 먼저 말해요. 어려워하면 '문장 듣기'를 눌러 따라 말하게 해 주세요. 보호자가 듣고 아래 버튼을 눌러요.</p></div>
+      <div class="photowrap">${photoSVG(it, {part: hasShape ? part : null, highlight: hasShape, label: hasShape && (textOn() || done)})}</div>
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="hear">🔊 문장 듣기</button>${done ? '' : revealBtn()}
+        ${done ? `<button class="btn btn-next pulse" id="back">🔍 탐험으로 ▶</button>` : ''}
+      </div>
+      ${done ? '' : `<div class="saybtns">
+        <button class="btn btn-next big" id="saidFull">🗣️ 말했어요!</button>
+        <button class="btn" id="saidPart">💬 한 단어나 일부만 말했어요</button></div>`}
+    </div>`;
+  document.getElementById('hear').addEventListener('click', () => { S.heard = true; renderS4(); speak(part.sentence, true); });
+  const finish = level => {
+    const r = pprog(it.id, part.id); r.s4 = level; prog(it.id).at = today(); save();
+    S.done = true; renderS4();
+    const got = maybeSticker(it);
+    praise(level === 'full' ? '잘했어! 최고야!' : '잘했어! 좋아!');
+    speak((level === 'full' ? '잘했어! 최고야! ' : '잘했어! 같이 말해 볼까? ') + part.sentence + (got ? ` 우와! ${it.name} 스티커를 받았어요!` : ''), true);
+    if (got) S.newSticker = true;
+  };
+  if (!done){
+    document.getElementById('saidFull').addEventListener('click', () => finish('full'));
+    document.getElementById('saidPart').addEventListener('click', () => finish('part'));
+  } else document.getElementById('back').addEventListener('click', () => go(S.newSticker ? {screen:'sticker', item:it.id, part:part.id} : {screen:'hub', item:it.id, part:part.id}));
+  bindCommon(renderS4);
+}
+
+function renderSticker(){
+  const it = curItem(), c = DATA.categories.find(x => x.id === it.cat);
+  const its = DATA.items.filter(x => x.cat === c.id), g = its.filter(x => store.stickers[x.id]).length;
+  app.innerHTML = `${topbar(2)}
+    <div class="panel" style="text-align:center;padding:18px">
+      <div class="sticker"><img src="${esc(it.photo)}" alt="${esc(it.name)} 스티커"><span class="st" aria-hidden="true">⭐</span></div>
+      <p class="say">${esc(it.name)} 스티커를 받았어요!</p>
+      <p class="small">${c.icon} ${esc(c.name)} 스티커 ${g} / ${its.length}</p>
+      <div class="controls" style="justify-content:center"><button class="btn btn-next pulse" id="toCat2">${c.icon} 다른 것 탐험하기</button></div>
+    </div>`;
+  stars(22);
+  document.getElementById('toCat2').addEventListener('click', () => go({screen:'cat', cat:it.cat}));
+  bindCommon(renderSticker);
+}
+
+/* ---------- 퀴즈 A: 사진에서 부분 찾기 ---------- */
+function startQuiz(k){
+  const it = curItem();
+  if (k === 'qa'){
+    const ready = it.parts.filter(p => partReady(it, p));
+    const part = ready[Math.floor(Math.random() * ready.length)];
+    go({screen:'qa', item:it.id, part:part.id, tries:0});
+    speak(part.findQ); return;
+  }
+  const Q = k === 'qb' ? it.quizB : it.quizC;
+  const opts = shuffle([{w:Q.ok, ok:true}, ...shuffle(Q.wrong).slice(0, store.nOpts - 1).map(w => ({w}))]);
+  go({screen:k, item:it.id, part:S.part, opts, wrongs:[], solved:false, tries:0});
+  speak(Q.q);
+}
+function renderQA(){
+  const it = curItem(), part = curPart(), solved = !!S.solved;
+  app.innerHTML = `${topbar(3)}
+    <div class="panel">
+      <div class="qtext"><span class="chip">🔎 A · 어디 있을까?</span>${solved ? `<p class="say">맞아요! 여기가 ${esc(it.name)}의 ${esc(part.name)}${iy(part.name)}.</p>` : sayBlock(part.findQ)}</div>
+      <div class="photowrap">${photoSVG(it, {part, touch:!solved, highlight:solved, label:solved, marker:S.marker})}</div>
+      ${S.msg && !solved ? `<div class="feedback fb-hint" role="status">${textOn() ? esc(S.msg) : '🔊 다시 찾아볼까요?'}</div>` : ''}
+      ${solved ? `<div class="feedback fb-good">${esc(part.sentence)}</div>` : ''}
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 질문 듣기</button>${solved ? '' : revealBtn()}
+        <button class="btn btn-next ${solved?'pulse':''}" id="next" ${solved?'':'disabled'}>🔍 탐험으로 ▶</button>
+      </div>
+    </div>`;
+  const svg = document.getElementById('wSvg');
+  if (!solved) svg.addEventListener('click', ev => {
+    const t = ev.target; S.tries++;
+    let loc = null; try{ const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY; loc = pt.matrixTransform(svg.getScreenCTM().inverse()); }catch(e){}
+    if (t.dataset && t.dataset.target){
+      S.solved = true; S.marker = null;
+      (store.quiz[it.id] = store.quiz[it.id] || {}).A = S.tries; save();
+      renderQA(); praise('맞아요!'); speak(`맞아요! 여기가 ${it.name}의 ${part.name}${iy(part.name)}. ${part.sentence}`);
+      return;
+    }
+    const nm2 = t.dataset && t.dataset.name ? t.dataset.name : '';
+    S.marker = loc ? {x: loc.x, y: loc.y, name: nm2} : null;
+    S.msg = nm2 ? `이건 ${nm2}${iy(nm2)}. ${eun(part.name)} 어디 있을까?` : `거기는 ${iga(part.name)} 아니야. 다시 찾아볼까?`;
+    renderQA(); speak(S.msg);
+  });
+  document.getElementById('again').addEventListener('click', () => speak(solved ? part.sentence : part.findQ, true));
+  document.getElementById('next').addEventListener('click', () => { if (S.solved) go({screen:'hub', item:it.id, part:S.part}); });
+  bindCommon(renderQA);
+}
+
+/* ---------- 퀴즈 B·C: 숫자 보기 + 듣기 ---------- */
+function renderQBC(){
+  const it = curItem(), k = S.screen, Q = k === 'qb' ? it.quizB : it.quizC;
+  const label = k === 'qb' ? '✋ B · 어떻게 움직일까?' : '⚙️ C · 무엇을 할까?';
+  const show = textOn() || S.solved;
+  app.innerHTML = `${topbar(3)}
+    <div class="panel">
+      <div class="qtext"><span class="chip">${label}</span>${textOn() ? `<p class="say">${esc(Q.q)}</p>` : sayBlock('')}</div>
+      <div class="photowrap small">${photoSVG(it, {})}</div>
+      <div class="bopts">
+        ${S.opts.map((o,i) => { const wrong = S.wrongs.includes(i), right = S.solved && o.ok;
+          return `<div class="bopt ${right?'right':''} ${wrong?'tried':''}">
+            <button class="pick" data-i="${i}" ${S.solved?'disabled':''}><span class="n">${i+1}</span><span class="w">${show || wrong ? esc(o.w) : '● ● ●'}</span></button>
+            <button class="listen" data-i="${i}" aria-label="${i+1}번 듣기">🔊 ${i+1}번 듣기</button></div>`; }).join('')}
+      </div>
+      ${S.solved ? `<div class="feedback fb-good" role="status">${esc(Q.yes)}</div>` : S.msg ? `<div class="feedback fb-hint" role="status">${textOn() ? esc(S.msg) : '🔊 다시 골라 볼까요?'}</div>` : ''}
+      ${ttsNote()}
+      <div class="controls">
+        <button class="btn btn-sun" id="again">🔊 질문 듣기</button>${S.solved ? '' : revealBtn()}
+        <button class="btn btn-next ${S.solved?'pulse':''}" id="next" ${S.solved?'':'disabled'}>🔍 탐험으로 ▶</button>
+      </div>
+    </div>`;
+  app.querySelectorAll('.listen').forEach(b => b.addEventListener('click', () => { const i = +b.dataset.i; speak(`${i+1}번, ${S.opts[i].w}`, true); }));
+  app.querySelectorAll('.pick').forEach(b => b.addEventListener('click', () => {
+    const i = +b.dataset.i, o = S.opts[i];
+    if (S.solved) return;
+    S.tries++;
+    if (o.ok){
+      S.solved = true; S.msg = '';
+      (store.quiz[it.id] = store.quiz[it.id] || {})[k === 'qb' ? 'B' : 'C'] = S.tries; save();
+      renderQBC(); praise('맞아요!'); speak(Q.yes);
+    } else {
+      if (!S.wrongs.includes(i)) S.wrongs.push(i);
+      S.msg = `${DATA.wordInfo[o.w] || ''} 다시 골라 볼까?`.trim();
+      renderQBC(); speak(S.msg);
+    }
+  }));
+  document.getElementById('again').addEventListener('click', () => speak(S.solved ? Q.yes : Q.q, true));
+  document.getElementById('next').addEventListener('click', () => { if (S.solved) go({screen:'hub', item:it.id, part:S.part}); });
+  bindCommon(renderQBC);
+}
+
+/* ---------- 터치 영역 만들기 (보호자용) ---------- */
+function renderEdit(){
+  const it = itemById[S.eItem] || DATA.items[0];
+  S.eItem = it.id;
+  const ph = photoInfo(it);
+  const targets = it.parts.map(p => ({id:p.id, name:p.name, kind:'부분'})).concat((it.others || []).map(p => ({id:p.id, name:p.name, kind:'다른 곳'})));
+  if (!targets.find(t => t.id === S.eTarget)) S.eTarget = targets[0].id;
+  const tg = targets.find(t => t.id === S.eTarget);
+  const mode = S.eMode || 'shape', kind = S.eKind || 'rect';
+  const ov = (store.overrides[it.id] || {})[tg.id] || {};
+  app.innerHTML = `
+    <div class="topbar"><button class="pill" id="toHome">🗺️ 처음으로</button></div>
+    <div class="panel ed">
+      <div class="qtext"><h1>📐 터치 영역 만들기</h1>
+        <p class="small">사진 위에 손가락으로 끌어서 네모(또는 동그라미)를 그려요. 그린 영역은 이 기기에 바로 저장돼요. 모든 기기에 적용하려면 아래 '코드 복사'로 나온 내용을 전달해 주세요.</p></div>
+      <div class="row"><label class="field" for="eItem">사물
+        <select id="eItem">${DATA.items.map(x => `<option value="${x.id}" ${x.id===it.id?'selected':''}>${esc(x.name)}</option>`).join('')}</select></label></div>
+      <div class="targets">${targets.map(t => { const has = !!getShape(it, t.id);
+        return `<button class="tbtn ${t.id===tg.id?'on':''} ${has?'set':''}" data-t="${t.id}">${t.kind}: ${esc(t.name)}</button>`; }).join('')}</div>
+      <div class="row">
+        <div class="seg"><button type="button" data-mode="shape" aria-pressed="${mode==='shape'}">터치 영역 그리기</button>${tg.kind === '부분' ? `<button type="button" data-mode="zoom" aria-pressed="${mode==='zoom'}">확대 범위 그리기</button>` : ''}</div>
+        ${mode === 'shape' ? `<div class="seg"><button type="button" data-kind="rect" aria-pressed="${kind==='rect'}">▭ 네모</button><button type="button" data-kind="ellipse" aria-pressed="${kind==='ellipse'}">◯ 동그라미</button></div>` : ''}
+      </div>
+      ${ph.state === 'ok' ? `<div class="photowrap" id="edWrap">${editSVG(it, tg)}</div>`
+        : `<div class="missing">${ph.state === 'missing' ? `📷 사진이 없어요: <code>word-game/${esc(it.photo)}</code>` : '사진 불러오는 중…'}</div>`}
+      <div class="row">
+        <button class="btn" type="button" id="eClear">이 항목 지우기</button>
+        <button class="btn btn-sun" type="button" id="eCopy">📋 코드 복사</button>
+        <span class="small" id="eMsg">${ov.shape || ov.zoom ? '이 기기에 저장됨' : ''}</span>
+      </div>
+      <div class="row" style="display:block"><textarea id="eCode" readonly aria-label="복사할 코드">${esc(codeFor(it))}</textarea></div>
+    </div>`;
+  document.getElementById('eItem').addEventListener('change', e => { S.eItem = e.target.value; S.eTarget = null; renderEdit(); });
+  app.querySelectorAll('.tbtn').forEach(b => b.addEventListener('click', () => { S.eTarget = b.dataset.t; renderEdit(); }));
+  app.querySelectorAll('[data-mode]').forEach(b => b.addEventListener('click', () => { S.eMode = b.dataset.mode; renderEdit(); }));
+  app.querySelectorAll('[data-kind]').forEach(b => b.addEventListener('click', () => { S.eKind = b.dataset.kind; renderEdit(); }));
+  document.getElementById('eClear').addEventListener('click', () => {
+    const o = store.overrides[it.id] || {}; delete o[tg.id]; store.overrides[it.id] = o; save(); renderEdit();
+  });
+  document.getElementById('eCopy').addEventListener('click', () => {
+    const ta = document.getElementById('eCode'), msg = document.getElementById('eMsg');
+    const txt = ta.value;
+    try{ navigator.clipboard.writeText(txt).then(() => { msg.textContent = '복사했어요'; }, () => { ta.select(); msg.textContent = '자동 복사가 안 돼요. 글자를 길게 눌러 복사해 주세요.'; }); }
+    catch(e){ ta.select(); msg.textContent = '자동 복사가 안 돼요. 글자를 길게 눌러 복사해 주세요.'; }
+  });
+  if (ph.state === 'ok') bindDraw(it, tg);
+  bindCommon(renderEdit);
+}
+function editSVG(it, tg){
+  const ph = PHOTO[it.id], W = ph.W, H = ph.H;
+  let s = `<svg class="wsvg" id="edSvg" viewBox="0 0 ${W} ${H}" preserveAspectRatio="xMidYMid meet"><image href="${esc(it.photo)}" width="${W}" height="${H}"/>`;
+  it.parts.concat(it.others || []).forEach(p => {
+    const sh = getShape(it, p.id); if (!sh) return;
+    const on = p.id === tg.id;
+    s += shapeSVG(sh, W, H, `fill="${on ? 'rgba(255,210,63,.25)' : 'rgba(79,155,224,.15)'}" stroke="${on ? '#ffb000' : '#4f9be0'}" stroke-width="${W*.006}"`);
+    const b = bbox(sh);
+    s += `<text x="${(b.x+b.w/2)*W}" y="${Math.max(.06,b.y-.015)*H}" text-anchor="middle" class="plabel" font-size="${Math.round(Math.min(W,H)*.05)}">${esc(p.name)}</text>`;
+  });
+  if (tg.kind === '부분' && getShape(it, tg.id)){
+    const z = getZoom(it, tg.id);
+    s += `<rect x="${z.x*W}" y="${z.y*H}" width="${z.w*W}" height="${z.h*H}" fill="none" stroke="#e5484d" stroke-width="${W*.005}" stroke-dasharray="${W*.02} ${W*.012}"/>`;
+  }
+  return s + `<rect id="edDraft" x="0" y="0" width="0" height="0" fill="rgba(46,158,98,.2)" stroke="#2e9e62" stroke-width="${W*.006}"/></svg>`;
+}
+function bindDraw(it, tg){
+  const svg = document.getElementById('edSvg'), ph = PHOTO[it.id];
+  const draft = document.getElementById('edDraft');
+  let start = null;
+  const toPt = ev => { const pt = svg.createSVGPoint(); pt.x = ev.clientX; pt.y = ev.clientY; const p = pt.matrixTransform(svg.getScreenCTM().inverse());
+    return {x: Math.max(0, Math.min(ph.W, p.x)), y: Math.max(0, Math.min(ph.H, p.y))}; };
+  svg.addEventListener('pointerdown', ev => { ev.preventDefault(); start = toPt(ev); try{ svg.setPointerCapture(ev.pointerId); }catch(e){} });
+  svg.addEventListener('pointermove', ev => {
+    if (!start) return; const p = toPt(ev);
+    draft.setAttribute('x', Math.min(start.x, p.x)); draft.setAttribute('y', Math.min(start.y, p.y));
+    draft.setAttribute('width', Math.abs(p.x - start.x)); draft.setAttribute('height', Math.abs(p.y - start.y));
+  });
+  svg.addEventListener('pointerup', ev => {
+    if (!start) return; const p = toPt(ev);
+    const x = Math.min(start.x, p.x) / ph.W, y = Math.min(start.y, p.y) / ph.H, w = Math.abs(p.x - start.x) / ph.W, h = Math.abs(p.y - start.y) / ph.H;
+    start = null;
+    if (w < .02 || h < .02){ draft.setAttribute('width', 0); return; }   // 너무 작으면 무시
+    const r3 = v => Math.round(v * 1000) / 1000;
+    const o = (store.overrides[it.id] = store.overrides[it.id] || {}), cur = (o[tg.id] = o[tg.id] || {});
+    if ((S.eMode || 'shape') === 'zoom') cur.zoom = {x:r3(x), y:r3(y), w:r3(w), h:r3(h)};
+    else cur.shape = (S.eKind || 'rect') === 'ellipse'
+      ? {t:'ellipse', cx:r3(x + w/2), cy:r3(y + h/2), rx:r3(w/2), ry:r3(h/2)}
+      : {t:'rect', x:r3(x), y:r3(y), w:r3(w), h:r3(h)};
+    save(); renderEdit();
+  });
+}
+function codeFor(it){
+  const fmt = s => s ? JSON.stringify(s).replace(/"(\w+)":/g, '$1:').replace(/"/g, "'") : 'null';
+  const lines = [`/* ${it.name} (${it.id}) — words.js에 붙여 넣을 값 */`];
+  it.parts.forEach(p => { const ov = (store.overrides[it.id] || {})[p.id] || {};
+    lines.push(`${p.id} (${p.name}): shape:${fmt(ov.shape || p.shape)}, zoom:${fmt(ov.zoom || p.zoom)}`); });
+  (it.others || []).forEach(p => { const ov = (store.overrides[it.id] || {})[p.id] || {};
+    lines.push(`${p.id} (${p.name}, 다른 곳): shape:${fmt(ov.shape || p.shape)}`); });
+  return lines.join('\n');
+}
+
+/* ---------- 부모님 ---------- */
+function parentHTML(){
+  const tag = n => !n ? '<span class="tag t0">-</span>' : n===1 ? '<span class="tag t1">한 번에</span>' : n===2 ? '<span class="tag t2">두 번째</span>' : `<span class="tag t3">${n}번째</span>`;
+  const said = v => v === 'full' ? '<span class="tag t1">문장</span>' : v === 'part' ? '<span class="tag t2">단어·일부</span>' : '<span class="tag t0">-</span>';
+  const rows = DATA.items.filter(it => store.prog[it.id] || store.quiz[it.id]).map(it => {
+    const p = store.prog[it.id] || {parts:{}}, q = store.quiz[it.id] || {};
+    const partTxt = it.parts.map(pt => { const r = (p.parts || {})[pt.id] || {}; return `${esc(pt.name)}: 찾기 ${tag(r.s2)} 말하기 ${said(r.s4)}`; }).join('<br>');
+    return `<tr><td>${esc(it.name)}<br><span class="small">${p.at || ''}</span>${store.stickers[it.id] ? ' ⭐' : ''}</td><td>${partTxt}</td><td>A ${tag(q.A)}<br>B ${tag(q.B)}<br>C ${tag(q.C)}</td></tr>`; }).join('');
+  const missing = DATA.items.filter(it => (PHOTO[it.id] || {}).state === 'missing');
+  return `<details class="parent"><summary>부모님 설정 · 기록</summary>
+    <div class="form">
+      <label class="field" for="nameIn">아이 이름<input type="text" id="nameIn" maxlength="8" value="${esc(store.name)}"></label>
+      <div class="field">글자 표시
+        <div class="seg"><button type="button" data-tm="voice" aria-pressed="${store.textMode==='voice'}">그림·음성 중심 (기본)</button><button type="button" data-tm="text" aria-pressed="${store.textMode==='text'}">그림·글자·음성 함께</button></div>
+        <span class="small">그림·음성 중심에서는 사물 이름과 정답 단어를 처음에 숨기고 소리로 들려줘요. 숫자는 항상 보여요. 소리가 안 나면 '👀 글자 보기'를 눌러요.</span></div>
+      <label class="check" for="readIn"><input type="checkbox" id="readIn" ${store.autoRead?'checked':''}> 화면마다 소리 내어 읽어주기</label>
+      <div class="field">보기 개수
+        <div class="seg"><button type="button" data-n="2" aria-pressed="${store.nOpts===2}">2개 (쉬움)</button><button type="button" data-n="3" aria-pressed="${store.nOpts===3}">3개</button></div></div>
+      <label class="field" for="voiceSel">목소리<select id="voiceSel"><option value="">자동 선택</option></select></label>
+      <div class="testrow"><button class="btn btn-sun" type="button" id="soundTestBtn">🔊 소리 테스트</button><button class="btn" type="button" id="beepBtn">🔔 삐 소리 테스트</button><button class="btn" type="button" id="plainBtn">🗣️ 기본 목소리로 테스트</button></div>
+      <p class="small">아이패드에서 소리가 안 나면 먼저 제어센터의 🔔 무음 모드가 꺼져 있는지 확인해 주세요.</p>
+      <div class="field">음성 상태<div id="voiceStatus" class="vbox"></div></div>
+      <div><button class="btn" type="button" id="editBtn">📐 터치 영역 만들기</button></div>
+      ${missing.length ? `<p class="small">📷 사진이 필요한 사물: ${missing.map(it => `${esc(it.name)} (<code>word-game/${esc(it.photo)}</code>)`).join(', ')}</p>` : ''}
+    </div>
+    ${rows ? `<div style="overflow-x:auto"><table><thead><tr><th>사물</th><th>부분별 (2 찾기 · 4 말하기)</th><th>퀴즈</th></tr></thead><tbody>${rows}</tbody></table></div>` : '<p class="small">아직 기록이 없어요.</p>'}
+    <p class="small">기록과 스티커, 이 기기에서 그린 터치 영역은 이 기기에만 저장돼요. 사진 출처: <a href="photos/CREDITS.md">사진 출처 목록</a></p>
+    <p><button class="btn" type="button" id="resetBtn">스티커와 기록 지우기</button></p>
+  </details>`;
+}
+let resetArmed = false;
+function bindParent(){
+  const n = document.getElementById('nameIn');
+  if (n) n.addEventListener('change', e => { store.name = e.target.value.trim() || '토리'; save(); renderHome(); });
+  const r = document.getElementById('readIn');
+  if (r) r.addEventListener('change', e => { store.autoRead = e.target.checked; save(); });
+  const reopen = () => { renderHome(); app.querySelector('details.parent').open = true; };
+  app.querySelectorAll('.seg button[data-tm]').forEach(b => b.addEventListener('click', () => { store.textMode = b.dataset.tm; save(); reopen(); }));
+  app.querySelectorAll('.seg button[data-n]').forEach(b => b.addEventListener('click', () => { store.nOpts = +b.dataset.n; save(); reopen(); }));
+  const t = document.getElementById('soundTestBtn'); if (t) t.addEventListener('click', soundTest);
+  const bb = document.getElementById('beepBtn'); if (bb) bb.addEventListener('click', beepTest);
+  const pb = document.getElementById('plainBtn'); if (pb) pb.addEventListener('click', plainVoiceTest);
+  const vs = document.getElementById('voiceSel');
+  if (vs) vs.addEventListener('change', e => { store.voiceURI = e.target.value; save(); V.bad.clear(); loadVoices(); vlog('목소리 바꿈: ' + (e.target.value ? (V.chosen ? V.chosen.name : e.target.value) : '자동 선택')); });
+  updateVoiceStatus();
+  const eb = document.getElementById('editBtn'); if (eb) eb.addEventListener('click', () => go({screen:'edit', eItem: DATA.items[0].id}));
+  const rs = document.getElementById('resetBtn');
+  if (rs) rs.addEventListener('click', () => {
+    if (!resetArmed){ resetArmed = true; rs.textContent = '정말 지울까요? 한 번 더 누르면 지워져요 (터치 영역은 남아요)'; return; }
+    store.stickers = {}; store.prog = {}; store.quiz = {}; save(); resetArmed = false; renderHome();
+  });
+  /* 사진이 있는지 미리 확인해서 '사진 필요' 목록을 채워요 */
+  DATA.items.forEach(it => photoInfo(it));
+}
+
+function render(){
+  const f = {home:renderHome, cat:renderCat, hub:renderHub, s1:renderS1, s2:renderS2, s3:renderS3, s4:renderS4, qa:renderQA, qb:renderQBC, qc:renderQBC, sticker:renderSticker, edit:renderEdit}[S.screen] || renderHome;
+  f();
+  if (S.screen !== 'home') window.scrollTo({top:0, behavior: reduceMotion ? 'auto' : 'smooth'});
+}
+render();
+</script>
+</body>
+</html>

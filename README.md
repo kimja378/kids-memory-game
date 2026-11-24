@@ -9,6 +9,7 @@
 
 ```
 animal-game/index.html         동물 친구 탐험대 — 땅·바다 동물 18종의 생김새·사는 곳·먹이 퀴즈와 스티커 모으기 (아이 얼굴 사진 포함, 사진은 assets/images/animals·habitats 사용)
+word-game/                     우리 아이 어휘 탐험대 — 사물의 부분 이름·특징·기능 (index.html, 학습 데이터 words.js, 사진 photos/ — 넣는 법은 photos/README.md)
 home.html                      처음 화면 — 동화와 놀이를 카드로 골라 들어가는 메뉴
 index.html                     게임 (HTML/CSS/JS 한 파일)
 assets/images/catalog.json     사진 ↔ 한글 이름 ↔ 분류 ↔ 출처/라이선스 데이터
